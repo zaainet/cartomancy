@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Vintage Cartomancy Reading</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --accent-red: #8b0000;
+            --text-light: #e0e0e0;
+            --border-color: #333;
+            --card-w: 100px;
+            --card-h: 150px;
+        }
+
+        body {
+            margin: 0;
+            background: radial-gradient(circle at center, #2a2a2a 0%, var(--bg-color) 100%);
+            color: var(--text-light);
+            font-family: 'Times New Roman', serif;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow: hidden;
+            user-select: none;
+        }
+
+        /* Header */
+        header {
+            width: 100%;
+            padding: 20px 0;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.8);
+            border-bottom: 2px solid var(--accent-red);
+            box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+            z-index: 10;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 1.8rem;
+            color: #fff;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+        }
+        header p {
+            margin: 5px 0 0 0;
+            font-size: 1rem;
+            color: #aaa;
+            font-style: italic;
+        }
+
+        /* Card Spread Area */
+        #deck-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 20px;
+            box-sizing: border-box;
+            scrollbar-width: none;
+        }
+        #deck-container::-webkit-scrollbar { display: none; }
+
+        .card {
+            width: var(--card-w);
+            height: var(--card-h);
+            margin: 0 -20px; 
+            position: relative;
+            perspective: 1000px;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.2, 1, 0.3, 1), margin 0.3s;
+            display: inline-block;
+        }
+
+        .card:hover {
+            transform: translateY(-20px) scale(1.05);
+            margin: 0 10px;
+            z-index: 10;
+        }
+
+        .card-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.9);
+        }
+
+        .card.picked .card-inner {
+            transform: rotateY(180deg) scale(1.1);
+            z-index: 20;
+        }
+
+        .face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background-size: cover;
+            background-position: center;
+            background-color: #000;
+        }
+
+        /* Card Back Design */
+        .back {
+            background-image: repeating-linear-gradient(
+                45deg,
+                #1a1a1a,
+                #1a1a1a 10px,
+                #222 10px,
+                #222 20px
+            );
+            border: 2px solid var(--accent-red);
+        }
+
+        .front {
+            transform: rotateY(180deg);
+            background-color: #fff; /* Fallback */
+        }
+
+        /* Reading Modal */
+        #reading-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(4px);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+        #reading-modal.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-content {
+            background: #1e1e1e;
+            border: 1px solid var(--accent-red);
+            width: 90%;
+            max-width: 450px;
+            max-height: 80vh;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(30px);
+            transition: transform 0.4s ease;
+        }
+        #reading-modal.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: transparent;
+            border: 1px solid #555;
+            color: #aaa;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-family: Arial, sans-serif;
+            transition: 0.3s;
+        }
+        .close-btn:hover { background: var(--accent-red); color: white; border-color: var(--accent-red); }
+
+        .modal-title { color: #fff; text-align: center; border-bottom: 1px solid var(--accent-red); padding-bottom: 10px; margin-top: 0; letter-spacing: 1px;}
+        .modal-essence { font-style: italic; text-align: center; color: #aaa; margin-bottom: 20px; font-size: 1.1rem;}
+        
+        .reading-section { margin-bottom: 15px; font-size: 1rem; line-height: 1.6; color: #ccc; }
+        .reading-section strong { color: var(--accent-red); font-size: 1.05rem; display: block; margin-bottom: 3px;}
+
+        /* Action Buttons */
+        .controls {
+            position: absolute;
+            bottom: 30px;
+            display: flex;
+            gap: 15px;
+        }
+        .btn {
+            background: transparent;
+            border: 1px solid #777;
+            color: #ddd;
+            padding: 12px 25px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-family: 'Times New Roman', serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: 0.3s;
+        }
+        .btn:hover {
+            background: var(--accent-red);
+            border-color: var(--accent-red);
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Vintage Cartomancy</h1>
+        <p>Pick a card to reveal your fate</p>
+    </header>
+
+    <div id="deck-container">
+        <!-- Cards injected via JS -->
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="shuffleDeck()">Shuffle Deck</button>
+    </div>
+
+    <!-- Reading Modal -->
+    <div id="reading-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">X</button>
+            <h2 class="modal-title" id="m-title">Card Name</h2>
+            <p class="modal-essence" id="m-essence">Essence...</p>
+            <div id="m-details">
+                <!-- Sections injected via JS -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // -------------------------------------------------------------
+        // ENGLISH DATA STRUCTURE 
+        // Replace the strings here with the exact text from your PDF
+        // Image names must match the cropped image files in your folder
+        // -------------------------------------------------------------
+        const cartomancyData = [
+            {
+                id: "H_A", 
+                name: "Ace of Hearts", 
+                image: "hearts_A.jpg", // The cropped image file name
+                essence: "New beginnings in love and emotions.",
+                career: "A new passion or creative project is on the horizon. Trust your instincts at work.",
+                finance: "A gift or a new source of income related to your passions.",
+                love: "The start of a deep, meaningful relationship or a renewed emotional connection.",
+                health: "Emotional well-being leading to physical vitality."
+            },
+            {
+                id: "D_10", 
+                name: "Ten of Diamonds", 
+                image: "diamonds_10.jpg",
+                essence: "Financial success and material wealth.",
+                career: "A culmination of hard work resulting in a significant promotion or business success.",
+                finance: "Large sums of money, successful investments, or an inheritance.",
+                love: "A relationship built on strong foundations, providing security and comfort.",
+                health: "Excellent physical health supported by good resources."
+            },
+            {
+                id: "S_K", 
+                name: "King of Spades", 
+                image: "spades_K.jpg",
+                essence: "Authority, intellect, and strict judgment.",
+                career: "Dealing with law, management, or government. You may need to make tough, logical decisions.",
+                finance: "Protect your assets. Seek professional, logical advice before investing.",
+                love: "A partner who is intellectual and perhaps a bit detached or strict.",
+                health: "Pay attention to stress and mental exhaustion."
+            },
+            {
+                id: "C_5", 
+                name: "Five of Clubs", 
+                image: "clubs_5.jpg",
+                essence: "Competition, minor conflicts, and physical activity.",
+                career: "Expect some rivalry or brainstorming sessions at work. Stand your ground.",
+                finance: "Avoid impulsive spending. Minor financial struggles that can be overcome with effort.",
+                love: "Petty arguments or a need to clear the air with your partner.",
+                health: "Good time for sports, but be careful of minor injuries."
+            }
+            // Add all 52 cards here...
+        ];
+
+        const deckContainer = document.getElementById('deck-container');
+        const modal = document.getElementById('reading-modal');
+
+        function initDeck() {
+            deckContainer.innerHTML = '';
+            
+            // Generate cards (using the available data array for demo)
+            // If you have all 52 cards in the array, use: for (let i = 0; i < cartomancyData.length; i++)
+            // Here we just duplicate them to make the deck look full
+            const totalCardsToShow = 15; 
+            
+            for (let i = 0; i < totalCardsToShow; i++) {
+                const randomCardData = cartomancyData[Math.floor(Math.random() * cartomancyData.length)];
+                
+                const cardElem = document.createElement('div');
+                cardElem.className = 'card';
+                cardElem.innerHTML = `
+                    <div class="card-inner">
+                        <div class="face back"></div>
+                        <!-- Use the 'image' property from the data object as the background -->
+                        <div class="face front" style="background-image: url('${randomCardData.image}');">
+                            <!-- Fallback text in case image is missing -->
+                            <span style="display:none;">${randomCardData.name}</span>
+                        </div>
+                    </div>
+                `;
+                
+                cardElem.onclick = () => drawCard(cardElem, randomCardData);
+                deckContainer.appendChild(cardElem);
+            }
+        }
+
+        function shuffleDeck() {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.classList.remove('picked');
+                const randomY = Math.floor(Math.random() * 60) - 30;
+                card.style.transform = `translateY(${randomY}px)`;
+            });
+
+            setTimeout(() => {
+                initDeck();
+            }, 500);
+        }
+
+        function drawCard(cardElement, cardData) {
+            document.querySelectorAll('.card').forEach(c => c.classList.remove('picked'));
+            cardElement.classList.add('picked');
+            
+            setTimeout(() => {
+                showReading(cardData);
+            }, 600);
+        }
+
+        function showReading(data) {
+            document.getElementById('m-title').innerText = data.name;
+            document.getElementById('m-essence').innerText = `"${data.essence}"`;
+            
+            let detailsHTML = '';
+            if(data.career) detailsHTML += `<div class="reading-section"><strong>Career & Work</strong> ${data.career}</div>`;
+            if(data.finance) detailsHTML += `<div class="reading-section"><strong>Finances</strong> ${data.finance}</div>`;
+            if(data.love) detailsHTML += `<div class="reading-section"><strong>Love & Relationships</strong> ${data.love}</div>`;
+            if(data.health) detailsHTML += `<div class="reading-section"><strong>Health</strong> ${data.health}</div>`;
+            
+            document.getElementById('m-details').innerHTML = detailsHTML;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+        }
+
+        window.onload = initDeck;
+    </script>
+</body>
+</html>
