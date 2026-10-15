@@ -3,19 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Vintage Cartomancy Reading (ဂမ္ဘီရဖဲချပ်ဟောကိန်း)</title>
+    <title>Numerological Cartomancy Masterclass | Hmaw Set Shin</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Padauk:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@600;700&family=Noto+Sans+Myanmar:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <style>
+        /* ==========================================================================
+           NUMEROLOGICAL CARTOMANCY MASTERCLASS 
+           Designed for Hmaw Set Shin (Esoteric Researcher)
+           ========================================================================== */
+
         :root {
-            --bg-color: #0d0b0b;
-            --accent-gold: #c5a059;
-            --accent-red: #8b0000;
-            --border-vintage: #3d312a;
-            --text-light: #e6ded3;
-            --card-w: 105px;
-            --card-h: 160px;
+            --bg-abyss: #03050c;
+            --bg-midnight: #0a0f24;
+            --bg-velvet: #170b2c;
+            --glass-surface: rgba(14, 21, 45, 0.78);
+            --glass-card: rgba(255, 255, 255, 0.04);
+            
+            /* Luxury Gold Palette */
+            --gold-primary: #d4af37;
+            --gold-bright: #fff1b8;
+            --gold-deep: #997415;
+            --gold-gradient: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            --gold-glow: 0 0 22px rgba(212, 175, 55, 0.5);
+
+            /* Accent Colors */
+            --emerald-mystic: #00e676;
+            --crimson-alert: #ff5252;
+            --text-ivory: #f7f4eb;
+            --text-muted: #b0bdd4;
+
+            /* Suit Colors */
+            --red-suit: #c62828;
+            --black-suit: #12131a;
+
+            /* Card Dimensions */
+            --card-w: 86px;
+            --card-h: 132px;
         }
 
         * {
@@ -24,79 +50,337 @@
             -webkit-tap-highlight-color: transparent;
         }
 
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-abyss);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--gold-deep), var(--gold-primary));
+            border-radius: 10px;
+        }
+
         body {
             margin: 0;
-            background: radial-gradient(circle at 50% 30%, #1e1715 0%, var(--bg-color) 100%);
-            color: var(--text-light);
-            font-family: 'Padauk', 'Cinzel', serif;
+            background-color: var(--bg-abyss);
+            background-image: 
+                radial-gradient(circle at 20% 15%, rgba(212, 175, 55, 0.09) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(106, 27, 154, 0.16) 0%, transparent 45%),
+                radial-gradient(ellipse at top, var(--bg-velvet) 0%, var(--bg-midnight) 55%, var(--bg-abyss) 100%);
+            color: var(--text-ivory);
+            font-family: 'Noto Sans Myanmar', 'Pyidaungsu', 'Myanmar Text', sans-serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow: hidden;
+            overflow-x: hidden;
+            position: relative;
         }
 
-        /* Header */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(1.5px 1.5px at 25px 35px, rgba(252, 238, 167, 0.5), transparent),
+                radial-gradient(1px 1px at 90px 120px, rgba(255, 255, 255, 0.4), transparent),
+                radial-gradient(1.5px 1.5px at 210px 70px, rgba(212, 175, 55, 0.45), transparent),
+                radial-gradient(1px 1px at 320px 190px, rgba(255, 255, 255, 0.35), transparent);
+            background-size: 380px 260px;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.65;
+        }
+
+        /* Header & Hamburger Setup */
         header {
             width: 100%;
-            padding: 16px 12px;
+            padding: 14px 16px;
             text-align: center;
-            background: rgba(10, 8, 8, 0.85);
-            border-bottom: 2px solid var(--accent-gold);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
-            z-index: 10;
+            background: linear-gradient(180deg, rgba(3, 5, 12, 0.96) 0%, rgba(10, 15, 36, 0.9) 100%);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.8);
+            z-index: 50;
+            position: relative;
         }
-        header h1 {
-            margin: 0;
+
+        .hamburger-btn {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid var(--gold-primary);
+            border-radius: 8px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            z-index: 60;
+            padding: 0;
+        }
+
+        .hamburger-btn span {
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--gold-bright);
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .hamburger-btn:hover {
+            background: var(--gold-gradient);
+            box-shadow: var(--gold-glow);
+        }
+
+        .hamburger-btn:hover span {
+            background: #03050c;
+        }
+
+        .header-center {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 0 45px;
+        }
+
+        header .badge {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            border: 1px solid rgba(212, 175, 55, 0.65);
+            color: var(--gold-bright);
             font-family: 'Cinzel', serif;
-            font-size: 1.6rem;
-            color: var(--accent-gold);
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 3px 12px;
+            border-radius: 20px;
+            letter-spacing: 1.5px;
         }
-        header p {
+
+        @keyframes goldShimmer {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        header h1 {
             margin: 4px 0 0 0;
-            font-size: 0.9rem;
-            color: #b5a999;
-            letter-spacing: 0.5px;
+            font-family: 'Cinzel Decorative', 'Cinzel', serif;
+            font-size: 1.35rem;
+            background: var(--gold-gradient);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            animation: goldShimmer 6s ease infinite;
         }
 
-        /* Card Spread Area */
-        #table-area {
+        header p {
+            margin: 3px 0 0 0;
+            font-size: 0.8rem;
+            color: var(--gold-bright);
+            opacity: 0.88;
+        }
+
+        /* Floating Nav Drawer */
+        .nav-drawer {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 16px;
+            width: calc(100% - 32px);
+            max-width: 440px;
+            background: rgba(6, 10, 24, 0.98);
+            border: 1px solid var(--gold-primary);
+            border-radius: 14px;
+            padding: 12px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), var(--gold-glow);
+            z-index: 200;
+            flex-direction: column;
+            gap: 8px;
+            animation: fadeInView 0.25s ease-out;
+        }
+
+        .nav-drawer.open {
+            display: flex;
+        }
+
+        .nav-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: var(--text-ivory);
+            padding: 11px 14px;
+            border-radius: 10px;
+            font-size: 0.88rem;
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .nav-item:hover {
+            border-color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.12);
+        }
+
+        .nav-item.active {
+            background: var(--gold-gradient);
+            color: #03050c;
+            font-weight: 700;
+            border-color: #fff;
+        }
+
+        /* View Sections & Toolbar */
+        .view-section {
+            display: none;
+            width: 100%;
+            max-width: 920px;
             flex-grow: 1;
-            width: 100%;
-            display: flex;
+            flex-direction: column;
             align-items: center;
-            justify-content: center;
-            position: relative;
-            perspective: 1200px;
-            overflow: hidden;
-            padding-bottom: 60px;
+            padding: 10px 12px 36px;
+            z-index: 10;
+            animation: fadeInView 0.35s ease-out;
         }
 
-        #deck-container {
+        @keyframes fadeInView {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .view-section.active {
+            display: flex;
+        }
+
+        .compact-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin: 6px 0;
+            z-index: 40;
+        }
+
+        .dropdown-wrapper {
             position: relative;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            min-width: 280px;
+            background: rgba(8, 12, 28, 0.98);
+            border: 1px solid var(--gold-primary);
+            border-radius: 12px;
+            padding: 8px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.95), var(--gold-glow);
+            z-index: 100;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .dropdown-menu.open {
+            display: flex;
+        }
+
+        .drop-item {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.25);
+            color: var(--text-ivory);
+            padding: 9px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-family: inherit;
+            text-align: left;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .drop-item:hover {
+            background: rgba(212, 175, 55, 0.15);
+            border-color: var(--gold-bright);
+        }
+
+        .drop-item.active {
+            background: var(--gold-gradient);
+            color: #03050c;
+            font-weight: 700;
+        }
+
+        .ritual-notice {
+            font-size: 0.83rem;
+            color: #d8e4f8;
+            margin: 6px 0;
+            text-align: center;
+            padding: 8px 16px;
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.08), transparent);
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
             width: 100%;
-            max-width: 900px;
-            height: 320px;
+            max-width: 780px;
+        }
+
+        .ritual-notice span {
+            color: var(--gold-bright);
+            font-weight: 700;
+        }
+
+        /* 3D Levitating Cards */
+        #deck-container {
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            padding: 38px 36px;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            min-height: 210px;
+        }
+        #deck-container::-webkit-scrollbar {
+            display: none;
         }
 
         .card {
             width: var(--card-w);
             height: var(--card-h);
-            position: absolute;
-            perspective: 1000px;
+            margin: 0 -24px;
+            position: relative;
+            perspective: 1200px;
             cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
-            transform-origin: 50% 120%;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), margin 0.3s ease, filter 0.3s ease;
+            display: inline-block;
+            flex-shrink: 0;
         }
 
         .card:hover {
-            z-index: 100 !important;
-            transform: translateY(-35px) scale(1.12) !important;
+            transform: translateY(-20px) scale(1.07);
+            margin: 0 4px;
+            z-index: 25;
+            filter: drop-shadow(0 12px 18px rgba(212, 175, 55, 0.35));
+        }
+
+        .card.picked {
+            transform: translateY(-26px) scale(1.09);
+            margin: 0 9px;
+            z-index: 35;
+            filter: drop-shadow(0 0 18px rgba(212, 175, 55, 0.65));
         }
 
         .card-inner {
@@ -104,14 +388,13 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            border-radius: 8px;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.7);
+            transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+            border-radius: 9px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.9);
         }
 
         .card.picked .card-inner {
-            transform: rotateY(180deg) scale(1.15);
-            z-index: 120;
+            transform: rotateY(180deg);
         }
 
         .face {
@@ -119,97 +402,436 @@
             width: 100%;
             height: 100%;
             backface-visibility: hidden;
-            border-radius: 8px;
-            border: 1px solid var(--border-vintage);
+            border-radius: 9px;
+            border: 2px solid var(--gold-primary);
             display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .back {
+            background: 
+                radial-gradient(circle at center, rgba(212, 175, 55, 0.22) 0%, transparent 65%),
+                repeating-linear-gradient(45deg, rgba(212, 175, 55, 0.08) 0px, rgba(212, 175, 55, 0.08) 2px, transparent 2px, transparent 8px),
+                repeating-linear-gradient(-45deg, rgba(212, 175, 55, 0.08) 0px, rgba(212, 175, 55, 0.08) 2px, transparent 2px, transparent 8px),
+                linear-gradient(145deg, #161032 0%, #090d20 55%, #040611 100%);
+            box-shadow: inset 0 0 0 3px #090d20, inset 0 0 0 4.5px rgba(212, 175, 55, 0.55);
+        }
+
+        .back::after {
+            content: '⚜️';
+            font-size: 1.6rem;
+            filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+        }
+
+        .front {
+            background: radial-gradient(circle at center, #fffdf7 0%, #f5ebd6 100%);
+            transform: rotateY(180deg);
             flex-direction: column;
             justify-content: space-between;
-            padding: 8px;
+            padding: 6px;
+            box-shadow: inset 0 0 0 2px rgba(212, 175, 55, 0.45);
         }
 
-        /* Card Back Design */
-        .back {
-            background-color: #1a1210;
-            background-image: 
-                radial-gradient(var(--accent-gold) 15%, transparent 16%),
-                linear-gradient(45deg, rgba(0,0,0,0.4) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.4) 75%),
-                linear-gradient(45deg, rgba(0,0,0,0.4) 25%, transparent 25%, transparent 75%, rgba(0,0,0,0.4) 75%);
-            background-size: 16px 16px, 12px 12px, 12px 12px;
-            background-position: 0 0, 0 0, 6px 6px;
-            border: 2px solid var(--accent-gold);
-            outline: 2px solid #111;
-            outline-offset: -5px;
-        }
-
-        /* Procedural Card Front Styling */
-        .front {
-            transform: rotateY(180deg);
-            background: #faf4e8;
-            color: #1a1a1a;
-            box-shadow: inset 0 0 15px rgba(139, 115, 85, 0.3);
-            border: 1px solid #c0b298;
-        }
-        .front.red { color: #9c1111; }
-        .front.black { color: #1c1c1c; }
+        .front.red { color: var(--red-suit); }
+        .front.black { color: var(--black-suit); }
 
         .card-corner {
             font-family: 'Cinzel', serif;
-            font-size: 1.1rem;
+            font-size: 0.8rem;
             font-weight: 700;
             line-height: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            width: 18px;
+            align-self: flex-start;
+            text-align: center;
         }
+
         .card-corner.bottom {
             align-self: flex-end;
             transform: rotate(180deg);
         }
-        .card-center-suit {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.4rem;
-            opacity: 0.9;
+
+        .card-center {
+            font-size: 2.1rem;
+            line-height: 1;
         }
 
-        /* Controls */
-        .controls {
+        .slot-badge {
             position: absolute;
-            bottom: 20px;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gold-gradient);
+            color: #03050c;
+            font-size: 0.66rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 12px;
+            white-space: nowrap;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.8);
+            border: 1px solid #fff;
+        }
+
+        /* Study Tray */
+        .study-tray {
+            width: 100%;
+            max-width: 780px;
+            background: var(--glass-surface);
+            backdrop-filter: blur(14px);
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), var(--gold-glow);
+            animation: fadeInView 0.35s ease-out;
+        }
+
+        .tray-header {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .tray-header h4 {
+            margin: 0 0 4px 0;
+            color: var(--gold-bright);
+            font-size: 1rem;
+        }
+
+        .tray-header p {
+            margin: 0;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .drawn-preview-list {
             display: flex;
-            gap: 12px;
-            z-index: 10;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 14px;
+        }
+
+        .mini-card-item {
+            background: radial-gradient(circle, #fffdf7 0%, #f3e6c8 100%);
+            border: 2px solid var(--gold-primary);
+            border-radius: 10px;
+            padding: 8px 12px;
+            min-width: 78px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+        }
+
+        .mini-card-item.red { color: var(--red-suit); }
+        .mini-card-item.black { color: var(--black-suit); }
+
+        .mini-card-item .mini-pos {
+            display: block;
+            font-size: 0.65rem;
+            color: #444;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .mini-card-item .mini-sym {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        /* Buttons & Animation */
+        .controls {
+            padding: 8px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .center-act {
+            text-align: center;
+            margin-top: 10px;
         }
 
         .btn {
-            background: rgba(20, 15, 14, 0.85);
-            border: 1px solid var(--accent-gold);
-            color: var(--accent-gold);
-            padding: 10px 22px;
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.16) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-bright);
+            padding: 8px 16px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 0.95rem;
-            font-family: 'Padauk', serif;
-            font-weight: bold;
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            font-size: 0.83rem;
+            font-weight: 600;
+            transition: all 0.25s ease;
+            font-family: inherit;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
         }
+
+        .btn-large {
+            padding: 10px 26px;
+            font-size: 0.92rem;
+        }
+
+        .btn-gold-glow {
+            background: var(--gold-gradient);
+            color: #03050c;
+            font-weight: 700;
+            border-color: #fff;
+            box-shadow: var(--gold-glow);
+        }
+
         .btn:hover {
-            background: var(--accent-gold);
-            color: #120d0b;
-            box-shadow: 0 0 15px rgba(197, 160, 89, 0.5);
+            background: var(--gold-gradient);
+            color: #03050c;
+            border-color: #fff;
+            box-shadow: var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        @keyframes knockShake {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(0.94) rotate(-3deg); filter: drop-shadow(0 0 25px var(--gold-primary)); }
+            50% { transform: scale(1.04) rotate(3deg); }
+            75% { transform: scale(0.97) rotate(-1deg); }
+        }
+
+        .knocking .card-inner {
+            animation: knockShake 0.55s ease-in-out;
+        }
+
+        /* Panels & Forms */
+        .panel-box {
+            background: var(--glass-surface);
+            backdrop-filter: blur(14px);
+            border: 1px solid rgba(212, 175, 55, 0.45);
+            border-radius: 16px;
+            padding: 18px;
+            width: 100%;
+            max-width: 760px;
+            margin-top: 10px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.75);
+        }
+
+        .panel-title {
+            color: var(--gold-bright);
+            margin: 0 0 10px 0;
+            font-size: 1.08rem;
+            text-align: center;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.45);
+            padding-bottom: 10px;
+        }
+
+        .panel-subtext {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin: 0 0 12px 0;
+        }
+
+        .result-container {
+            margin-top: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 160px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.78rem;
+            color: var(--gold-bright);
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 9px 12px;
+            border-radius: 10px;
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            background: rgba(5, 8, 20, 0.9);
+            color: var(--text-ivory);
+            font-size: 0.86rem;
+            font-family: inherit;
+            outline: none;
+        }
+
+        .form-group optgroup {
+            background: #090e24;
+            color: var(--gold-bright);
+            font-weight: 700;
+        }
+
+        /* 3x3 Grid */
+        .grid-3x3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 14px auto;
+            max-width: 330px;
+        }
+
+        .grid-cell {
+            background: radial-gradient(circle, #fffdf7 0%, #f3e6c8 100%);
+            border: 2px solid var(--gold-primary);
+            border-radius: 10px;
+            padding: 8px 4px;
+            text-align: center;
+            font-weight: 700;
+            box-shadow: 0 5px 14px rgba(0, 0, 0, 0.65);
+        }
+
+        .grid-cell.red { color: var(--red-suit); }
+        .grid-cell.black { color: var(--black-suit); }
+
+        .grid-cell .cell-num {
+            font-size: 0.64rem;
+            color: #555;
+            display: block;
+        }
+
+        .grid-cell .cell-sym {
+            font-family: 'Cinzel', serif;
+            font-size: 1.3rem;
+        }
+
+        /* Flashcard Stage */
+        .flashcard-stage {
+            perspective: 1200px;
+            width: 100%;
+            max-width: 540px;
+            height: 210px;
+            margin: 12px auto;
+            cursor: pointer;
+        }
+
+        .flashcard-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
+            border-radius: 14px;
+            border: 2px solid var(--gold-primary);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.75);
+        }
+
+        .flashcard-stage.flipped .flashcard-inner {
+            transform: rotateY(180deg);
+        }
+
+        .fc-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .fc-front {
+            background: radial-gradient(circle at top, #1d2b56 0%, #090e24 100%);
+            color: var(--gold-bright);
+        }
+
+        .fc-back {
+            background: radial-gradient(circle at top, #261447 0%, #0b0718 100%);
+            color: #ffffff;
+            transform: rotateY(180deg);
+            border: 1px solid var(--emerald-mystic);
+        }
+
+        .fc-meta {
+            font-family: 'Cinzel', serif;
+            font-size: 0.74rem;
+            color: var(--gold-primary);
+            margin-bottom: 6px;
+        }
+
+        .fc-meta.emerald {
+            color: var(--emerald-mystic);
+        }
+
+        .fc-question {
+            font-size: 1rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        .fc-answer {
+            font-size: 0.94rem;
+            line-height: 1.55;
+        }
+
+        .fc-hint {
+            font-size: 0.74rem;
+            color: var(--text-muted);
+            margin-top: 10px;
+        }
+
+        /* Day Cards & Accordion */
+        .day-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            border-radius: 12px;
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            transition: all 0.25s ease;
+        }
+
+        .day-card h4 {
+            margin: 0;
+            color: var(--gold-bright);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.92rem;
+            cursor: pointer;
+        }
+
+        .day-card-content {
+            display: none;
+            margin-top: 12px;
+            font-size: 0.87rem;
+            line-height: 1.65;
+            color: #e2e8f0;
+            border-top: 1px dashed rgba(212, 175, 55, 0.35);
+            padding-top: 10px;
+        }
+
+        .day-card.open > .day-card-content {
+            display: block;
+        }
+
+        .reveal-section {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.3);
+            animation: fadeInView 0.3s ease-out;
+        }
+
+        .reveal-section.open {
+            display: block;
         }
 
         /* Reading Modal */
         #reading-modal {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
+            background: rgba(2, 4, 10, 0.88);
+            backdrop-filter: blur(10px);
             z-index: 2000;
             display: flex;
             justify-content: center;
@@ -217,302 +839,1481 @@
             opacity: 0;
             pointer-events: none;
             transition: opacity 0.35s ease;
-            padding: 15px;
+            padding: 14px;
         }
+
         #reading-modal.active {
             opacity: 1;
             pointer-events: auto;
         }
 
         .modal-content {
-            background: #171311;
-            border: 1px solid var(--accent-gold);
+            background: linear-gradient(165deg, rgba(16, 25, 54, 0.97) 0%, rgba(6, 9, 22, 0.99) 100%);
+            border: 2px solid var(--gold-primary);
             width: 100%;
-            max-width: 460px;
-            max-height: 85vh;
-            border-radius: 12px;
-            padding: 24px;
-            box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), 0 0 15px rgba(197, 160, 89, 0.2);
+            max-width: 670px;
+            max-height: 89vh;
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.95), 0 0 35px rgba(212, 175, 55, 0.35);
             overflow-y: auto;
             position: relative;
-            transform: translateY(20px);
-            transition: transform 0.35s ease;
-        }
-        #reading-modal.active .modal-content {
-            transform: translateY(0);
         }
 
         .close-btn {
-            position: absolute;
-            top: 14px;
-            right: 14px;
-            background: transparent;
-            border: 1px solid #66554b;
-            color: #bbb;
+            position: sticky;
+            top: 0;
+            float: right;
+            background: var(--bg-abyss);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-bright);
             border-radius: 50%;
-            width: 32px;
-            height: 32px;
-            font-size: 1.1rem;
+            width: 34px;
+            height: 34px;
             cursor: pointer;
-            transition: 0.2s;
-        }
-        .close-btn:hover {
-            background: var(--accent-red);
-            color: #fff;
-            border-color: var(--accent-red);
+            font-weight: bold;
+            z-index: 10;
         }
 
-        .modal-title {
-            color: var(--accent-gold);
+        .modal-header-title {
+            color: var(--gold-bright);
             text-align: center;
-            margin: 0 0 4px 0;
-            font-size: 1.45rem;
-            font-weight: bold;
+            font-size: 1.12rem;
+            margin: 0 0 12px 0;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed rgba(212, 175, 55, 0.5);
         }
-        .modal-subtitle {
-            text-align: center;
-            color: #8f8174;
-            font-size: 0.85rem;
-            font-family: 'Cinzel', serif;
+
+        .card-reading-block {
+            background: var(--glass-card);
+            border: 1px solid rgba(212, 175, 55, 0.32);
+            border-radius: 14px;
+            padding: 14px;
             margin-bottom: 12px;
         }
-        .modal-essence {
-            font-style: italic;
-            text-align: center;
-            color: #f1dfc5;
-            background: rgba(197, 160, 89, 0.08);
-            border-left: 3px solid var(--accent-gold);
-            padding: 8px 12px;
-            border-radius: 4px;
-            margin-bottom: 18px;
-            font-size: 0.95rem;
-            line-height: 1.5;
+
+        .card-reading-block.highlight-final {
+            border: 2px solid var(--gold-primary);
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.12) 0%, rgba(16, 25, 54, 0.6) 100%);
         }
-        
-        .reading-section {
-            margin-bottom: 12px;
-            font-size: 0.92rem;
-            line-height: 1.6;
-            color: #ded6cc;
-            background: rgba(255, 255, 255, 0.02);
-            padding: 8px 10px;
-            border-radius: 6px;
-            border: 1px solid rgba(255, 255, 255, 0.05);
+
+        .block-position {
+            font-size: 0.76rem;
+            color: var(--gold-bright);
+            text-transform: uppercase;
+            margin-bottom: 4px;
         }
-        .reading-section strong {
-            color: var(--accent-gold);
+
+        .block-title {
+            font-size: 1.05rem;
+            color: var(--gold-primary);
+            margin: 0 0 8px 0;
             display: flex;
             align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
             gap: 6px;
-            font-size: 0.95rem;
-            margin-bottom: 3px;
+        }
+
+        .formula-box {
+            background: rgba(3, 5, 12, 0.65);
+            border-left: 4px solid var(--gold-primary);
+            border-radius: 0 8px 8px 0;
+            padding: 10px 14px;
+            font-size: 0.87rem;
+            margin: 8px 0;
+            color: var(--gold-bright);
+            line-height: 1.6;
+        }
+
+        .grandma-box {
+            background: rgba(0, 230, 118, 0.08);
+            border-left: 4px solid var(--emerald-mystic);
+            border-radius: 0 8px 8px 0;
+            padding: 9px 13px;
+            font-size: 0.84rem;
+            margin: 8px 0;
+            color: #d2fbe3;
+            line-height: 1.55;
+        }
+
+        .special-omen {
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.28), rgba(212, 175, 55, 0.05));
+            border: 1px solid var(--gold-primary);
+            color: #ffffff;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            margin: 8px 0;
+        }
+
+        .paris-figure {
+            font-size: 0.83rem;
+            color: #a7cdff;
+            margin-bottom: 6px;
+        }
+
+        .reading-section {
+            margin-bottom: 6px;
+            font-size: 0.87rem;
+            line-height: 1.6;
+        }
+
+        .reading-section strong {
+            color: var(--gold-bright);
+        }
+
+        .multiples-alert {
+            background: linear-gradient(135deg, rgba(211, 47, 47, 0.25) 0%, rgba(120, 15, 30, 0.25) 100%);
+            border: 1px solid var(--crimson-alert);
+            color: #ffdce0;
+            padding: 12px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            font-size: 0.86rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 600px) {
+            :root {
+                --card-w: 75px;
+                --card-h: 115px;
+            }
+            header h1 {
+                font-size: 1.15rem;
+            }
+            .header-center {
+                padding: 0 35px;
+            }
+            .panel-box {
+                padding: 14px;
+            }
         }
     </style>
 </head>
 <body>
 
+    <!-- Header Section -->
     <header>
-        <h1>Vintage Cartomancy</h1>
-        <p>ကံကြမ္မာအဟောလမ်းညွှန်အတွက် ဖဲချပ်တစ်ခုကို နှိုက်ယူပါ</p>
+        <button class="hamburger-btn" onclick="toggleMainMenu()" aria-label="Menu" title="မီနူးဖွင့်ရန်">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
+        <div class="header-center">
+            <div class="badge">HMAW SET SHIN • ESOTERIC RESEARCHER</div>
+            <h1>NUMEROLOGICAL CARTOMANCY</h1>
+            <p>ဖဲပွင့် + ဂဏန်း = ဟောကိန်း</p>
+        </div>
+
+        <!-- Collapsible Navigation Drawer -->
+        <div id="main-nav-drawer" class="nav-drawer">
+            <button class="nav-item active" onclick="switchTab('spreads', this)">🔮 အဟောကတ် လေ့ကျင့်ခန်း</button>
+            <button class="nav-item" onclick="switchTab('birthday', this)">🎂 မွေးနေ့ဖဲချပ်နှင့် ဘဝကံဇာတာ</button>
+            <button class="nav-item" onclick="switchTab('explorer', this)">🔍 ၅၂ ချပ် ဖော်မြူလာ အဘိဓာန်</button>
+            <button class="nav-item" onclick="switchTab('tutor', this)">🎓 ဉာဏ်စမ်း၊ ပုစ္ဆာနှင့် သင်ရိုးညွှန်းတမ်း</button>
+        </div>
     </header>
 
-    <div id="table-area">
-        <div id="deck-container"></div>
-    </div>
+    <!-- TAB 1: SPREADS & READING PRACTICE -->
+    <section id="view-spreads" class="view-section active">
+        <div class="compact-toolbar">
+            <div class="dropdown-wrapper">
+                <button class="btn" onclick="toggleSpreadMenu()">
+                    🃏 အဟောစနစ် - <span id="current-spread-label">၁ ချပ်တည်းစနစ်</span> ▼
+                </button>
+                <div id="spread-dropdown" class="dropdown-menu">
+                    <button class="drop-item active" id="btn-mode-1" onclick="setSpreadMode(1, '၁ ချပ်တည်းစနစ်')">☝️ ၁ ချပ်တည်းစနစ်</button>
+                    <button class="drop-item" id="btn-mode-3" onclick="setSpreadMode(3, '၃ ချပ်တွဲစနစ်')">⏳ ၃ ချပ်တွဲစနစ်</button>
+                    <button class="drop-item" id="btn-mode-7" onclick="setSpreadMode(7, '၇ ချပ် မြင်းခွာစနစ်')">🧲 ၇ ချပ် မြင်းခွာစနစ်</button>
+                    <button class="drop-item" id="btn-mode-9" onclick="setSpreadMode(9, '၉ ချပ်စနစ်')">⊞ ၉ ချပ်စနစ်</button>
+                    <button class="drop-item" id="btn-mode-13" onclick="setSpreadMode(13, '၁၃ ချပ် စက်ဝန်းစနစ်')">🎡 ၁၃ ချပ် စက်ဝန်းစနစ်</button>
+                    <button class="drop-item" id="btn-mode-yn" onclick="setSpreadMode('yn', 'Yes / No စနစ်')">⚖️ Yes / No စနစ်</button>
+                </div>
+            </div>
 
-    <div class="controls">
-        <button class="btn" onclick="shuffleAndSpread()">ဖဲချပ်မွှေမည် (Shuffle)</button>
-    </div>
-
-    <!-- Reading Modal -->
-    <div id="reading-modal" onclick="onModalBackdropClick(event)">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">✕</button>
-            <h2 class="modal-title" id="m-title">Card Name</h2>
-            <div class="modal-subtitle" id="m-subtitle">SUIT & RANK</div>
-            <div class="modal-essence" id="m-essence">Essence</div>
-            <div id="m-details"></div>
+            <button class="btn" onclick="cleanseDeck()">✊ ၃ ချက်ခေါက်</button>
+            <button class="btn" onclick="shuffleDeck()">🔀 ဖဲမွှေမည်</button>
         </div>
-    </div>
 
-    <script>
-        // အစုံ (Suits) နှင့် နံပါတ်စဉ် (Ranks) များဆိုင်ရာ အခြေခံ အဓိပ္ပာယ်သဘောတရားများ
-        const SUITS = {
-            hearts: { name: 'Hearts', symbol: '♥', color: 'red', mm: 'အသည်း (မေတ္တာ၊ ခံစားချက်၊ မိသားစု)', elem: 'ရေဓာတ်' },
-            diamonds: { name: 'Diamonds', symbol: '♦', color: 'red', mm: 'ဒေါင့် (စီးပွားရေး၊ ငွေကြေး၊ အောင်မြင်မှု)', elem: 'မြေဓာတ်' },
-            clubs: { name: 'Clubs', symbol: '♣', color: 'black', mm: 'ပွင့် (ကြိုးစားအားထုတ်မှု၊ စိတ်ကူးသစ်၊ အခွင့်အလမ်း)', elem: 'မီးဓာတ်' },
-            spades: { name: 'Spades', symbol: '♠', color: 'black', mm: 'စပိတ် (အတားအဆီး၊ ဆုံးဖြတ်ချက်၊ စိန်ခေါ်မှု)', elem: 'လေဓာတ်' }
-        };
+        <div class="ritual-notice" id="status-text">
+            <span>🖐️ ဘယ်လက်စည်းမျဉ်း -</span> မနောစိတ်နှင့်ချိတ်ဆက်ထားသော ဘယ်လက်ဖြင့် ဖဲချပ် ၁ ချပ် ရွေးချယ်ပါ။
+        </div>
 
-        const RANKS = [
-            { key: 'A', label: 'Ace', num: 1 },
-            { key: '2', label: '2', num: 2 },
-            { key: '3', label: '3', num: 3 },
-            { key: '4', label: '4', num: 4 },
-            { key: '5', label: '5', num: 5 },
-            { key: '6', label: '6', num: 6 },
-            { key: '7', label: '7', num: 7 },
-            { key: '8', label: '8', num: 8 },
-            { key: '9', label: '9', num: 9 },
-            { key: '10', label: '10', num: 10 },
-            { key: 'J', label: 'Jack', num: 11 },
-            { key: 'Q', label: 'Queen', num: 12 },
-            { key: 'K', label: 'King', num: 13 }
-        ];
+        <!-- 52-Card Fan Deck -->
+        <div id="deck-container"></div>
 
-        // ၅၂ ချပ်စလုံးအတွက် အဓိပ္ပာယ် သဘောတရားများကို တွက်ချက်ဖန်တီးပေးသည့် စနစ်
-        function generateFullDeck() {
-            const deck = [];
-            for (const [suitKey, suit] of Object.entries(SUITS)) {
-                for (const rank of RANKS) {
-                    deck.push({
-                        id: `${suitKey}_${rank.key}`,
-                        suitKey: suitKey,
-                        suit: suit,
-                        rank: rank,
-                        name: `${rank.label} of ${suit.name}`,
-                        nameMm: `${suit.name} ${rank.key}`,
-                        essence: getEssence(suitKey, rank.key),
-                        career: getDomainReading(suitKey, rank.key, 'career'),
-                        finance: getDomainReading(suitKey, rank.key, 'finance'),
-                        love: getDomainReading(suitKey, rank.key, 'love'),
-                        health: getDomainReading(suitKey, rank.key, 'health')
-                    });
-                }
-            }
-            return deck;
-        }
+        <!-- Self-Study Tray -->
+        <div id="self-study-tray" class="study-tray" style="display: none;">
+            <div class="tray-header">
+                <h4>🧐 သင်ရွေးချယ်ထားသော ကတ်များ</h4>
+                <p>အဆင့် ၁ အရောင် ➔ အဆင့် ၂ ဖဲပွင့်နယ်ပယ် ➔ အဆင့် ၃ ဂဏန်းစွမ်းအင် တို့ကို ပေါင်းစပ်ပြီး ကိုယ်တိုင် အရင်သုံးသပ်ကြည့်ပါ။</p>
+            </div>
+            <div id="drawn-cards-preview" class="drawn-preview-list"></div>
+            <div class="center-act">
+                <button class="btn btn-gold-glow btn-large" onclick="showReadingModal()">
+                    👁️ အဟောနှင့် ဖော်မြူလာ အဖြေကြည့်မည်
+                </button>
+            </div>
+        </div>
+    </section>
 
-        // ဖဲချပ်တစ်ခုချင်းစီ၏ မူလအနှစ်သာရ
-        function getEssence(s, r) {
-            const map = {
-                'hearts_A': 'မေတ္တာရေးနှင့် စိတ်နှလုံးချမ်းမြေ့ဖွယ် အစပျိုးခြင်းအသစ်။',
-                'diamonds_10': 'ငွေကြေးဥစ္စာ ကြီးမားစွာပြည့်စုံခြင်းနှင့် အကျိုးခံစားခွင့်များ ရရှိခြင်း။',
-                'spades_K': 'ဩဇာအာဏာ၊ တိကျပြတ်သားသော ဆုံးဖြတ်ချက်နှင့် ဉာဏ်ပညာဖြင့် ဦးဆောင်ရမည့်ကာလ။',
-                'clubs_5': 'ပြိုင်ဆိုင်မှု၊ အားထုတ်ရုန်းကန်ရမှုနှင့် တက်ကြွလှုပ်ရှားရမည့် အခြေအနေ။'
-            };
-            if (map[`${s}_${r}`]) return map[`${s}_${r}`];
-            return `${SUITS[s].mm}နယ်ပယ်တွင် အဆင့် (${r}) အရ ပြောင်းလဲမှုနှင့် သက်ရောက်မှုများ ပေါ်ပေါက်လာမည်။`;
-        }
+    <!-- TAB 2: BIRTHDAY, LIFE STAGE & SIGNIFICATOR -->
+    <section id="view-birthday" class="view-section">
+        <div class="panel-box">
+            <h3 class="panel-title">🎂 မွေးနေ့ဖဲချပ်၊ ဘဝခရီးစဉ်ဂဏန်းနှင့် ကိုယ်စားပြုကတ် တွက်ချက်စနစ်</h3>
+            <p class="panel-subtext">
+                ဖဲ ၅၂ ချပ် = ရက်သတ္တပတ် ၅၂ ပတ် | ဖဲပွင့် ၄ မျိုး = ရာသီ ၄ ခု နှင့် ဘဝသက်တမ်း အဆင့် ၄ ဆင့်
+            </p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dob-input">မွေးသက္ကရာဇ် ရွေးချယ်ပါ</label>
+                    <input type="date" id="dob-input" value="1995-05-15">
+                </div>
+                <div class="form-group">
+                    <label for="gender-role">ကျား / မ နှင့် အသက်အရွယ်အုပ်စု</label>
+                    <select id="gender-role">
+                        <option value="J">အသက် ၁၈ နှစ်အောက် လူငယ် — J</option>
+                        <option value="Q_under40" selected>အသက် ၁၈ မှ ၄၀ အတွင်း အမျိုးသမီး — Q</option>
+                        <option value="Q_over40">အသက် ၄၀ အထက် အမျိုးသမီး — Q</option>
+                        <option value="K_under40">အသက် ၁၈ မှ ၄၀ အတွင်း အမျိုးသား — K</option>
+                        <option value="K_over40">အသက် ၄၀ အထက် အမျိုးသား — K</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="complexion-type">အသားအရေ နှင့် ဆံပင်သဘာဝ</label>
+                    <select id="complexion-type">
+                        <option value="fair">အသားဖြူ / အရောင်လင်းသော ဆံပင်</option>
+                        <option value="dark" selected>အသားညို / အသားလတ် / ဆံပင်နက်</option>
+                    </select>
+                </div>
+            </div>
+            <div class="center-act">
+                <button class="btn btn-gold-glow btn-large" onclick="calculateBirthdayDestiny()">
+                    ✨ မွေးနေ့ဖဲချပ် တွက်ချက်မည်
+                </button>
+            </div>
 
-        function getDomainReading(s, r, domain) {
-            const suit = SUITS[s];
-            if (domain === 'career') {
-                if (s === 'clubs') return 'လုပ်ငန်းခွင်တွင် အားသွန်ခွန်စိုက် ကြိုးပမ်းရမည်ဖြစ်ပြီး ရလဒ်ကောင်းများ ထွက်ပေါ်လာမည်။';
-                if (s === 'diamonds') return 'စီးပွားရေးဆိုင်ရာ စာချုပ်သစ်များ၊ ရာထူးတိုးခြင်းနှင့် အခွင့်အလမ်းကောင်းများ ကြုံရမည်။';
-                if (s === 'spades') return 'လုပ်ငန်းခွင် အပြောင်းအလဲ သို့မဟုတ် ဉာဏ်ပညာသုံး၍ ဖြေရှင်းရမည့် ပြဿနာငယ်များ ကြုံနိုင်သည်။';
-                return 'လုပ်ဖော်ကိုင်ဖက်များနှင့် ဆက်ဆံရေးပြေပြစ်ပြီး အကူအညီကောင်းများ ရရှိမည်။';
-            }
-            if (domain === 'finance') {
-                if (s === 'diamonds') return 'ငွေကြေးကံ အထူးကောင်းမွန်နေပြီး ဝင်ငွေစီးဆင်းမှု တည်ငြိမ်တိုးတက်မည်။';
-                if (s === 'spades') return 'မလိုလားအပ်သော အသုံးစရိတ်များကို ထိန်းချုပ်ပြီး စာချုပ်စာတမ်းများ သတိထားသင့်သည်။';
-                return 'မျှတသော ငွေကြေးအခြေအနေတွင် ရှိနေပြီး မမျှော်လင့်ဘဲ အထောက်အပံ့ရနိုင်သည်။';
-            }
-            if (domain === 'love') {
-                if (s === 'hearts') return 'အချစ်ရေးနှင့် အိမ်ထောင်ရေးတွင် နားလည်မှု ပိုမိုခိုင်မာလာပြီး ကြည်နူးရမည်။';
-                if (s === 'spades') return 'အထင်အမြင်လွဲမှားမှုများ မဖြစ်စေရန် စိတ်ရှည်သည်းခံ၍ ရှင်းလင်းပြောဆိုပါ။';
-                return 'အပြန်အလှန် လေးစားမှုဖြင့် တည်ငြိမ်စွာ ရှေ့ဆက်နိုင်သော ဆက်ဆံရေးဖြစ်ပါသည်။';
-            }
-            if (domain === 'health') {
-                if (s === 'spades') return 'စိတ်ဖိစီးမှုနှင့် အိပ်ရေးပျက်ခြင်းကို သတိပြုပြီး အနားယူချိန် ပိုပေးပါ။';
-                return 'ကျန်းမာရေး ပုံမှန်ကောင်းမွန်နေပြီး ခန္ဓာကိုယ်နှင့် စိတ်ဓာတ် တက်ကြွနေပါမည်။';
-            }
-            return '';
-        }
+            <div id="birthday-result" class="result-container"></div>
+        </div>
+    </section>
 
-        const fullDeck = generateFullDeck();
-        const deckContainer = document.getElementById('deck-container');
-        const modal = document.getElementById('reading-modal');
+    <!-- TAB 3: 52-CARD FORMULA EXPLORER -->
+    <section id="view-explorer" class="view-section">
+        <div class="panel-box">
+            <h3 class="panel-title">🔍 ဖဲချပ် ၅၂ ချပ် Master Formula နှင့် အဘွားသင်ကြားချက် အဘိဓာန်</h3>
+            <p class="panel-subtext">လေ့လာလိုသော ဖဲပွင့်နှင့် ဂဏန်းကို ရွေးချယ်ပြီး ကိုယ်တိုင်အရင် စဉ်းစားကြည့်ပါ။ ပြီးမှ အဖြေဖွင့်ကြည့်ပါ။</p>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="exp-suit">ဖဲပွင့် ရွေးချယ်ပါ</label>
+                    <select id="exp-suit" onchange="exploreCard()">
+                        <option value="H">♥ Hearts — အချစ်ရေး၊ မိသားစု၊ စိတ်ခံစားမှု</option>
+                        <option value="D">♦ Diamonds — ငွေကြေး၊ ဥစ္စာဓန၊ စွမ်းအင်</option>
+                        <option value="C">♣ Clubs — စီးပွားရေး၊ အလုပ်အကိုင်၊ ပညာရေး</option>
+                        <option value="S">♠ Spades — စိတ်ပိုင်းဆိုင်ရာ၊ ကံကြမ္မာ၊ စိန်ခေါ်မှု</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exp-rank">ဂဏန်း / ရုပ်ပုံ ရွေးချယ်ပါ</label>
+                    <select id="exp-rank" onchange="exploreCard()">
+                        <option value="A">A — အစသစ်၊ ပထမခြေလှမ်း</option>
+                        <option value="2">2 — အပြန်အလှန်ဖလှယ်မှု၊ ဆက်သွယ်ရေး</option>
+                        <option value="3">3 — တိုးချဲ့ခြင်း၊ ကြီးထွားမှု</option>
+                        <option value="4">4 — အုတ်မြစ်ခိုင်မာခြင်း၊ တည်ငြိမ်မှု</option>
+                        <option value="5">5 — လက်တွေ့လှုပ်ရှားမှု၊ အပြောင်းအလဲ</option>
+                        <option value="6">6 — ညီညွတ်မျှတမှု၊ တာဝန်ယူမှု</option>
+                        <option value="7">7 — ကံကြမ္မာ အလှည့်အပြောင်း</option>
+                        <option value="8">8 — နေ့စဉ်အလုပ်၊ အချိန်နှင့် ချိန်ညှိမှု</option>
+                        <option value="9" selected>9 — ရည်မှန်းချက် ပြည့်စုံအောင်မြင်ခြင်း</option>
+                        <option value="10">10 — သံသရာပြည့်မြောက်ခြင်း၊ အထွတ်အထိပ်</option>
+                        <option value="J">J — လူငယ်၊ သူရဲကောင်း၊ သတင်းစကား</option>
+                        <option value="Q">Q — အမျိုးသမီး၊ မိခင်၊ အကြံပေး</option>
+                        <option value="K">K — အမျိုးသားကြီး၊ ဖခင်၊ အာဏာပိုင်</option>
+                    </select>
+                </div>
+            </div>
+            <div id="explorer-output"></div>
+        </div>
+    </section>
 
-        // ဖဲချပ်များကို ယပ်တောင်ပုံသဏ္ဌာန် လှပစွာ ဖြန့်ခင်းပေးခြင်း
-        function spreadDeck() {
-            deckContainer.innerHTML = '';
-            // မျက်နှာပြင်ပေါ်တွင် ဖဲချပ် ၂၁ ချပ်ကို ယပ်တောင်ပုံစံ ဖြန့်ခင်းပြသမည်
-            const cardsCount = 21;
-            const shuffled = [...fullDeck].sort(() => Math.random() - 0.5);
-            const activeCards = shuffled.slice(0, cardsCount);
+    <!-- TAB 4: MASTER TUTOR -->
+    <section id="view-tutor" class="view-section">
+        <div class="panel-box">
+            <h3 class="panel-title">🎓 လက်တွေ့လေ့ကျင့်ခန်း၊ ဉာဏ်စမ်းနှင့် သင်ရိုးညွှန်းတမ်းများ</h3>
+            <p class="panel-subtext">လေ့ကျင့်လိုသော ကဏ္ဍခေါင်းစဉ်ကို နှိပ်၍ ဖွင့်ပါ</p>
 
-            activeCards.forEach((cardData, i) => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                
-                // ယပ်တောင်ပုံ ကွေးညွတ်စေရန် ထောင့်ချိုးနှင့် အကွာအဝေး တွက်ချက်ခြင်း
-                const mid = (cardsCount - 1) / 2;
-                const offset = i - mid;
-                const rot = offset * 3.2; // တစ်ချပ်ချင်းစီ၏ လှည့်ထောင့်
-                const transX = offset * 24; // ဘေးဘက်သို့ ခွာထုတ်မှု
-                const transY = Math.abs(offset) * 3; // အလယ်ကုန်းပြီး ဘေးနိမ့်သည့် အကွေး
+            <!-- Sub-panel 1: Case Study & Quiz Generator -->
+            <div class="day-card open">
+                <h4 onclick="this.parentElement.classList.toggle('open')">
+                    <span>🎲 ၁။ လက်တွေ့ ကတ်တွဲ ပုစ္ဆာနှင့် ဉာဏ်စမ်း ထုတ်လုပ်စက်</span>
+                    <span>▼</span>
+                </h4>
+                <div class="day-card-content">
+                    <div class="controls">
+                        <button class="btn" onclick="generateCaseStudy(2)">🃏 ၂ ချပ်တွဲ ပုစ္ဆာ</button>
+                        <button class="btn" onclick="generateCaseStudy(3)">⏳ ၃ ချပ်တွဲ ပုစ္ဆာ</button>
+                        <button class="btn" onclick="generateQuizCard()">🧠 ၁ ကတ်ချင်း ဉာဏ်စမ်း</button>
+                    </div>
+                    <div id="tutor-output" class="card-reading-block">
+                        အပေါ်မှ ခလုတ်တစ်ခုကို နှိပ်ပါ။ ကတ်ပုစ္ဆာ အရင်ပေါ်လာမည်ဖြစ်ပြီး ကိုယ်တိုင်သုံးသပ်ပြီးမှ အဖြေခလုတ်ကို နှိပ်ကြည့်နိုင်ပါသည်။
+                    </div>
+                </div>
+            </div>
 
-                card.style.transform = `translateX(${transX}px) translateY(${transY}px) rotate(${rot}deg)`;
-                card.style.zIndex = i;
-
-                card.innerHTML = `
-                    <div class="card-inner">
-                        <div class="face back"></div>
-                        <div class="face front ${cardData.suit.color}">
-                            <div class="card-corner top">
-                                <span>${cardData.rank.key}</span>
-                                <span style="font-size:0.85rem;">${cardData.suit.symbol}</span>
+            <!-- Sub-panel 2: Official 26 Flashcards -->
+            <div class="day-card">
+                <h4 onclick="this.parentElement.classList.toggle('open')">
+                    <span>🗂️ ၂။ သင်တန်းသုံး Flashcards ၂၆ ကတ် လေ့ကျင့်ခန်း</span>
+                    <span>▼</span>
+                </h4>
+                <div class="day-card-content">
+                    <p class="panel-subtext">မေးခွန်းကို ဖတ်ပြီး စိတ်ထဲမှ အရင်ဖြေကြည့်ပါ။ ပြီးမှ ကတ်ပြားကို နှိပ်၍ အဖြေလှန်ကြည့်ပါ။</p>
+                    <div class="flashcard-stage" id="fc-stage" onclick="this.classList.toggle('flipped')">
+                        <div class="flashcard-inner">
+                            <div class="fc-face fc-front">
+                                <div class="fc-meta" id="fc-counter">Flashcard 1 / 26</div>
+                                <div class="fc-question" id="fc-q">Loading...</div>
+                                <div class="fc-hint">👆 အဖြေကြည့်ရန် ကတ်ကိုနှိပ်ပါ</div>
                             </div>
-                            <div class="card-center-suit">${cardData.suit.symbol}</div>
-                            <div class="card-corner bottom">
-                                <span>${cardData.rank.key}</span>
-                                <span style="font-size:0.85rem;">${cardData.suit.symbol}</span>
+                            <div class="fc-face fc-back">
+                                <div class="fc-meta emerald">✅ အဖြေမှန်</div>
+                                <div class="fc-answer" id="fc-a">Loading...</div>
                             </div>
                         </div>
                     </div>
-                `;
+                    <div class="controls">
+                        <button class="btn" onclick="prevFlashcard()">⬅️ ရှေ့ကတ်</button>
+                        <button class="btn" onclick="randomFlashcard()">🔀 ကျပန်းမေးခွန်း</button>
+                        <button class="btn" onclick="nextFlashcard()">နောက်ကတ် ➡️</button>
+                    </div>
+                </div>
+            </div>
 
-                card.onclick = () => drawCard(card, cardData);
-                deckContainer.appendChild(card);
+            <!-- Sub-panel 3: 15-Day Master Curriculum & Homework -->
+            <div class="day-card">
+                <h4 onclick="this.parentElement.classList.toggle('open')">
+                    <span>📅 ၃။ ၁၅ ရက်တာ (နာရီ ၃၀) သင်ခန်းစာနှင့် အိမ်စာလေ့ကျင့်ခန်းများ</span>
+                    <span>▼</span>
+                </h4>
+                <div class="day-card-content">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="lesson-day-select">သင်ခန်းစာ နေ့ရက် ရွေးချယ်ပါ</label>
+                            <select id="lesson-day-select" onchange="renderDailyLessonPost()">
+                                <optgroup label="🟢 Phase 1: Foundations & Core Energies">
+                                    <option value="1">Day 1 — သမိုင်းနောက်ခံ၊ Paris/English Pattern နှင့် ပြက္ခဒိန်သင်္ချာ</option>
+                                    <option value="2">Day 2 — ဖဲပွင့် ၄ မျိုး၊ လူမှုတန်းစား ၄ ရပ်၊ အရောင်စွမ်းအင်နှင့် ဓာတ် ၄ ပါး</option>
+                                    <option value="3">Day 3 — ဂဏန်းဗေဒင် (1 to 10) နှင့် Master Formula အခြေခံ</option>
+                                    <option value="4">Day 4 — Court Cards နှင့် Paris Pattern သမိုင်းဝင်ပုဂ္ဂိုလ် ၁၂ ဦး</option>
+                                    <option value="5">Day 5 — အထူးနိမိတ်ကတ်များ၊ Multiples Rule နှင့် Assignment 1</option>
+                                </optgroup>
+                                <optgroup label="🟡 Phase 2: Narrative Building & Spreads">
+                                    <option value="6">Day 6 — 3-Step Reading System နှင့် ဇာတ်လမ်းဆင်ဟောပြောနည်း</option>
+                                    <option value="7">Day 7 — Lenormand (၃၆ ချပ်) vs Cartomancy (၅၂ ချပ်) နှိုင်းယှဉ်ချက်နှင့် FAQ</option>
+                                    <option value="8">Day 8 — Single Card နှင့် Three-Card Spread အကြောင်းအကျိုးချိတ်ဆက်မှု</option>
+                                    <option value="9">Day 9 — Square of Nine (၉ ချပ်စနစ်) အပြည့်အစုံ</option>
+                                    <option value="10">Day 10 — ရှေးဟောင်းနှင့် ဂျစ်ပစီ ဖဲခင်းနည်းများ (Horseshoe, Cross, Pyramid) နှင့် Assignment 2</option>
+                                </optgroup>
+                                <optgroup label="🔴 Phase 3: Advanced Timing, Practice & Ethics">
+                                    <option value="11">Day 11 — အချိန်ကာလ (Timing) တွက်ချက်နည်း စနစ် ၄ မျိုး</option>
+                                    <option value="12">Day 12 — The Celestial Circle Spread (၁၃ ချပ် ၁ နှစ်တာ ကံဇာတာစနစ်)</option>
+                                    <option value="13">Day 13 — လက်တွေ့ Case Studies ခွဲခြမ်းစိတ်ဖြာမှုများ</option>
+                                    <option value="14">Day 14 — ဗေဒင်ဆရာ၏ ကျင့်ဝတ် (Reader's Code)၊ ဘယ်လက်နိယာမနှင့် စွမ်းအင်သန့်စင်ခြင်း</option>
+                                    <option value="15">Day 15 — သင်တန်းဆင်းစာမေးပွဲ၊ Review နှင့် Certificate of Completion</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="lesson-post-output" class="card-reading-block"></div>
+                </div>
+            </div>
+
+            <!-- Sub-panel 4: Student Q&A -->
+            <div class="day-card">
+                <h4 onclick="this.parentElement.classList.toggle('open')">
+                    <span>💬 ၄။ သင်တန်းသား အမေးအဖြေနှင့် ယုတ္တိဗေဒ ရှင်းလင်းချက်များ</span>
+                    <span>▼</span>
+                </h4>
+                <div class="day-card-content">
+                    <div id="qa-accordion-container"></div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Reading Modal -->
+    <div id="reading-modal" onclick="if(event.target === this) closeModal()">
+        <div class="modal-content">
+            <button class="close-btn" onclick="closeModal()">✕</button>
+            <h2 class="modal-header-title" id="m-header">🔮 ဖော်မြူလာ နိမိတ်ဖတ်ကြားချက်</h2>
+            <div id="m-body"></div>
+        </div>
+    </div>
+
+    <!-- Application Logic (Embedded JS) -->
+    <script>
+        // 1. SUIT DATABASE
+        const suitsData = {
+            D: {
+                symbol: "♦", name: "Diamonds", color: "red",
+                season: "နွေဦးရာသီ — မတ်လ မှ မေလ", element: "လေဓာတ် — ဦးနှောက်နှင့် ဉာဏ်ပညာ",
+                lifeStage: "ကလေးဘဝနှင့် နံနက်ခင်းအချိန်",
+                humour: "Choleric — ထက်မြက်သွက်လက်ပြီး အပြင်လောကသို့ စူးစမ်းလိုသော သဘာဝ",
+                colorEnergy: "အနီရောင် — နေ့ဘက်၊ အပြုသဘော၊ ဆုလာဘ်နှင့် တက်ကြွသောစွမ်းအင်",
+                domain: "ငွေကြေး၊ ဥစ္စာဓန၊ အကျိုးအမြတ်နှင့် အသိအမှတ်ပြုခံရမှု",
+                medievalClass: "ကုန်သည်နှင့် စီးပွားရေးလုပ်ငန်းရှင်တန်းစား"
+            },
+            C: {
+                symbol: "♣", name: "Clubs", color: "black",
+                season: "နွေရာသီ — ဇွန်လ မှ ဩဂုတ်လ", element: "မီးဓာတ် — လက်တွေ့လှုပ်ရှားမှုနှင့် ဇွဲလုံ့လ",
+                lifeStage: "လူငယ်ဘဝနှင့် မွန်းတည့်အချိန်",
+                humour: "Sanguine — မျှော်လင့်ချက်ကြီးမားပြီး ဘယ်တော့မှ အရှုံးမပေးတတ်သော သဘာဝ",
+                colorEnergy: "အနက်ရောင် — ညဘက်၊ လက်တွေ့ကြိုးစားအားထုတ်ရမှု",
+                domain: "စီးပွားရေး၊ အလုပ်အကိုင်၊ စီမံကိန်း၊ လူမှုရေးနှင့် သင်ယူမှု",
+                medievalClass: "စိုက်ပျိုးရေးနှင့် လယ်သမားတန်းစား"
+            },
+            H: {
+                symbol: "♥", name: "Hearts", color: "red",
+                season: "ဆောင်းဦးရာသီ — စက်တင်ဘာလ မှ နိုဝင်ဘာလ", element: "ရေဓာတ် — နှလုံးသားနှင့် မေတ္တာတရား",
+                lifeStage: "လူလတ်ပိုင်း ရင့်ကျက်ချိန်နှင့် ညနေခင်း",
+                humour: "Phlegmatic — စာနာတတ်ပြီး အတွင်းစိတ်ခံစားချက်ကို အလေးပေးသော သဘာဝ",
+                colorEnergy: "အနီရောင် — နေ့ဘက်၊ အပြုသဘော၊ ချောမွေ့မှု",
+                domain: "အချစ်ရေး၊ စိတ်ခံစားမှု၊ မိသားစုနှင့် မိတ်ဆွေဆက်ဆံရေး",
+                medievalClass: "နန်းတွင်းနှင့် ဘာသာရေးခေါင်းဆောင်တန်းစား"
+            },
+            S: {
+                symbol: "♠", name: "Spades", color: "black",
+                season: "ဆောင်းရာသီ — ဒီဇင်ဘာလ မှ ဖေဖော်ဝါရီလ", element: "မြေဓာတ် — ကံကြမ္မာနှင့် ဘဝသင်ခန်းစာ",
+                lifeStage: "သက်ကြီးပိုင်းနှင့် ညအချိန်",
+                humour: "Melancholic — လေးနက်စွာ ဆင်ခြင်သုံးသပ်တတ်ပြီး သတိကြီးသော သဘာဝ",
+                colorEnergy: "အနက်ရောင် — ညဘက်၊ အနုတ်သဘော၊ စိန်ခေါ်မှုနှင့် သတိပေးချက်",
+                domain: "စိတ်ပိုင်းဆိုင်ရာ၊ ကံကြမ္မာ၊ အခက်အခဲနှင့် စိန်ခေါ်မှု",
+                medievalClass: "စစ်တပ်နှင့် သူရဲကောင်းတန်းစား"
+            }
+        };
+
+        // 2. NUMEROLOGY & COURT DATABASE
+        const ranksData = {
+            "A": { num: 1, title: "Ace", action: "အစသစ်၊ ပထမခြေလှမ်း၊ ဦးဆောင်မှုနှင့် စာချုပ်သတင်းသစ်", lifePath: "ဦးဆောင်သူ၊ အသစ်တီထွင်သူ၊ ကိုယ့်အားကိုယ်ကိုး၍ ပထမခြေလှမ်း စတင်နိုင်စွမ်းရှိသူ။" },
+            "2": { num: 2, title: "2", action: "အပြန်အလှန်ဖလှယ်မှု၊ ဆက်သွယ်ရေး၊ ဒွိဘာဝနှင့် ပူးပေါင်းဆောင်ရွက်မှု", lifePath: "သံတမန်ဆန်သူ၊ ပူးပေါင်းဆောင်ရွက်တတ်သူ၊ မျှတမှုနှင့် ဆက်သွယ်ရေး ထူးချွန်သူ။" },
+            "3": { num: 3, title: "3", action: "တိုးချဲ့ခြင်း၊ ဖန်တီးနိုင်စွမ်း၊ ကြီးထွားတိုးတက်မှုနှင့် ၃ ဦးပေါင်းစပ်မှု", lifePath: "ဖန်တီးနိုင်စွမ်းမြင့်မားသူ၊ လူမှုဆက်ဆံရေးကောင်းမွန်ပြီး အခွင့်အလမ်းများကို ချဲ့ထွင်နိုင်သူ။" },
+            "4": { num: 4, title: "4", action: "အခြေခံအုတ်မြစ် ခိုင်မာခြင်း၊ တည်ငြိမ်မှု၊ နံရံ ၄ ဖက်နှင့် လုံခြုံမှု", lifePath: "စနစ်ကျသူ၊ တည်ငြိမ်ခိုင်မာသော အုတ်မြစ်နှင့် လုံခြုံသောဘဝကို တည်ဆောက်နိုင်သူ။" },
+            "5": { num: 5, title: "5", action: "လက်တွေ့လှုပ်ရှားမှု၊ အပြောင်းအလဲ၊ ခန္ဓာကိုယ်နှင့် စိန်ခေါ်မှု", lifePath: "လွတ်လပ်မှုကို မြတ်နိုးသူ၊ အပြောင်းအလဲနှင့် လက်တွေ့လှုပ်ရှားမှုများဖြင့် တိုးတက်သူ။" },
+            "6": { num: 6, title: "6", action: "ညီညွတ်မျှတမှု၊ တာဝန်ယူမှု၊ စိတ်ပညာနှင့် သတင်းအချက်အလက်", lifePath: "တာဝန်ယူစိတ်ကြီးမားသူ၊ မိသားစုနှင့် အများအကျိုးကို သဟဇာတဖြစ်အောင် ကူညီစောင့်ရှောက်သူ။" },
+            "7": { num: 7, title: "7", action: "ကံကြမ္မာ အလှည့်အပြောင်း၊ ဆန်းကြယ်သော ကံကောင်းမှု သို့မဟုတ် သင်ခန်းစာ", lifePath: "စူးစမ်းလေ့လာသူ၊ ဝိညာဉ်ရေးရာနှင့် ဂမ္ဘီရပညာရပ်များတွင် ထိုးထွင်းသိမြင်နိုင်စွမ်းရှိသူ။" },
+            "8": { num: 8, title: "8", action: "နေ့စဉ်အလုပ်အကိုင်၊ အချိန်၊ ဟန်ချက်ညီမှုနှင့် လုပ်ပိုင်ခွင့်အာဏာ", lifePath: "စီမံခန့်ခွဲမှုနှင့် အုပ်ချုပ်ရေးထူးချွန်သူ၊ လက်တွေ့ကြိုးစားမှုဖြင့် ဩဇာအာဏာ တည်ဆောက်သူ။" },
+            "9": { num: 9, title: "9", action: "ရည်မှန်းချက်ပြည့်စုံအောင်မြင်ခြင်း၊ ခရီးသွားခြင်းနှင့် ဆန္ဒပြည့်ဝမှု", lifePath: "အမြင်ကျယ်သူ၊ ဒဿနပညာရှင်ဆန်ပြီး မြင့်မားသော ရည်မှန်းချက်အိပ်မက်များကို အကောင်အထည်ဖော်သူ။" },
+            "10": { num: 10, title: "10", action: "သံသရာတစ်ပတ်ပြည့်မြောက်ခြင်း၊ အထွတ်အထိပ်ရောက်ရှိခြင်းနှင့် ရလဒ်ကြီး", lifePath: "ဘဝသံသရာအဆင့်ဆင့်ကို အထွတ်အထိပ်ရောက်အောင် အောင်မြင်စွာ အဆုံးသတ်နိုင်သူ။" },
+            "J": { num: 11, title: "Jack", action: "ကျား/မ မရွေး လူငယ်၊ ကျောင်းသား၊ သတင်းစကားသယ်ဆောင်သူနှင့် တက်ကြွမှု", lifePath: "စိတ်ဓာတ်နုပျိုတက်ကြွပြီး အစဉ်အမြဲ ပညာသစ်ရှာဖွေနေသူ။" },
+            "Q": { num: 12, title: "Queen", action: "အသက် ၁၈ နှစ်အထက် အမျိုးသမီး၊ မိခင်၊ ယုံကြည်ရသော အကြံပေးနှင့် စောင့်ရှောက်သူ", lifePath: "ထိုးထွင်းသိမြင်တတ်သော ဉာဏ်ပညာနှင့် မေတ္တာဖြင့် အကြံပေးဦးဆောင်သူ။" },
+            "K": { num: 13, title: "King", action: "အသက် ၃၅ နှစ်အထက် အမျိုးသား၊ ဖခင်၊ အာဏာပိုင်၊ ခေါင်းဆောင်နှင့် လုပ်ငန်းရှင်", lifePath: "အတွေ့အကြုံရင့်ကျက်ပြီး ဩဇာအာဏာဖြင့် စီမံအုပ်ချုပ်နိုင်သော ခေါင်းဆောင်။" }
+        };
+
+        // 3. PARIS PATTERN HISTORICAL FIGURES
+        const parisFigures = {
+            "KS": "David — အစ္စရေး ဒေးဗစ်ဘုရင်၊ တိကျပြတ်သားသော အာဏာပိုင်",
+            "KH": "Charlemagne — ဥရောပ၏ဖခင် ရှားလမိန်ဘုရင်၊ မေတ္တာကြီးမားသော ဖခင်",
+            "KD": "Julius Caesar — ရောမ ဂျူးလိယက်ဆီဇာ၊ ဩဇာကြီးမားသော ဘဏ္ဍာရေးခေါင်းဆောင်",
+            "KC": "Alexander the Great — မဟာအလက်ဇန္ဒား၊ အောင်မြင်သော စီးပွားရေးခေါင်းဆောင်",
+            "QS": "Pallas Athena — ဂရိဉာဏ်ပညာနတ်သမီး၊ လွတ်လပ်ပြတ်သားသော ပညာရှင်အမျိုးသမီး",
+            "QH": "Judith — ဂျူးသူရဲကောင်းမင်းသမီး ဂျူးဒစ်၊ ကြင်နာသော မိခင်နှင့် အမျိုးသမီးမိတ်ဆွေ",
+            "QD": "Rachel — ဣသရေလ ၁၂ မျိုးနွယ်၏ မိခင် ရာချယ်၊ ဉာဏ်ကောင်းပြီး ချမ်းသာသော အမျိုးသမီး",
+            "QC": "Argine — Regina မိဖုရား၊ ပေါင်းသင်းဆက်ဆံရေးကောင်းသော စီးပွားရေးအမျိုးသမီး",
+            "JS": "Ogier the Dane — ရှားလမိန်၏ သူရဲကောင်း၊ ပါးနပ်သော်လည်း စိတ်ဆတ်သော လူငယ်",
+            "JH": "La Hire — ဂျိန်းအော့ဖ်အာခ်၏ စစ်သူကြီး၊ သံယောဇဉ်ကြီးသော လူငယ်ချစ်သူ",
+            "JD": "Hector — ထရွိုင်မင်းသား ဟက်တာ၊ ငွေကြေးကံကောင်းပြီး တက်ကြွသော လူငယ်",
+            "JC": "Lancelot / Judah Maccabee — အာသာဘုရင်၏ သူရဲကောင်း၊ ရိုးသားကြိုးစားသော လူငယ်"
+        };
+
+        // 4. ALL 52 CARDS DETAILED MEANINGS + GRANDMOTHER'S TEACHINGS
+        const cardSpecifics = {
+            "AS": { meaning: "စိတ်ဖိစီးမှုအစ၊ အရေးကြီးသော ဆုံးဖြတ်ချက်နှင့် အဆုံးသတ်မှ အစသစ်သို့ ပြောင်းလဲခြင်း။", grandma: "ကတ်ထိပ်ချွန် အပေါ်လှည့်ပါက စိုးရိမ်ပူပန်မှုဖြစ်ပြီး အခြားစပိတ်ကတ်များ ဝိုင်းရံမှသာ အန္တရာယ်ကို သတိပေးသည်။", advice: "ကြောက်ရွံ့မှုကို ရင်ဆိုင်ပြီး ပြတ်သားစွာ ဆုံးဖြတ်ပါ။" },
+            "2S": { meaning: "စိတ်ဝိဝါဒကွဲပြားခြင်း၊ သံသယ၊ ဆက်ဆံရေးတင်းမာခြင်း သို့မဟုတ် လမ်းခွဲရတတ်ခြင်း။", grandma: "မေတ္တာရေးကတ်များနှင့် တွဲပါက သဘောထားကွဲလွဲ၍ လမ်းခွဲရတတ်သည်ကို သတိပေးသည်။", advice: "အထင်လွဲမှားမှုများကို စိတ်အေးအေးထား၍ ဖြေရှင်းပါ။" },
+            "3S": { meaning: "တတိယလူ ဝင်ရောက်စွက်ဖက်ခြင်း၊ စိတ်ဒဏ်ရာနှင့် မနာလိုမှုများ။", grandma: "La Suocera — စွက်ဖက်တတ်သော ယောက္ခမ သို့မဟုတ် အဆစ်အမြစ်နာကျင်မှုဟု ခေါ်ဆိုခဲ့သည်။", advice: "ဘေးစကားနှင့် ဝင်ရောက်စွက်ဖက်သူများကို သတိပြုပါ။" },
+            "4S": { meaning: "ကျန်းမာရေး အနားယူရခြင်း၊ ဆေးရုံ၊ အခြေအနေများ ခေတ္တရပ်တန့်နေခြင်း။", grandma: "ခုတင်ခြေ ၄ ချောင်းကို ကိုယ်စားပြု၍ အနားယူရခြင်း သို့မဟုတ် ဆေးရုံခုတင်ကို ညွှန်းသည်။", advice: "စိတ်ရောကိုယ်ပါ အနားယူပြီး အားမွေးရမည့် အချိန်ဖြစ်သည်။" },
+            "5S": { meaning: "စိန်ခေါ်မှုများနှင့် ရင်ဆိုင်ရခြင်း၊ မလိုအပ်သော နှောင်ကြိုးများကို ဖြတ်တောက်စွန့်လွှတ်ရခြင်း။", grandma: "ဓားကိုင်ထားသော ဘယ်လက် — ခွဲစိတ်ကုသမှု သို့မဟုတ် အဆက်အသွယ်ဖြတ်တောက်ခြင်း။", advice: "အတိတ်က အဆိုးများကို ပြတ်သားစွာ စွန့်လွှတ်ပါ။" },
+            "6S": { meaning: "အတိတ်မှ ပြဿနာများ ပြီးဆုံး၍ အခြေအနေသစ်သို့ ကူးပြောင်းရွှေ့ပြောင်းခြင်း။", grandma: "ယာဉ်ကြောပို့ဆောင်ရေးနှင့် အဟောင်းကိုစွန့်၍ အသစ်သို့ ရွှေ့ပြောင်းခြင်း။", advice: "အဟောင်းကိုထားခဲ့ပြီး ရှေ့သို့ ဆက်လက်လျှောက်လှမ်းပါ။" },
+            "7S": { meaning: "ဆုံးရှုံးမှု၊ စိတ်ပျက်ရမှုနှင့် မထင်မှတ်သော အလှည့်အပြောင်း။", grandma: "Sfortuna — ကံဆိုးမှုဟု ခေါ်ပြီး ရေပိုက်၊ အရက်သေစာနှင့် ဆေးဝါးများကို သတိပေးသည့်ကတ် ဖြစ်သည်။", advice: "အရက်သေစာနှင့် စိတ်လိုက်မာန်ပါ ဆုံးဖြတ်ခြင်းကို ရှောင်ကြဉ်ပါ။" },
+            "8S": { meaning: "စိတ်ဖိစီးမှုကြောင့် အကျဉ်းအကျပ်ထဲ ပိတ်မိသလို ခံစားရခြင်း၊ ဆေးစစ်ချက်ခံယူရခြင်း။", grandma: "ဆရာဝန် သို့မဟုတ် ဥပဒေပိုင်းဆိုင်ရာ စစ်ဆေးမေးမြန်းမှုများ ကြုံရတတ်သည်။", advice: "လျှို့ဝှက်ချက်များကို မည်သူ့ကိုမျှ မပြောဘဲ သည်းခံစောင့်ဆိုင်းပါ။" },
+            "9S": { meaning: "အတားအဆီးများ၊ ဝမ်းနည်းပူဆွေးမှုနှင့် ကံကြမ္မာအကြွေးများ။", grandma: "ဝမ်းနည်းကြေကွဲမှုနှင့် ကံကြမ္မာဝတ္တရားများကို သတိဖြင့် ကျော်ဖြတ်ရန် ညွှန်ပြသည်။", advice: "မလိုအပ်သော စိုးရိမ်ပူပန်မှုများဖြင့် ကိုယ့်ကိုယ်ကိုယ် မနှိပ်စက်ပါနှင့်။" },
+            "10S": { meaning: "အကြောက်ဆုံးအရာများ သို့မဟုတ် ကြီးမားသော စိတ်ဖိစီးမှု ကြုံတွေ့ရတတ်ခြင်း။", grandma: "The Nightmare Card — အမှောင်ထု၊ ညအချိန်နှင့် လျှို့ဝှက်ချက်များကို သတိပေးသည်။", advice: "အမှောင်ဆုံးအချိန်ကျော်လွန်လျှင် အရုဏ်တက်လာမည်ဖြစ်၍ စိတ်ဓာတ်မကျပါနှင့်။", omen: "⚠️ The Nightmare Card — အိပ်မက်ဆိုးနှင့် လျှို့ဝှက်ချက်များ သတိပေးကတ်" },
+            "JS": { meaning: "ဉာဏ်ရည်ထက်မြက်သော်လည်း စိတ်ဆတ်ပြီး ပြဿနာရှာတတ်သော လူငယ် သို့မဟုတ် စစ်ဘက်ဝန်ထမ်းငယ်။", grandma: "ဆံပင်အနက်၊ မျက်လုံးအနက်ရှိပြီး စူးစမ်းထောက်လှမ်းတတ်သော လူငယ် သို့မဟုတ် စစ်သားနှင့် ရဲဝန်ထမ်း။", advice: "လူငယ်များ၏ မဆင်မခြင်ပြုမူမှုကို သတိထားပါ။" },
+            "QS": { meaning: "ထက်မြက်ပြတ်သားသော အမျိုးသမီး၊ ဆရာဝန်၊ ရှေ့နေ သို့မဟုတ် တစ်ကိုယ်တော် ရပ်တည်သူ။", grandma: "ရည်မှန်းချက်ကြီးသော ပညာရှင်အမျိုးသမီး သို့မဟုတ် မုဆိုးမနှင့် တစ်ခုလပ်။", advice: "ခံစားချက်ထက် ဦးနှောက်နှင့် ဉာဏ်ပညာကို အသုံးပြုပါ။" },
+            "KS": { meaning: "ဩဇာအာဏာကြီးမားသော အမျိုးသား၊ တရားသူကြီး၊ ရှေ့နေ သို့မဟုတ် စည်းကမ်းကြီးသူ။", grandma: "တရားဥပဒေနှင့် ဆေးပညာဘက်တွင် ဩဇာကြီးမားသော အမျိုးသားကြီး။", advice: "ဥပဒေနှင့် စည်းမျဉ်းစည်းကမ်းအတိုင်း တိကျမှန်ကန်စွာ ဆောင်ရွက်ပါ။" },
+
+            "AH": { meaning: "ချစ်ခြင်းမေတ္တာအစ၊ ပျော်ရွှင်ဖွယ် မိသားစုနှင့် အိမ်ဂေဟာ။", grandma: "Casa — နေအိမ်ဂေဟာ၊ မိသားစုဆုံစည်းရာနှင့် အိမ်ခြံမြေကို ကိုယ်စားပြုသည်။", advice: "မိသားစုနှင့် နှလုံးသားရေးရာကို ဦးစားပေးပါ။" },
+            "2H": { meaning: "ချစ်သူသစ်၊ အပြန်အလှန် မေတ္တာမျှခြင်း၊ ရင်ခုန်စရာ အချစ်စာနှင့် နားလည်မှု။", grandma: "အနုပညာ၊ ဂီတပါရမီနှင့် အချိန်နိမိတ်အရ ၂ ရက်၊ ၂ ပတ် သို့မဟုတ် ၂ လအတွင်း ပျော်ရွှင်ဖွယ်သတင်း ကြားရတတ်သည်။", advice: "ချစ်ခင်ရသူနှင့် ပွင့်လင်းရိုးသားစွာ မေတ္တာဖလှယ်ပါ။" },
+            "3H": { meaning: "ပျော်ရွှင်ဖွယ် ပွဲလမ်းသဘင်၊ မေတ္တာတိုးပွားခြင်းနှင့် မထင်မှတ်သော ဆန္ဒအသေးစားများ ပြည့်ဝခြင်း။", grandma: "Small Wish Card နှင့် ဘုရားကျောင်းဟု ခေါ်ဆိုခဲ့သည်။", advice: "ဘဝ၏ ပျော်ရွှင်စရာ အခိုက်အတန့်များကို တန်ဖိုးထားပါ။", omen: "✨ Small Wish Card — ဆန္ဒအသေးစားများ ပြည့်ဝစေသော ကတ်" },
+            "4H": { meaning: "ခိုင်မာတည်ငြိမ်သော အိမ်ထောင်ရေး၊ မင်္ဂလာခုတင်နှင့် စိတ်ပိုင်းဆိုင်ရာ လုံခြုံမှု။", grandma: "မင်္ဂလာခုတင်၏ ခြေ ၄ ချောင်းနှင့် ညစာဖိတ်ကြားလွှာကို ညွှန်းသည်။", advice: "လက်ရှိ မေတ္တာရေးအုတ်မြစ်ကို ပိုမိုခိုင်မာအောင် တည်ဆောက်ပါ။" },
+            "5H": { meaning: "မေတ္တာရေး အပြောင်းအလဲ၊ ကြင်နာမှု၊ အမျိုးသမီးစွမ်းအင်နှင့် မင်္ဂလာစကား ကမ်းလှမ်းမှု။", grandma: "အမျိုးသမီးစွမ်းအင်၊ ညာလက်နှင့် မင်္ဂလာဆောင်ရန် ကမ်းလှမ်းခြင်း။", advice: "နှလုံးသား၏ မှန်ကန်သော ဆန္ဒအတိုင်း လက်တွေ့ခြေလှမ်းစတင်ပါ။" },
+            "6H": { meaning: "သဟဇာတဖြစ်မှု၊ သစ္စာရှိမှု၊ စိတ်ပိုင်းဆိုင်ရာ လုံခြုံမှုနှင့် အပြန်အလှန် တာဝန်ယူမှု။", grandma: "အမျိုးသားစွမ်းအင်နှင့် ရေရှည်တည်မြဲသော သစ္စာတရားကို ကိုယ်စားပြုသည်။", advice: "မိတ်ဆွေနှင့် ချစ်သူအပေါ် သစ္စာရှိစွာ ကူညီဖေးမပါ။" },
+            "7H": { meaning: "အချစ်ရေး အလှည့်အပြောင်း၊ ငြိမ်းချမ်းမှုနှင့် ဒုတိယအကြိမ် အခွင့်အရေး။", grandma: "ဒုတိယအကြိမ် အခွင့်အရေးနှင့် ကျန်းမာရေး အမြန်ပြန်ကောင်းလာခြင်း။", advice: "သဝန်တိုမှုကို ဖယ်ရှားပြီး အခွင့်အရေးသစ်ကို လက်ခံပါ။" },
+            "8H": { meaning: "ချစ်သူမိတ်ဆွေများနှင့် ပျော်ရွှင်ဖွယ် အချိန်ပေးရခြင်း၊ သံယောဇဉ် ငြိတွယ်မှု။", grandma: "The Relationship Card — ရှိပြီးသား သံယောဇဉ် သို့မဟုတ် ချစ်သူဟောင်းကို စွဲလမ်းနေခြင်း။", advice: "မိတ်ဆွေနှင့် ချစ်သူများအကြား ဟန်ချက်ညီအောင် အချိန်ပေးပါ။" },
+            "9H": { meaning: "ဖဲထုပ်တစ်ခုလုံးတွင် အကောင်းဆုံးကတ်ဖြစ်ပြီး အလိုချင်ဆုံးဆန္ဒ ပြည့်ဝမည်။", grandma: "The Big Wish Card — ဘေးတွင် စပိတ်ကတ်များ ဝိုင်းနေသော်လည်း အဓိကပင်မဆန္ဒ မလွဲဧကန် ပြည့်ဝမည်။", advice: "သင်၏ အမြင့်မားဆုံး အိပ်မက်ကို ယုံကြည်ချက်အပြည့်ဖြင့် ဆက်လက်အကောင်အထည်ဖော်ပါ။", omen: "🌟 The Big Wish Card — အကြီးမားဆုံး ဆုတောင်းအိပ်မက် ပြည့်ဝမည့် အကောင်းဆုံးကတ်" },
+            "10H": { meaning: "မင်္ဂလာပွဲ၊ ခိုင်မြဲသော ပေါင်းဖက်မှုနှင့် မိသားစုဘဝ အထွတ်အထိပ် ပျော်ရွှင်မှု။", grandma: "l'innamorato — အချစ်ကြီးသူ၊ အိမ်ထောင်ပြုလိုစိတ် ပြင်းပြသူဟု ခေါ်ဆိုခဲ့သည်။", advice: "ချစ်ခြင်းမေတ္တာနှင့် မိသားစုပျော်ရွှင်မှုကို အပြည့်အဝ ခံစားပါ။" },
+            "JH": { meaning: "သံယောဇဉ်ကြီးသော လူငယ်ချစ်သူ၊ သား၊ ညီ သို့မဟုတ် အနုပညာဝါသနာပါသူ။", grandma: "Giovin Biond — အလိုလိုက်ခံရသော အချစ်တော်လူငယ်ဟု ခေါ်ဆိုခဲ့သည်။", advice: "နုပျိုလန်းဆန်းသော စိတ်ထားဖြင့် မေတ္တာပြပါ။" },
+            "QH": { meaning: "အကန့်အသတ်မရှိ မေတ္တာပေးသော မိခင် သို့မဟုတ် အရင်းနှီးဆုံး အမျိုးသမီးမိတ်ဆွေ။", grandma: "မေးမြန်းသူ၏ မိခင် သို့မဟုတ် အရင်းနှီးဆုံး အမျိုးသမီးသူငယ်ချင်းကို ကိုယ်စားပြုသည်။", advice: "မိခင်သဖွယ် နွေးထွေးသော မေတ္တာနှင့် စာနာစိတ်ကို အသုံးပြုပါ။" },
+            "KH": { meaning: "မေတ္တာကြီးမားပြီး နားလည်မှုရှိသော ဖခင်၊ ခင်ပွန်း သို့မဟုတ် အားကိုးရသော အမျိုးသားကြီး။", grandma: "ဖခင်ကဲ့သို့ စောင့်ရှောက်တတ်သော်လည်း စိတ်ဓာတ်နုနယ်၍ အထိမခံသော မေတ္တာရှင် အမျိုးသားကြီး။", advice: "ရင့်ကျက်သော မေတ္တာတရားဖြင့် မိသားစုကို ဦးဆောင်ပါ။" },
+
+            "AC": { meaning: "စီးပွားရေးလုပ်ငန်းသစ်၊ တရားဝင် စာချုပ်စာတမ်းသစ် လက်မှတ်ရေးထိုးရခြင်းနှင့် အခွင့်အလမ်းသစ်။", grandma: "အရေးကြီးသော တရားဝင်စာချုပ်၊ သေတမ်းစာနှင့် အဖွဲ့အစည်းကြီးများကို ကိုယ်စားပြုသည်။", advice: "ရည်မှန်းချက်အသစ်ကို အာရုံစူးစိုက်ပြီး စတင်လုပ်ဆောင်ပါ။" },
+            "2C": { meaning: "လုပ်ငန်းပူးပေါင်းဆောင်ရွက်မှု၊ အကြံဉာဏ်ဖလှယ်ခြင်းနှင့် အကူအညီ သို့မဟုတ် လက်ဆောင် ရရှိခြင်း။", grandma: "The Gift — လက်ဆောင်၊ သတင်းကောင်း သို့မဟုတ် အကြံဉာဏ်ကောင်း ရရှိခြင်းဟု ခေါ်ဆိုခဲ့သည်။", advice: "မိတ်ဖက်ကောင်းများနှင့် လက်တွဲလုပ်ကိုင်ပါ။" },
+            "3C": { meaning: "စီးပွားရေး တိုးချဲ့ခြင်း၊ အလုပ်အကိုင် တိုးတက်ပွင့်လန်းခြင်းနှင့် ပညာတိုးပွားခြင်း။", grandma: "သုံးရွက်လှ ခလိုးဗားရွက် ကံကောင်းမှုနှင့် သေးငယ်ရာမှ ကြီးထွားလာခြင်းကို ညွှန်းသည်။", advice: "လုပ်ငန်းချဲ့ထွင်ရန်နှင့် ပညာသစ်သင်ယူရန် အကောင်းဆုံးအချိန်ဖြစ်သည်။" },
+            "4C": { meaning: "ခိုင်မာသော ရုံးခန်းနှင့် အလုပ်အကိုင် အုတ်မြစ်၊ စားပွဲခြေ ၄ ချောင်း သို့မဟုတ် ကားဘီး ၄ ဘီး။", grandma: "မိမိကိစ္စကိုယ်သာ လက်တွေ့ကျကျ အာရုံစိုက်ရန် သတိပေးသော ကတ်ဟု ခေါ်ဆိုခဲ့သည်။", advice: "မိမိလုပ်ငန်းအပေါ်တွင်သာ လက်တွေ့ကျကျ အာရုံစိုက်ပါ။" },
+            "5C": { meaning: "အလုပ်အကိုင် လက်တွေ့အကောင်အထည်ဖော်မှု၊ ကာယနှင့် ဉာဏ လုပ်အားစိုက်ထုတ်ရခြင်း။", grandma: "ခန္ဓာကိုယ်နှင့် လက်များ၏ သင်္ကေတဖြစ်၍ အားကစား၊ လေ့ကျင့်ခန်းနှင့် လက်တွေ့လုပ်အားကို ပြသည်။", advice: "တွေးတောနေခြင်းကို ရပ်ပြီး လက်တွေ့ စတင်လှုပ်ရှားပါ။" },
+            "6C": { meaning: "စီးပွားရေး ညီညွတ်မျှတမှု၊ စာအုပ်၊ မီဒီယာ၊ သတင်းအချက်အလက်နှင့် တာဝန်ယူဖြေရှင်းနိုင်မှု။", grandma: "ရှေးနိမိတ်အရ စာအုပ်၊ စာပေရေးသားခြင်းနှင့် မီဒီယာဆက်သွယ်ရေးကို ကိုယ်စားပြုသည်။", advice: "သတင်းအချက်အလက်နှင့် အသိပညာကို အသုံးချ၍ လုပ်ငန်းဆောင်ရွက်ပါ။" },
+            "7C": { meaning: "အလုပ်အကိုင် အပြောင်းအလဲသစ်နှင့် ကြိုးစားသလောက် အောင်မြင်မှု သေချာခြင်း။", grandma: "အောင်မြင်မှု သေချာသည်၊ သို့သော် ပေါ့ဆမနေပါနှင့်ဟု မိန့်ကြားခဲ့သည်။", advice: "အောင်မြင်မှု သေချာသော်လည်း ပေါ့ဆမနေဘဲ ဆက်လက်ကြိုးစားပါ။" },
+            "8C": { meaning: "နေ့စဉ် အလုပ်အကိုင်၊ အစည်းအဝေး၊ ဆွေးနွေးပွဲများနှင့် အချိန်ကို စနစ်တကျ အသုံးချရခြင်း။", grandma: "လုပ်ငန်းဆိုင်ရာ ဆွေးနွေးပွဲများ၊ အစည်းအဝေးများနှင့် အချိန်ကို စနစ်တကျ အသုံးချခြင်း။", advice: "အချိန်ဇယားဆွဲ၍ လုပ်ငန်းတာဝန်များကို စနစ်တကျ စီမံပါ။" },
+            "9C": { meaning: "စီးပွားရေး စာချုပ်များ အောင်မြင်ပြည့်ဝခြင်းနှင့် လုပ်ငန်းဆိုင်ရာ ခရီးသွားရခြင်း။", grandma: "အချိန်၊ အကွာအဝေး ခရီးရှည်နှင့် ရေရှည်တည်တံ့သော စီးပွားရေးအောင်မြင်မှု။", advice: "ရေရှည်အကျိုးရှိမည့် စီမံကိန်းနှင့် ခရီးစဉ်များကို ရဲဝံ့စွာ ဆောင်ရွက်ပါ။" },
+            "10C": { meaning: "စီးပွားရေး ကုမ္ပဏီကြီးနှင့် အသက်မွေးဝမ်းကျောင်း အထွတ်အထိပ်ရောက်ရှိခြင်း၊ ရေကြောင်းနှင့် အဝေးခရီး။", grandma: "ရှေးနိမိတ်အရ ရေထုနှင့် ဘီး ဖြစ်၍ ရေကြောင်းခရီးနှင့် လုပ်ငန်းကြီးကို ပြသည်။", advice: "လုပ်ငန်းအောင်မြင်မှု အထွတ်အထိပ်သို့ ရောက်ရှိမည်ဖြစ်၍ ယုံကြည်စွာ ဦးဆောင်ပါ။" },
+            "JC": { meaning: "ရိုးသားကြိုးစားသော လူငယ်၊ သစ္စာရှိသော မိတ်ဆွေ သို့မဟုတ် ကူညီဆောင်ရွက်ပေးသူ။", grandma: "Domestico — ဗေဒင်မေးသူအား အကူအညီပေးမည့် သစ္စာရှိ လူငယ်မိတ်ဆွေဟု ခေါ်ဆိုခဲ့သည်။", advice: "ကြိုးစားသော လူငယ်နှင့် လုပ်ဖော်ကိုင်ဖက်၏ အကူအညီကို ရယူပါ။" },
+            "QC": { meaning: "အောင်မြင်သော စီးပွားရေးလုပ်ငန်းရှင် အမျိုးသမီး၊ လုပ်ဖော်ကိုင်ဖက်ကောင်းနှင့် အကြံပေး။", grandma: "အောင်မြင်သော စီးပွားရေးအမျိုးသမီးနှင့် အကောင်းဆုံးသူငယ်ချင်းဟု ခေါ်ခဲ့သည်။", advice: "ပေါင်းသင်းဆက်ဆံရေးနှင့် စီးပွားရေးအမြင်ကို တွဲဖက်အသုံးချပါ။" },
+            "KC": { meaning: "ဩဇာရှိသော စီးပွားရေးခေါင်းဆောင်၊ ရက်ရောပြီး လက်တွေ့ကျသော အကြီးအကဲ။", grandma: "အိမ်ထောင်ရှိ စီးပွားရေးအကြီးအကဲ သို့မဟုတ် ပါမောက္ခဟု ခေါ်ဆိုခဲ့သည်။", advice: "အတွေ့အကြုံရင့်ကျက်သော စီးပွားရေးပညာရှင်၏ လမ်းညွှန်မှုကို ခံယူပါ။" },
+
+            "AD": { meaning: "ငွေကြေးအခွင့်အလမ်းသစ်၊ အဖိုးတန်စာချုပ်၊ သတင်းစာနှင့် လက်စွပ်နိမိတ်။", grandma: "ရှေးနိမိတ်အရ လက်စွပ် ဖြစ်၍ စေ့စပ်ကြောင်းလမ်းခြင်းနှင့် ငွေစက္ကူသစ်ကို ကိုယ်စားပြုသည်။", advice: "ဘဏ္ဍာရေးအစီအစဉ်သစ်များကို စတင်အကောင်အထည်ဖော်ပါ။" },
+            "2D": { meaning: "ငွေကြေးစီးဆင်းမှု၊ အကျိုးတူ ဘဏ္ဍာရေးပူးပေါင်းမှုနှင့် ဘဏ်စာရင်း စာရွက်စာတမ်း။", grandma: "အချိန်ကတ် — ၂ ရက်၊ ၂ ပတ် သို့မဟုတ် ၂ နှစ်အတွင်း ငွေကြေးလက်ဆောင် သို့မဟုတ် အကြံဉာဏ်ရရှိခြင်း။", advice: "ဝင်ငွေနှင့် ထွက်ငွေ အပေးအယူမျှတအောင် စီမံခန့်ခွဲပါ။" },
+            "3D": { meaning: "ဝင်ငွေအနည်းငယ် တိုးပွားခြင်း၊ အပိုဝင်ငွေနှင့် ဘဏ္ဍာရေးအခွင့်အလမ်း။", grandma: "ဘဏ္ဍာရေး အခွင့်အလမ်းနှင့် အချိန်ပိုဝင်ငွေဟု ဖတ်ကြားခဲ့သည်။", advice: "ဝင်ငွေတိုးပွားမည့် အခွင့်အလမ်းသစ်များကို လက်လွှတ်မခံပါနှင့်။" },
+            "4D": { meaning: "ခိုင်မာသော ဘဏ္ဍာရေးအုတ်မြစ်၊ ဘဏ်အကောင့်၊ မီးခံသေတ္တာနှင့် စုဆောင်းငွေ။", grandma: "ဘဏ်စာရင်း၊ ချက်လက်မှတ်၊ လက်ဝတ်ရတနာသေတ္တာနှင့် အိမ်ငှားခတို့ကို ညွှန်းသည်။", advice: "ငွေကြေးကို လုံခြုံခိုင်မာသော နေရာတွင် စနစ်တကျ စုဆောင်းရင်းနှီးမြှုပ်နှံပါ။" },
+            "5D": { meaning: "ငွေကြေးလှုပ်ရှားမှု၊ မြေကွက်ပိုင်ဆိုင်မှုနှင့် အကြောင်းအကျိုး ကံကြမ္မာကတ်။", grandma: "အကြောင်းအကျိုးတရားနှင့် ပိုင်ဆိုင်သော မြေကွက်များကို ကိုယ်စားပြုသည်။", advice: "ငွေကြေးနှင့် ဥပဒေရေးရာကိစ္စများတွင် မှန်ကန်မျှတစွာ ဆောင်ရွက်ပါ။" },
+            "6D": { meaning: "ငွေကြေးမျှတမှု၊ အကြွေးကျေခြင်း၊ ဘောနပ်စ်ရရှိခြင်းနှင့် စွမ်းအင်တက်ကြွမှု။", grandma: "လျှပ်စစ်ဓာတ်၊ အဒရီနလင်း စွမ်းအင်နှင့် နှစ်သိမ့်ဆွေးနွေးပွဲမှ အကျိုးရရှိခြင်း။", advice: "ပေးရန်နှင့် ရရန်ရှိသော ငွေကြေးကိစ္စများကို မျှတစွာ ရှင်းလင်းပါ။" },
+            "7D": { meaning: "မထင်မှတ်သော ဆုလာဘ်ငွေဝင်မှု၊ ပညာရှိသော ရင်းနှီးမြှုပ်နှံမှု။", grandma: "ပညာရှိသော ရင်းနှီးမြှုပ်နှံမှုနှင့် လက်ဝယ်ရှိ လည်ပတ်ငွေဟု ဖတ်ကြားခဲ့သည်။", advice: "လက်ဝယ်ရှိသော အရင်းအနှီးကို အကျိုးရှိမည့်နေရာတွင် ရင်းနှီးမြှုပ်နှံပါ။" },
+            "8D": { meaning: "ဘဏ္ဍာရေး စီမံခန့်ခွဲမှု၊ ဘတ်ဂျက်ချိန်ညှိခြင်းနှင့် ငွေဝင်လိုက်ထွက်လိုက် ဖြစ်ခြင်း။", grandma: "ငွေဝင်လိုက် ထွက်လိုက် ဖြစ်ခြင်းနှင့် ရှေးနိမိတ်အရ မျက်မှန်ကို ကိုယ်စားပြုသည်။", advice: "အသုံးစရိတ်ကို စနစ်တကျ ဘတ်ဂျက်ဆွဲ၍ ထိန်းညှိပါ။" },
+            "9D": { meaning: "ငွေကြေးအောင်မြင်မှု၊ ပုံမှန်လစာပြင်ပမှ အပိုဆုကြေးငွေနှင့် ဥစ္စာဓန တိုးပွားခြင်း။", grandma: "ပုံမှန်လစာပြင်ပမှ အပိုဆုကြေး၊ ပြန်အမ်းငွေနှင့် အစိုးရချက်လက်မှတ်များ ရရှိခြင်း။", advice: "မိမိ၏ အရည်အချင်းကို အသုံးချ၍ ဘဏ္ဍာရေးအောင်မြင်မှု ရယူပါ။" },
+            "10D": { meaning: "ကြီးမားသော ဓနဥစ္စာ၊ ဘဏ်တိုက်ကြီး၊ အမွေအနှစ်နှင့် ဘဏ္ဍာရေးလုံခြုံမှု အထွတ်အထိပ်။", grandma: "ဘဏ်တိုက်ကြီး၊ ပင်စင်ရန်ပုံငွေနှင့် အမှန်တကယ် ပိုင်ဆိုင်သော ဓနဥစ္စာတန်ဖိုး။", advice: "ကြီးမားသော ဘဏ္ဍာရေးအောင်မြင်မှုနှင့် ရေရှည်တည်တံ့သော ဓနဥစ္စာကို တည်ဆောက်ပါ။" },
+            "JD": { meaning: "ငွေကြေးကံကောင်းပြီး ထက်မြက်တက်ကြွသော လူငယ် သို့မဟုတ် ဘဏ်နှင့် အစိုးရဝန်ထမ်းငယ်။", grandma: "ထိမ်းမြားမင်္ဂလာမှ တော်စပ်လာသော လူငယ်ဆွေမျိုး — ယောက်ဖ၊ မရီး၊ သမက်တို့ကိုလည်း ညွှန်းသည်။", advice: "တက်ကြွသော စွမ်းအင်ဖြင့် ငွေကြေးအခွင့်အလမ်းသစ်များကို ရှာဖွေပါ။" },
+            "QD": { meaning: "ဓနဥစ္စာပြည့်စုံပြီး ဉာဏ်ကောင်းသော အမျိုးသမီး၊ စာရင်းကိုင် သို့မဟုတ် ဘဏ်မန်နေဂျာ။", grandma: "အိမ်ထောင်ပြုခြင်းမှ တော်စပ်လာသော အမျိုးသမီးဆွေမျိုး သို့မဟုတ် ဘဏ်အရာရှိအမျိုးသမီး။", advice: "ငွေကြေးကို စနစ်တကျ စီမံခန့်ခွဲတတ်သော အမျိုးသမီး၏ အကြံဉာဏ်ကို ရယူပါ။" },
+            "KD": { meaning: "ဘဏ္ဍာရေး အာဏာပိုင်၊ ရင်းနှီးမြှုပ်နှံသူ သို့မဟုတ် ဩဇာကြီးမားသော စီးပွားရေးလုပ်ငန်းရှင်ကြီး။", grandma: "နိုင်ငံရေးသမား၊ အိမ်ခြံမြေပွဲစား၊ ရင်းနှီးမြှုပ်နှံသူ သို့မဟုတ် အိမ်ထောင်ပြုခြင်းမှ တော်စပ်သော အမျိုးသားကြီး။", advice: "ကြီးမားသော ရင်းနှီးမြှုပ်နှံမှုနှင့် ဘဏ္ဍာရေးဗျူဟာများကို ရဲဝံ့စွာ ချမှတ်ပါ။" }
+        };
+
+        // 5. OFFICIAL 26 FLASHCARDS DATA
+        const flashcardsData = [
+            { q: "Cartomancy ဗေဒင်ပညာဆိုသည်မှာ အဘယ်နည်း။", a: "သာမန်ကစားဖဲချပ် ၅၂ ချပ်ကို အသုံးပြု၍ ကံကြမ္မာနှင့် အနာဂတ်ကို ဖတ်ရှုသော ပညာရပ်ဖြစ်သည်။" },
+            { q: "ဖဲချပ် ၅၂ ချပ်ကို အလွတ်ကျက်စရာမလိုဘဲ အဓိပ္ပာယ်ဖော်နိုင်သည့် Master Formula မှာ အဘယ်နည်း။", a: "[ ဖဲပွင့်အကြောင်းအရာ ] + [ ဂဏန်းအခြေအနေ ] = ဟောကိန်း" },
+            { q: "♠ Spades ဖဲပွင့်သည် မည်သည့်အရာများကို ကိုယ်စားပြုသနည်း။", a: "စိတ်ပိုင်းဆိုင်ရာ၊ ကံကြမ္မာ၊ အခက်အခဲများ၊ စိန်ခေါ်မှုများ၊ နှောင့်နှေးမှုများနှင့် လျှို့ဝှက်ချက်များ။" },
+            { q: "♥ Hearts ဖဲပွင့်သည် မည်သည့်အရာများကို ကိုယ်စားပြုသနည်း။", a: "စိတ်ခံစားမှု၊ ချစ်ခြင်းမေတ္တာ၊ မိသားစု၊ မိတ်ဆွေ၊ ငြိမ်းချမ်းရေးနှင့် ပျော်ရွှင်မှု။" },
+            { q: "♣ Clubs ဖဲပွင့်သည် မည်သည့်အရာများကို ကိုယ်စားပြုသနည်း။", a: "စီးပွားရေး၊ အလုပ်အကိုင်၊ လူမှုရေးလှုပ်ရှားမှုများ၊ ပညာသင်ယူမှုနှင့် လက်တွေ့ကြိုးစားအားထုတ်မှု။" },
+            { q: "♦ Diamonds ဖဲပွင့်သည် မည်သည့်အရာများကို ကိုယ်စားပြုသနည်း။", a: "ငွေကြေး၊ ဘဏ္ဍာရေး၊ ရုပ်ဝတ္ထုပိုင်ဆိုင်မှု၊ အကျိုးအမြတ်၊ အောင်မြင်မှုနှင့် စွမ်းအင်။" },
+            { q: "ဖဲပွင့် ၄ မျိုးသည် အလယ်ခေတ် လူမှုတန်းစား ၄ ရပ်ကို မည်သို့ကိုယ်စားပြုသနည်း။", a: "♠ စစ်သည်တော်၊ ♥ ဘာသာရေးခေါင်းဆောင်နှင့် မိသားစု၊ ♣ လယ်သမားနှင့် အလုပ်သမား၊ ♦ ကုန်သည်နှင့် ငွေကြေး။" },
+            { q: "ဂဏန်းဗေဒင်အရ A (1) ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "အသစ်စတင်ခြင်း၊ ပထမခြေလှမ်း၊ အခွင့်အလမ်းသစ်နှင့် ခေါင်းဆောင်မှု။" },
+            { q: "ဂဏန်းဗေဒင်အရ 2 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "အပြန်အလှန်ဖလှယ်ခြင်း၊ ဒွန်တွဲခြင်း၊ ဒွိဟဖြစ်ခြင်းနှင့် ချိန်ခွင်လျှာညှိခြင်း။" },
+            { q: "ဂဏန်းဗေဒင်အရ 3 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "တိုးချဲ့ခြင်း၊ ပေါင်းစပ်ခြင်းနှင့် ဖန်တီးနိုင်စွမ်း။" },
+            { q: "ဂဏန်းဗေဒင်အရ 4 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "တည်ငြိမ်မှုနှင့် ခိုင်မာသော အခြေခံအုတ်မြစ်၊ နံရံ ၄ ဖက်၊ ခြေ ၄ ချောင်း။" },
+            { q: "ဂဏန်းဗေဒင်အရ 5 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "အပြောင်းအလဲ၊ လှုပ်ရှားမှု၊ မငြိမ်မသက်ဖြစ်ခြင်းနှင့် ခန္ဓာကိုယ်လက်အားသုံးရခြင်း။" },
+            { q: "ဂဏန်းဗေဒင်အရ 6 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "သဟဇာတဖြစ်မှု၊ စိတ်ပညာ၊ ချိတ်ဆက်မှုနှင့် တာဝန်ယူမှု။" },
+            { q: "ဂဏန်းဗေဒင်အရ 7 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "ကံကြမ္မာအချိုးအကွေ့၊ ဝိညာဉ်ရေးရာနှင့် ဆန်းကြယ်သော ကံကောင်းမှု သို့မဟုတ် ♠ ပါက ဆုံးရှုံးမှု။" },
+            { q: "ဂဏန်းဗေဒင်အရ 8 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "စွမ်းအား၊ အချိန်၊ ဟန်ချက်ညီမှု၊ တန်ပြန်သက်ရောက်မှုနှင့် နေ့စဉ်အလုပ်အကိုင်။" },
+            { q: "ဂဏန်းဗေဒင်အရ 9 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "ပြီးမြောက်အောင်မြင်မှု၊ ဆန္ဒပြည့်ဝမှု၊ အိပ်မက်များတကယ်ဖြစ်လာခြင်းနှင့် ခရီးသွားခြင်း။" },
+            { q: "ဂဏန်းဗေဒင်အရ 10 ၏ စွမ်းအင်သဘောတရားမှာ အဘယ်နည်း။", a: "သံသရာတစ်ပတ်လည်ခြင်း၊ စက်ဝန်းတစ်ခုပြီးမြောက်ခြင်းနှင့် အထွတ်အထိပ်သို့ရောက်ခြင်း။" },
+            { q: "ရုပ်ပုံကတ်များထဲမှ J သည် မည်သို့သော ပုဂ္ဂိုလ်နှင့် စွမ်းအင်ကို ကိုယ်စားပြုသနည်း။", a: "ကျား/မ မရွေး လူငယ်များ၊ ကလေးသူငယ်၊ ကျောင်းသား၊ သတင်းစကားပါးသူနှင့် တက်ကြွသော စွမ်းအင်။" },
+            { q: "ရုပ်ပုံကတ်များထဲမှ Q သည် မည်သို့သော ပုဂ္ဂိုလ်နှင့် စွမ်းအင်ကို ကိုယ်စားပြုသနည်း။", a: "အသက် ၁၈ နှစ်အထက် အမျိုးသမီးများ၊ မိခင်၊ ရင်းနှီးသောမိတ်ဆွေ၊ စောင့်ရှောက်သူနှင့် ယုံကြည်ရသော အကြံပေးပုဂ္ဂိုလ်။" },
+            { q: "ရုပ်ပုံကတ်များထဲမှ K သည် မည်သို့သော ပုဂ္ဂိုလ်နှင့် စွမ်းအင်ကို ကိုယ်စားပြုသနည်း။", a: "အသက် ၃၅ နှစ်အထက် အမျိုးသားများ၊ ဖခင်၊ အာဏာပိုင်၊ လုပ်ငန်းရှင်နှင့် ကာကွယ်စောင့်ရှောက်သူ။" },
+            { q: "Paris Pattern တွင် K ၄ ပါးသည် မည်သည့်သမိုင်းဝင်ပုဂ္ဂိုလ်များကို ကိုယ်စားပြုသနည်း။", a: "♠ K = David၊ ♥ K = Charlemagne၊ ♣ K = Alexander the Great၊ ♦ K = Julius Caesar။" },
+            { q: "Paris Pattern တွင် Q ၄ ပါးသည် မည်သည့်သမိုင်းဝင်ပုဂ္ဂိုလ်များကို ကိုယ်စားပြုသနည်း။", a: "♠ Q = Pallas Athena၊ ♥ Q = Judith၊ ♣ Q = Argine၊ ♦ Q = Rachel။" },
+            { q: "Paris Pattern တွင် J ၄ ပါးသည် မည်သည့်သမိုင်းဝင်ပုဂ္ဂိုလ်များကို ကိုယ်စားပြုသနည်း။", a: "♠ J = Ogier the Dane၊ ♥ J = La Hire၊ ♣ J = Lancelot / Judah Maccabee၊ ♦ J = Hector။" },
+            { q: "ဖဲထုပ်ထဲတွင် အကောင်းဆုံးကတ်ဖြစ်သည့် The Big Wish Card မှာ မည်သည့်ကတ်ဖြစ်သနည်း။", a: "♥ 9 ဖြစ်ပြီး အခက်အခဲများကြားမှ မိမိအလိုချင်ဆုံးသော ဆန္ဒကြီး အပြည့်အဝ ပြည့်ဝခြင်းကို ဆိုလိုသည်။" },
+            { q: "The Nightmare Card ဟုခေါ်သော အထူးသတိပေးကတ်မှာ မည်သည့်ကတ်ဖြစ်သနည်း။", a: "♠ 10 ဖြစ်ပြီး အကြောက်ဆုံးအရာများ တကယ်ဖြစ်လာခြင်း၊ ကြီးမားသော စိတ်ဖိစီးမှုနှင့် လျှို့ဝှက်ချက်ပေါက်ကြားခြင်းကို ဆိုလိုသည်။" },
+            { q: "ဟောကိန်းထုတ်ရာတွင် တူညီသောကတ်များ ပူးတွဲကျလာခြင်း၏ အဓိပ္ပာယ်များမှာ အဘယ်နည်း။", a: "2 Jacks = တရားရေးနှင့် စာချုပ်ကိစ္စ၊ 3 Queens = အမျိုးသမီးများစုဝေးခြင်း၊ 4 Kings = အများပြည်သူ အသိအမှတ်ပြုခံရမှု၊ 2 များ = ပျော်ရွှင်မှု သို့မဟုတ် ကိစ္စရပ် နှစ်ဆ။" }
+        ];
+
+        // 6. 15-DAY DAILY LESSONS DATABASE (30 Hours Master Plan)
+        const dailyLessonPosts = {
+            "1": {
+                title: "🔮 Day 1 (2 Hours) — သင်တန်းအဖွင့်၊ သမိုင်းနောက်ခံ၊ ၁၅၆၇ ရူးအန်းဖြစ်စဉ်နှင့် ပြက္ခဒိန်သင်္ချာစနစ်",
+                content: `• Cartomancy သမိုင်းအစ - ၁၄-၁၅ ရာစုတွင် အရှေ့အလယ်ပိုင်းမှ ဥရောပသို့ ရောက်ရှိလာခြင်းနှင့် ၁၅၆၇ ခုနှစ် ရူးအန်း (Rouen) ဖြစ်စဉ်။
+• Paris Pattern vs. English Pattern - ပြင်သစ်မူတွင် သမိုင်းဝင်ပုဂ္ဂိုလ်အမည်များပါရှိပြီး အင်္ဂလိပ်မူတွင် စာသားများပျောက်ကွယ်သွားကာ ရိုးရိုးသင်္ကေတများသာ ကျန်ခဲ့ပုံ။
+• စကြာဝဠာ ပြက္ခဒိန် သင်္ချာကုဒ် -
+  - ဖဲ ၅၂ ချပ် = ၁ နှစ်ရှိ ၅၂ ပတ်
+  - ဖဲပွင့် ၄ မျိုး = ရာသီ ၄ ခု
+  - ရုပ်ပုံကတ် ၁၂ ချပ် = ၁၂ လ
+  - ကတ်တန်ဖိုး စုစုပေါင်း ၃၆၄ + Joker ၁ ချပ် = ၃၆၅ ရက် (နေစကြဝဠာပြက္ခဒိန်နှင့် တိုက်ရိုက်ကိုက်ညီမှု)။`,
+                homework: `📝 Day 1 လေ့ကျင့်ခန်း
+၁။ မိမိ၏ ဖဲထုပ်ကို ပြက္ခဒိန်သင်္ချာသဘောတရားအရ (ပတ်၊ လ၊ ရာသီ) ခွဲခြားစစ်ဆေးပါ။
+၂။ Paris Pattern နှင့် English Pattern တို့၏ အဓိက ကွာခြားချက် ၃ ချက်ကို ချရေးပါ။`
+            },
+            "2": {
+                title: "🔮 Day 2 (2 Hours) — ဖဲပွင့် ၄ မျိုး၊ လူမှုတန်းစား ၄ ရပ်၊ အရောင်စွမ်းအင်နှင့် ဓာတ်ကြီး ၄ ပါး",
+                content: `• ♠ Spades (လေဓာတ်/မြေဓာတ်စိန်ခေါ်မှု) - စစ်တပ်နှင့် သူရဲကောင်းတန်းစား၊ စိတ်ပိုင်းဆိုင်ရာ၊ ကံကြမ္မာ၊ အခက်အခဲနှင့် ဘဝသင်ခန်းစာ။
+• ♥ Hearts (ရေဓာတ်) - နန်းတွင်းနှင့် ဘာသာရေးတန်းစား၊ ချစ်ခြင်းမေတ္တာ၊ မိသားစု၊ မိတ်ဆွေနှင့် နူးညံ့သော စိတ်ခံစားမှု။
+• ♣ Clubs (မီးဓာတ်) - စိုက်ပျိုးရေးနှင့် အလုပ်သမားတန်းစား၊ စီးပွားရေး၊ အလုပ်အကိုင်၊ ပညာသင်ယူမှုနှင့် လက်တွေ့ကြိုးစားအားထုတ်မှု။
+• ♦ Diamonds (လေဓာတ်/ရုပ်ဝတ္ထု) - ကုန်သည်တန်းစား၊ ငွေကြေး၊ ဥစ္စာဓန၊ စွမ်းအင်နှင့် ရုပ်ပိုင်းဆိုင်ရာ ဆုလာဘ်။
+• အရောင်စွမ်းအင် ဒွိဘာဝ -
+  - အနီရောင် (Red) = နေ့ဘက်၊ အပြုသဘော (Positive)၊ သက်သာချောမွေ့မှု။
+  - အနက်ရောင် (Black) = ညဘက်၊ အနုတ်သဘော (Challenging)၊ လက်တွေ့အားထုတ်ရမှုနှင့် သတိပေးချက်။`,
+                homework: `📝 Day 2 လေ့ကျင့်ခန်း
+ဖဲထုပ်ထဲမှ ကျပန်း ၄ ချပ်ဆွဲထုတ်ပြီး ဖဲပွင့်တစ်ခုချင်းစီ၏ ဓာတ်၊ လူမှုတန်းစားနှင့် အရောင်စွမ်းအင်တို့ကို ခွဲခြမ်းစိတ်ဖြာမှတ်တမ်းတင်ပါ။`
+            },
+            "3": {
+                title: "🔮 Day 3 (2 Hours) — ဂဏန်းဗေဒင် (Numerology 1 to 10) နှင့် Master Formula အခြေခံ",
+                content: `• ဂဏန်း ၁ မှ ၁၀ ၏ သဘာဝစွမ်းအင်များ -
+  - A (1) = အစသစ်၊ ဦးဆောင်မှု | 2 = အပြန်အလှန်ဖလှယ်မှု၊ ဆက်သွယ်ရေး
+  - 3 = တိုးချဲ့ခြင်း၊ ဖန်တီးမှု | 4 = အုတ်မြစ်ခိုင်မာခြင်း၊ တည်ငြိမ်မှု
+  - 5 = လက်တွေ့လှုပ်ရှားမှု၊ အပြောင်းအလဲ | 6 = သဟဇာတဖြစ်မှု၊ တာဝန်ယူမှု
+  - 7 = ကံကြမ္မာအလှည့်အပြောင်း | 8 = နေ့စဉ်အလုပ်၊ အချိန်နှင့် ဟန်ချက်
+  - 9 = ရည်မှန်းချက်ပြည့်စုံခြင်း | 10 = သံသရာတစ်ပတ်ပြည့်မြောက်ခြင်း
+• The Master Formula Core -
+  [ ဖဲပွင့်အကြောင်းအရာ/နယ်ပယ် ] + [ ဂဏန်းအခြေအနေ/လှုပ်ရှားမှု ] = ဟောကိန်း။`,
+                homework: `📝 Day 3 လေ့ကျင့်ခန်း
+♣ 3, ♦ 4, ♠ 5, ♥ 8 ကတ် ၄ ကတ်ကို Master Formula သုံး၍ အဓိပ္ပာယ်ဖော်မြူလာ ချရေးပါ။`
+            },
+            "4": {
+                title: "🔮 Day 4 (2 Hours) — Court Cards Archetypes နှင့် Paris Pattern သမိုင်းဝင်ပုဂ္ဂိုလ် ၁၂ ဦး",
+                content: `• Kings (အသက် ၃၅+ အမျိုးသား၊ ခေါင်းဆောင်၊ ဖခင်) -
+  - ♠ K = David (ဒေးဗစ်ဘုရင်) | ♥ K = Charlemagne (ရှားလမိန်ဘုရင်)
+  - ♣ K = Alexander the Great (မဟာအလက်ဇန္ဒား) | ♦ K = Julius Caesar (ဆီဇာ)
+• Queens (အသက် ၁၈+ အမျိုးသမီး၊ မိခင်၊ အကြံပေး) -
+  - ♠ Q = Pallas Athena (ဉာဏ်ပညာနတ်သမီး) | ♥ Q = Judith (ဂျူးဒစ်)
+  - ♣ Q = Argine (Regina မိဖုရား) | ♦ Q = Rachel (ရာချယ်)
+• Jacks (လူငယ်၊ ကျောင်းသား၊ သတင်းစကားပါးသူ) -
+  - ♠ J = Ogier the Dane | ♥ J = La Hire
+  - ♣ J = Lancelot / Judah Maccabee | ♦ J = Hector (ဟက်တာ)။`,
+                homework: `📝 Day 4 လေ့ကျင့်ခန်း
+သင့်မိသားစု သို့မဟုတ် မိတ်ဆွေ ၃ ဦး၏ စရိုက်လက္ခဏာနှင့် ကိုက်ညီသော Court Cards များကို သမိုင်းဝင်ပုဂ္ဂိုလ် archetype နှင့် တွဲဖက်ရွေးချယ်ပြပါ။`
+            },
+            "5": {
+                title: "🔮 Day 5 (2 Hours) — အထူးနိမိတ်ကတ်များ၊ Multiples Rule နှင့် Assignment 1",
+                content: `• အထူးနိမိတ်ကတ်များ (Special Omens) -
+  - ♥ 9 = The Big Wish Card (အလိုချင်ဆုံးဆန္ဒ အပြည့်အဝ ပြည့်ဝစေမည့် အကောင်းဆုံးကတ်)
+  - ♥ 3 = Small Wish Card (ဆန္ဒအသေးစားများ ပြည့်ဝခြင်း)
+  - ♠ 10 = The Nightmare Card (အိပ်မက်ဆိုး၊ စိတ်ဖိစီးမှုနှင့် လျှို့ဝှက်ချက်ပေါက်ကြားခြင်း)
+• Multiples Rule (တူညီသောကတ်များ ဆုံခြင်း) -
+  - 2 Jacks = စာချုပ်နှင့် တရားဥပဒေ | 3+ Queens = အမျိုးသမီးများ စုဝေးခြင်း
+  - 4 Kings = အများပြည်သူ အသိအမှတ်ပြုမှု | 2 များ = အရာရာ နှစ်ဆဖြစ်ပေါ်ခြင်း။`,
+                homework: `📝 Assignment 1 (၁၀ နာရီပြည့် လက်တွေ့လေ့ကျင့်ခန်း)
+"Master Formula, Suit Energies & Court Cards Personalities Identification"
+ကျပန်း ကတ် ၅ ကတ်ထုတ်ယူပြီး ကတ်တစ်ခုချင်းစီ၏ Formula၊ နိမိတ်နှင့် Multiples သက်ရောက်မှုများကို စာတမ်းငယ်အဖြစ် ရေးသားတင်ပြပါ။`
+            },
+            "6": {
+                title: "🔮 Day 6 (2 Hours) — 3-Step Reading System နှင့် ဇာတ်လမ်းဆင်ဟောပြောနည်း (Narrative)",
+                content: `• စာအုပ်လှန်စရာမလိုသော 3-Step Reading System -
+  - အဆင့် ၁ (အရောင်စစ်ဆေးခြင်း) ➔ နေ့ဘက်လား၊ ညဘက်လား၊ အပြုလား၊ စိန်ခေါ်မှုလား?
+  - အဆင့် ၂ (ဖဲပွင့်နယ်ပယ်စစ်ဆေးခြင်း) ➔ အချစ်၊ စီးပွား၊ ငွေကြေး သို့မဟုတ် ကံကြမ္မာ?
+  - အဆင့် ၃ (ဂဏန်းလှုပ်ရှားမှု ပေါင်းစပ်ခြင်း) ➔ အစပြုခြင်း၊ တိုးချဲ့ခြင်း သို့မဟုတ် အဆုံးသတ်?
+• Storytelling & Flow - ကတ်များကို သီးခြားစီမဖတ်ဘဲ ကတ်တစ်ခုမှတစ်ခုသို့ မြစ်ရေစီးသကဲ့သို့ အကြောင်းအကျိုး ဆက်စပ်ဟောပြောပုံ။`,
+                homework: `📝 Day 6 လေ့ကျင့်ခန်း
+ကတ် ၂ ကတ်တွဲ (♣ A + ♦ 10) ကို 3-Step System ဖြင့် အဆင့်လိုက် ခွဲခြမ်းပြီး ဇာတ်လမ်းဆင် ဝါကျဖွဲ့ပါ။`
+            },
+            "7": {
+                title: "🔮 Day 7 (2 Hours) — Lenormand (၃၆ ချပ်) vs Cartomancy (၅၂ ချပ်) တိုက်ရိုက်နှိုင်းယှဉ်ချက်နှင့် FAQ",
+                content: `• Cartomancy vs Lenormand အဓိကကွာခြားချက် -
+  - Cartomancy (၅၂ ချပ်) = Numerology + Suits + စိတ်ပညာနှင့် ရေရှည်ကံကြမ္မာ စီးဆင်းမှု။
+  - Lenormand (၃၆ ချပ်) = တိုက်ရိုက်ရုပ်ပုံသင်္ကေတများဖြင့် နေ့စဉ်မျက်မြင်ဖြစ်ရပ် အဖြေထုတ်ခြင်း။
+• ကျောင်းသားများ အမေးအများဆုံး FAQ များနှင့် ယုတ္တိဗေဒရှင်းလင်းချက်များ -
+  - ဘာကြောင့် ဂဏန်း 4 ကတ်တွေက အိမ်၊ ခုတင်၊ ကား ကို ပြတာလဲ?
+  - ♥ 9 ဘေးမှာ ♠ ကတ်တွေ ဝိုင်းနေရင် ဆုတောင်း ပျက်ပြယ်သလား?`,
+                homework: `📝 Day 7 လေ့ကျင့်ခန်း
+Lenormand ၏ Rider (နံပါတ် ၁) နှင့် Cartomancy ၏ 9 of Hearts တို့၏ သဘောတရားကွဲပြားမှုကို နှိုင်းယှဉ်ချက် ၃ ချက် ရေးပါ။`
+            },
+            "8": {
+                title: "🔮 Day 8 (2 Hours) — Single Card Spread နှင့် Three-Card Spread စနစ်များ",
+                content: `• Single Card Spread - နေ့စဉ်နိမိတ် (Daily Draw) နှင့် တိုက်ရိုက်မေးခွန်းအတွက် အာရုံစူးစိုက်ဖတ်ရှုနည်း။
+• Three-Card Spread (အတိတ် - ပစ္စုပ္ပန် - အနာဂတ်) -
+  - ကတ် ၁ = အတိတ်အကြောင်းရင်း (Root Cause)
+  - ကတ် ၂ = ပစ္စုပ္ပန်လက်ရှိအခြေအနေ (Current State)
+  - ကတ် ၃ = အနာဂတ်နောက်ဆုံးရလဒ် (The Outcome - အဆုံးအဖြတ်ကတ် ★)
+• တတိယကတ် အဆုံးအဖြတ်စည်းမျဉ်း (Rule of the 3rd Card) ၏ အရေးပါပုံ။`,
+                homework: `📝 Day 8 လေ့ကျင့်ခန်း
+လက်တွေ့ မေးခွန်းတစ်ခုအတွက် ၃ ချပ်တွဲ ဆွဲထုတ်ပြီး အတိတ်၊ ပစ္စုပ္ပန်၊ အနာဂတ် ချိတ်ဆက်ဟောချက် ထုတ်ပြပါ။`
+            },
+            "9": {
+                title: "🔮 Day 9 (2 Hours) — Square of Nine (၉ ချပ်စနစ်) အပြည့်အစုံ",
+                content: `• 3x3 Grid တည်ဆောက်ပုံနှင့် ဖတ်ရှုနည်းလမ်းကြောင်းများ -
+  - ဗဟိုကတ် (Center Card #5) = အခြေအနေတစ်ခုလုံး၏ ပင်မနှလုံးသည်းပွတ်။
+  - အလျားလိုက်အတန်း ၃ တန်း = အတိတ် (#1,2,3)၊ ပစ္စုပ္ပန် (#4,5,6)၊ အနာဂတ် (#7,8,9)။
+  - ဒေါင်လိုက်အတိုင် ၃ တိုင် = အတွေးအကြံ၊ လက်ရှိအခြေအနေ၊ နောက်ဆုံးဦးတည်ချက်။
+  - ထောင့်ဖြတ်မျဉ်း ၂ ကြောင်း = အတိတ်မှ အနာဂတ်သို့ တိုက်ရိုက်စီးဆင်းသော ကံကြမ္မာမျဉ်း (#1➔#5➔#9)။`,
+                homework: `📝 Day 9 လေ့ကျင့်ခန်း
+၉ ချပ်စနစ်ဖြင့် 3x3 ဇယားခင်းပြီး ဗဟိုကတ်နှင့် ထောင့်ဖြတ်မျဉ်းတို့ကို အဓိကထား၍ အသေးစိတ် သုံးသပ်ချက်ရေးပါ။`
+            },
+            "10": {
+                title: "🔮 Day 10 (2 Hours) — ရှေးဟောင်းနှင့် ဂျစ်ပစီ ဖဲခင်းနည်းများ၊ Assignment 2",
+                content: `• The Horseshoe of Fate (မြင်းခွာ ၇ ချပ်စနစ်) - အတိတ်၊ အခွင့်အလမ်း၊ အတားအဆီး၊ ပတ်ဝန်းကျင်နှင့် နောက်ဆုံးရလဒ်။
+• The Mystical Cross (ကြက်ခြေခတ် ၁၃ ချပ်စနစ်) - ဘဝပြဿနာကြီးများကို လေးနက်စွာ အဖြေရှာခြင်း။
+• The Pyramid (ပိရမစ် ၁၀ ချပ်စနစ်) - အောက်ခြေအုတ်မြစ်မှ ထိပ်ဆုံးရလဒ်သို့ တက်လှမ်းပုံ။`,
+                homework: `📝 Assignment 2 (နာရီ ၂၀ ပြည့် လက်တွေ့လေ့ကျင့်ခန်း)
+"3-Card Narrative & 9-Card Spread Case Study Analysis"
+မိမိကိုယ်တိုင် သို့မဟုတ် မိတ်ဆွေတစ်ဦးအတွက် ၉ ချပ်စနစ် အပြည့်အစုံ ခင်းကျင်းဟောကြားထားသော Case Study စာတမ်း ရေးသားတင်ပြပါ။`
+            },
+            "11": {
+                title: "🔮 Day 11 (2 Hours) — အချိန်ကာလ (Timing) တွက်ချက်နည်း စနစ် ၄ မျိုး",
+                content: `• စနစ် ၁ (Time Cards) - ဂဏန်း ၂ ကတ်များ (၂ ရက်၊ ၂ ပတ်၊ ၂ လ) ၏ အချိန်နိမိတ်။
+• စနစ် ၂ (Seasonal Rulers) -
+  - Diamonds = နွေဦး (မတ် - မေ)
+  - Clubs = နွေရာသီ (ဇွန် - သြဂုတ်)
+  - Hearts = ဆောင်းဦး (စက်တင်ဘာ - နိုဝင်ဘာ)
+  - Spades = ဆောင်းရာသီ (ဒီဇင်ဘာ - ဖေဖော်ဝါရီ)
+• စနစ် ၃ (ဖဲအရေအတွက် စနစ်) - ကတ်တန်ဖိုးဂဏန်းများ ပေါင်းစပ်၍ ရက်/ပတ် တွက်ချက်ခြင်း။
+• စနစ် ၄ (အရပ်မျက်နှာ စနစ်) - အရှေ့၊ အနောက်၊ တောင်၊ မြောက် စွမ်းအင်စီးဆင်းမှု။`,
+                homework: `📝 Day 11 လေ့ကျင့်ခန်း
+"ငါ့စီးပွားရေး ဘယ်အချိန်မှာ အဆင်ပြေမလဲ?" ဟူသော မေးခွန်းအတွက် Seasonal Ruler နှင့် Time Card နည်းတို့ဖြင့် အချိန်ကာလ တွက်ပြပါ။`
+            },
+            "12": {
+                title: "🔮 Day 12 (2 Hours) — The Celestial Circle Spread (၁၃ ချပ် - ၁ နှစ်တာ ကံဇာတာစနစ်)",
+                content: `• ၁၃ ချပ် စက်ဝန်းခင်းကျင်းပုံ - ၁၂ လရာသီ စက်ဝန်းနှင့် ဗဟိုချက်မကတ်။
+• ကတ် ၁ မှ ၁၂ ထိ = ဇန်နဝါရီမှ ဒီဇင်ဘာလအထိ (သို့မဟုတ် မွေးလမှစ၍ ၁၂ လတာ ကံဇာတာ)။
+• ကတ် ၁၃ (Center Ruler) = ထိုတစ်နှစ်တာလုံးကို လွှမ်းမိုးမည့် မဟာစွမ်းအင်ချုပ်။
+• တစ်နှစ်တာ အတက်အကျ၊ အခွင့်အလမ်းနှင့် ကြိုတင်သတိပြုရမည့် လများကို ချိန်ဆဟောကြားပုံ။`,
+                homework: `📝 Day 12 လေ့ကျင့်ခန်း
+မိမိ၏ လာမည့် ၁ နှစ်တာအတွက် ၁၃ ချပ်စက်ဝန်း ခင်းကျင်းပြီး အဓိကလွှမ်းမိုးမည့် ဗဟိုကတ် #13 ကို အဓိကထား ဟောချက်ထုတ်ပါ။`
+            },
+            "13": {
+                title: "🔮 Day 13 (2 Hours) — လက်တွေ့ Case Studies ခွဲခြမ်းစိတ်ဖြာမှုများ",
+                content: `• Case Study 1 - စီးပွားရေးလုပ်ငန်းသစ် စတင်ခြင်းနှင့် ငွေကြေးရင်းနှီးမြှုပ်နှံမှု အဟော။
+• Case Study 2 - အချစ်ရေး၊ အိမ်ထောင်ရေး အဆင်မပြေမှုနှင့် တတိယလူ ပြဿနာ။
+• Case Study 3 - စိတ်ဖိစီးမှု၊ အလုပ်အကိုင်ပြောင်းလဲခြင်းနှင့် ကျန်းမာရေး သတိပေးချက်များ။
+• Case Study 4 - K + J သို့မဟုတ် Q + J တွဲကျလာပြီး အတိတ်မှလူ ပြန်လည်ရောက်ရှိလာခြင်း။`,
+                homework: `📝 Day 13 လေ့ကျင့်ခန်း
+ဖော်ပြပါ Case Studies များထဲမှ တစ်ခုကို ရွေးချယ်ပြီး ဆရာတစ်ဦးကဲ့သို့ ပြည့်စုံသော အကြံပေးဟောစာတမ်း ပြုစုပါ။`
+            },
+            "14": {
+                title: "🔮 Day 14 (2 Hours) — ဗေဒင်ဆရာ၏ ကျင့်ဝတ် (Reader's Code)၊ ဘယ်လက်နိယာမနှင့် စွမ်းအင်သန့်စင်ခြင်း",
+                content: `• ဗေဒင်ဆရာ၏ ကျင့်ဝတ် ၅ ချက် (Reader's Code) - လျှို့ဝှက်ချက်စောင့်ထိန်းခြင်း၊ မျှော်လင့်ချက်ပေးခြင်းနှင့် အကြောက်တရားမသွင်းခြင်း။
+• ဘယ်လက် နိယာမ (The Left Hand Rule) - ဘာကြောင့် မနောစိတ် (Subconscious) နှင့် ချိတ်ဆက်ရန် ဘယ်လက်ဖြင့်သာ ဖဲနှိုက်/ဖဲချိုးရသနည်း?
+• ဖဲထုပ်နှင့် စွမ်းအင် သန့်စင်နည်းများ - ညာလက်သီးဖြင့် ၃ ချက်ခေါက်ခြင်း (Knocking)၊ အမွှေးတိုင်မှိုင်းတိုက်ခြင်း၊ ပင်လယ်ဆားနှင့် လရောင်ပြခြင်း။`,
+                homework: `📝 Day 14 လေ့ကျင့်ခန်း
+မိမိဖဲထုပ်ကို စနစ်တကျ သန့်စင်ပြီး ဘယ်လက်နိယာမအတိုင်း ဖဲနှိုက်လေ့ကျင့်သည့် ဗီဒီယို သို့မဟုတ် မှတ်တမ်း ရေးသားပါ။`
+            },
+            "15": {
+                title: "🎓 Day 15 (2 Hours) — သင်တန်းဆင်း စာမေးပွဲ၊ Review နှင့် Certificate ပေးအပ်ခြင်း",
+                content: `• Masterclass ပြန်လည်သုံးသပ်ချက် - ၅၂ ချပ်၊ ဖဲပွင့် ၄ မျိုး၊ Numerology၊ Spreads နှင့် Timing စနစ်များ ပြန်လည်ပေါင်းစပ်ခြင်း။
+• သင်တန်းဆင်း နှုတ်ဖြေ/ရေးဖြေ စာမေးပွဲ စစ်ဆေးခြင်း။
+• Master Cartomancer အဖြစ် တရားဝင် အသိအမှတ်ပြု Certificate of Completion ပေးအပ်ချီးမြှင့်ခြင်း။`,
+                homework: `🎓 Assignment 3 (နာရီ ၃၀ ပြည့် သင်တန်းဆင်း မဟာစီမံကိန်း)
+"Comprehensive Full Year Reading & Client Case Study Project"
+အမှန်တကယ် မေးမြန်းသူ (Client) တစ်ဦးကို ရှာဖွေ၍ မေးခွန်း၊ ဖဲခင်းပုံ၊ အချိန်ကာလနှင့် လမ်းညွှန်အကြံပြုချက်များ ပါဝင်သော ပြည့်စုံသည့် ဗေဒင်ဟောစာတမ်း အပြည့်အစုံ ရေးသားတင်ပြရမည်။`
+            }
+        };
+
+        // 7. STUDENT Q&A DATABASE
+        const qaDatabase = [
+            {
+                q: "❓ ၁။ ဘာကြောင့် ဂဏန်း 4 ကတ်တွေက အိမ်၊ ရုံးခန်း၊ ခုတင်၊ ကား တို့ကို ပြတာလဲ?",
+                a: "<strong>Master Formula ရှင်းလင်းချက် -</strong> ဂဏန်းဗေဒင်တွင် ဂဏန်း 4 သည် စတုရန်းပုံစံ ဂျီဩမေတြီ၊ တည်ငြိမ်မှုနှင့် အခြေခံအုတ်မြစ်ကို ကိုယ်စားပြုပါသည်။ ထို့ကြောင့် နံရံ ၄ ဖက်ရှိသော အိမ်နှင့် ရုံးခန်း၊ ခြေထောက် ၄ ချောင်းရှိသော စားပွဲနှင့် ခုတင်၊ ဘီး ၄ ဘီးရှိသော မော်တော်ကားတို့နှင့် တိုက်ရိုက်ချိတ်ဆက်နေခြင်း ဖြစ်သည် — ♥ 4 = မင်္ဂလာခုတင်နှင့် အိမ်ထောင်ရေး၊ ♣ 4 = ရုံးခန်းစားပွဲနှင့် ကား၊ ♠ 4 = ဆေးရုံခုတင်၊ ♦ 4 = မီးခံသေတ္တာနှင့် ဘဏ်အကောင့်။"
+            },
+            {
+                q: "❓ ၂။ ♥ 9 ဘေးမှာ ♠ ကတ်တွေ ဝိုင်းနေရင် ဆုတောင်းပျက်ပြယ်သွားမလား?",
+                a: "<strong>Master Formula နှင့် အဘွားသင်ကြားချက် -</strong> လုံးဝ မပျက်ပြယ်ပါ။ ♥ 9 သည် ဖဲထုပ်တစ်ခုလုံးတွင် အကောင်းဆုံးသော <strong>The Big Wish Card</strong> ဖြစ်ပါသည်။ ဘေးတွင် စပိတ်ကတ်များ ဝိုင်းရံနေပါက အဟန့်အတားနှင့် ကြန့်ကြာမှု အနည်းငယ်သာ ကြုံရမည်ဖြစ်ပြီး မေးမြန်းသူ၏ အဓိက ပင်မဆန္ဒကြီးမှာမူ မလွဲဧကန် ပြည့်ဝမည် ဖြစ်ပါသည်။"
+            },
+            {
+                q: "❓ ၃။ ♦ 7 နဲ့ ♠ 7 က ဂဏန်း 7 ချင်းတူပြီး ဘာလို့ အဓိပ္ပာယ် ဆန့်ကျင်ဘက်ဖြစ်နေတာလဲ?",
+                a: "<strong>Master Formula ရှင်းလင်းချက် -</strong> ဂဏန်း 7 သည် ကံကြမ္မာ အလှည့်အပြောင်း ဖြစ်ပါသည်။ အနီရောင် အပြုသဘောဆောင်သည့် ♦ နှင့် ပေါင်းစပ်သောအခါ ♦ 7 သည် မထင်မှတ်သော ငွေကြေးကံကောင်းမှုနှင့် ပညာရှိသော ရင်းနှီးမြှုပ်နှံမှု ဖြစ်လာပြီး၊ အနက်ရောင် စိန်ခေါ်မှုဖြစ်သည့် ♠ နှင့် ပေါင်းစပ်သောအခါ ♠ 7 သည် ကံဆိုးမှု၊ ဆုံးရှုံးမှုနှင့် အရက်သေစာ သတိပေးကတ် ဖြစ်သွားရခြင်း ဖြစ်ပါသည်။"
+            },
+            {
+                q: "❓ ၄။ ၃ ချပ်တွဲစနစ်မှာ ရှေ့ ၂ ကတ်က အနက်ရောင် အဆိုးကတ်ဖြစ်ပြီး နောက်ဆုံး ၃ ကတ်မြောက်က အနီရောင် အကောင်းကတ်ဖြစ်နေရင် ဘယ်လိုဟောရမလဲ?",
+                a: "<strong>တတိယကတ် အဆုံးအဖြတ်စည်းမျဉ်း -</strong> ၃ ချပ်တွဲစနစ်တွင် တတိယကတ်သည် အရေးအကြီးဆုံး အဆုံးအဖြတ်ကတ် ဖြစ်ပါသည်။ ရှေ့ ၂ ကတ်တွင် အခက်အခဲများ ရှိခဲ့သော်လည်း တတိယကတ်သည် အနီရောင် အကောင်းကတ်ဖြစ်ပါက အဆိုးများအားလုံးကို ကျော်လွှားပြီး အဆုံးသတ်ရလဒ် ကောင်းမွန်အောင်မြင်မည်ဟု ဟောကြားရပါမည်။"
+            }
+        ];
+
+        // Global State Variables
+        let fullDeck = [];
+        let cardMap = {};
+        let spreadMode = 1;
+        let selectedCards = [];
+        let currentFcIndex = 0;
+
+        function build52Deck() {
+            fullDeck = [];
+            cardMap = {};
+            const suits = ["D", "C", "H", "S"];
+            const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+
+            for (let s of suits) {
+                for (let r of ranks) {
+                    const id = r + s;
+                    const cardObj = {
+                        id: id,
+                        suitKey: s,
+                        rankKey: r,
+                        suit: suitsData[s],
+                        rank: ranksData[r],
+                        specific: cardSpecifics[id],
+                        parisFigure: parisFigures[id] || null
+                    };
+                    fullDeck.push(cardObj);
+                    cardMap[id] = cardObj;
+                }
+            }
+        }
+
+        function toggleMainMenu() {
+            const nav = document.getElementById('main-nav-drawer');
+            if (nav) nav.classList.toggle('open');
+        }
+
+        function toggleSpreadMenu() {
+            const menu = document.getElementById('spread-dropdown');
+            if (menu) menu.classList.toggle('open');
+        }
+
+        document.addEventListener('click', (e) => {
+            const spreadDrop = document.getElementById('spread-dropdown');
+            if (spreadDrop && !e.target.closest('.dropdown-wrapper')) {
+                spreadDrop.classList.remove('open');
+            }
+            const navDrawer = document.getElementById('main-nav-drawer');
+            if (navDrawer && !e.target.closest('header')) {
+                navDrawer.classList.remove('open');
+            }
+        });
+
+        function switchTab(tabName, el) {
+            document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
+            if (el) el.classList.add('active');
+            
+            const navDrawer = document.getElementById('main-nav-drawer');
+            if (navDrawer) navDrawer.classList.remove('open');
+
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            const targetView = document.getElementById('view-' + tabName);
+            if (targetView) targetView.classList.add('active');
+
+            if (tabName === 'explorer') exploreCard();
+            if (tabName === 'tutor') {
+                renderFlashcard();
+                renderDailyLessonPost();
+                renderQAAccordion();
+            }
+        }
+
+        function shuffleArray(arr) {
+            for (let i = arr.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [arr[i], arr[j]] = [arr[j], arr[i]];
+            }
+        }
+
+        function getRequiredCount() {
+            if (spreadMode === 'yn') return 3;
+            return spreadMode;
+        }
+
+        function setSpreadMode(mode, labelText) {
+            spreadMode = mode;
+            const label = document.getElementById('current-spread-label');
+            if (label) label.innerText = labelText;
+            
+            const dropdown = document.getElementById('spread-dropdown');
+            if (dropdown) dropdown.classList.remove('open');
+
+            ['1', '3', '7', '9', '13', 'yn'].forEach(m => {
+                const btn = document.getElementById('btn-mode-' + m);
+                if (btn) btn.classList.toggle('active', String(mode) === m);
+            });
+            shuffleDeck();
+        }
+
+        function updateStatusText() {
+            const statusEl = document.getElementById('status-text');
+            if (!statusEl) return;
+            const req = getRequiredCount();
+            const rem = req - selectedCards.length;
+
+            if (rem === 0) {
+                statusEl.innerHTML = `<span>🧐 ကတ်ရွေးချယ်မှု ပြည့်စုံပါပြီ —</span> အောက်ပါကတ်များကို ကိုယ်တိုင် အရင်သုံးသပ်ဟောကြည့်ပြီးမှ <span>"အဟောနှင့် ဖော်မြူလာ အဖြေကြည့်မည်"</span> ကို နှိပ်ပါ။`;
+                return;
+            }
+
+            if (spreadMode === 1) {
+                statusEl.innerHTML = `<span>🖐️ ဘယ်လက်စည်းမျဉ်း -</span> မနောစိတ်နှင့်ချိတ်ဆက်ထားသော ဘယ်လက်ဖြင့် ဖဲချပ် <span>၁ ချပ်</span> ရွေးချယ်ပါ။`;
+            } else if (spreadMode === 3) {
+                const labels = ["အတိတ်", "ပစ္စုပ္ပန်", "အနာဂတ် အဓိကရလဒ် ★"];
+                statusEl.innerHTML = `<span>⏳ ၃ ချပ်တွဲစနစ် -</span> ${labels[selectedCards.length]} အတွက် ဖဲချပ်ရွေးပါ — ကျန် ${rem} ချပ်။`;
+            } else if (spreadMode === 7) {
+                statusEl.innerHTML = `<span>🧲 ၇ ချပ် မြင်းခွာစနစ် -</span> ဖဲချပ် ၇ ချပ် ရွေးချယ်ပါ — ရွေးပြီး ${selectedCards.length}/၇ ချပ်။`;
+            } else if (spreadMode === 9) {
+                statusEl.innerHTML = `<span>⊞ ၉ ချပ်စနစ် -</span> 3x3 ဇယားကွက်အတွက် ဖဲချပ် ၉ ချပ် ရွေးချယ်ပါ — ရွေးပြီး ${selectedCards.length}/၉ ချပ်။`;
+            } else if (spreadMode === 13) {
+                statusEl.innerHTML = `<span>🎡 ၁၃ ချပ် စက်ဝန်းစနစ် -</span> ၁၂ လနှင့် ဗဟိုကတ်အတွက် ၁၃ ချပ် ရွေးပါ — ရွေးပြီး ${selectedCards.length}/၁၃ ချပ်။`;
+            } else if (spreadMode === 'yn') {
+                statusEl.innerHTML = `<span>⚖️ Yes / No စနစ် -</span> သိလိုသောမေးခွန်းကို အာရုံပြု၍ ဖဲချပ် ၃ ချပ် ရွေးပါ — ကျန် ${rem} ချပ်။`;
+            }
+        }
+
+        function initDeck() {
+            if (fullDeck.length === 0) build52Deck();
+            shuffleArray(fullDeck);
+            selectedCards = [];
+            const tray = document.getElementById('self-study-tray');
+            if (tray) tray.style.display = 'none';
+            updateStatusText();
+
+            const container = document.getElementById('deck-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            fullDeck.forEach((cardData) => {
+                const cardElem = document.createElement('div');
+                cardElem.className = 'card';
+                cardElem.innerHTML = `
+                    <div class="card-inner">
+                        <div class="face back"></div>
+                        <div class="face front ${cardData.suit.color}">
+                            <div class="card-corner">${cardData.rankKey}<br>${cardData.suit.symbol}</div>
+                            <div class="card-center">${cardData.suit.symbol}</div>
+                            <div class="card-corner bottom">${cardData.rankKey}<br>${cardData.suit.symbol}</div>
+                        </div>
+                    </div>
+                `;
+                cardElem.onclick = () => onCardClick(cardElem, cardData);
+                container.appendChild(cardElem);
             });
         }
 
-        function shuffleAndSpread() {
+        function onCardClick(cardElem, cardData) {
+            const req = getRequiredCount();
+            if (cardElem.classList.contains('picked')) return;
+            if (selectedCards.length >= req) return;
+
+            cardElem.classList.add('picked');
+            selectedCards.push(cardData);
+
+            const badge = document.createElement('div');
+            badge.className = 'slot-badge';
+            if (spreadMode === 3) {
+                const slotLabels = ["၁။ အတိတ်", "၂။ ပစ္စုပ္ပန်", "၃။ အနာဂတ် ★"];
+                badge.innerText = slotLabels[selectedCards.length - 1];
+            } else {
+                badge.innerText = `#${selectedCards.length}`;
+            }
+            cardElem.appendChild(badge);
+
+            updateStatusText();
+            renderSelfStudyTray();
+        }
+
+        function renderSelfStudyTray() {
+            const tray = document.getElementById('self-study-tray');
+            const previewList = document.getElementById('drawn-cards-preview');
+            if (!tray || !previewList) return;
+            tray.style.display = 'block';
+
+            const slotNames3 = ["၁။ အတိတ်", "၂။ ပစ္စုပ္ပန်", "၃။ အနာဂတ် ★"];
+            previewList.innerHTML = selectedCards.map((c, i) => {
+                let posLabel = `#${i + 1}`;
+                if (spreadMode === 3) posLabel = slotNames3[i];
+                if (spreadMode === 9 && i === 4) posLabel = `#5 ဗဟို`;
+                if (spreadMode === 13 && i === 12) posLabel = `#13 ဗဟို`;
+                return `
+                    <div class="mini-card-item ${c.suit.color}">
+                        <span class="mini-pos">${posLabel}</span>
+                        <span class="mini-sym">${c.suit.symbol} ${c.rankKey}</span>
+                    </div>
+                `;
+            }).join("");
+        }
+
+        function cleanseDeck() {
+            const container = document.getElementById('deck-container');
+            if (!container) return;
+            container.classList.add('knocking');
+            const status = document.getElementById('status-text');
+            if (status) status.innerHTML = `<span>✊ ဖဲထုပ်ကို ညာလက်သီးဖြင့် ၃ ချက်ခေါက်၍ စွမ်းအင်ဟောင်းများကို သန့်စင်နေပါသည်...</span>`;
+            setTimeout(() => {
+                container.classList.remove('knocking');
+                shuffleDeck();
+            }, 600);
+        }
+
+        function shuffleDeck() {
             const cards = document.querySelectorAll('.card');
             cards.forEach(card => {
                 card.classList.remove('picked');
-                card.style.transform = `translateX(0) translateY(0) rotate(0deg)`;
+                const randomY = Math.floor(Math.random() * 26) - 13;
+                card.style.transform = `translateY(${randomY}px)`;
+            });
+            setTimeout(initDeck, 320);
+        }
+
+        function evaluateCombinations(cards) {
+            if (cards.length < 2) return "";
+            let alerts = [];
+            const ids = cards.map(c => c.id);
+
+            const rankCounts = {};
+            const suitCounts = {};
+            cards.forEach(c => {
+                rankCounts[c.rankKey] = (rankCounts[c.rankKey] || 0) + 1;
+                suitCounts[c.suitKey] = (suitCounts[c.suitKey] || 0) + 1;
             });
 
-            setTimeout(() => {
-                spreadDeck();
-            }, 350);
+            for (let s in suitCounts) {
+                if ((cards.length === 3 && suitCounts[s] === 3) || (cards.length >= 7 && suitCounts[s] >= Math.ceil(cards.length * 0.55))) {
+                    alerts.push(`🔥 <strong>${suitsData[s].symbol} လွှမ်းမိုးမှု -</strong> ဤဖဲခင်းကျင်းမှုတွင် ${suitsData[s].domain.split('၊')[0]} နယ်ပယ်က အဓိက လွှမ်းမိုးနေပါသည်။`);
+                }
+            }
+
+            if (rankCounts["A"] >= 2) alerts.push("🌟 <strong>A များ ဆုံခြင်း -</strong> ပြန်လည်ဆုံစည်းခြင်း သို့မဟုတ် အရေးကြီးသော အစသစ်များ ပေါင်းစည်းခြင်း။");
+            if (rankCounts["J"] === 2) alerts.push("⚖️ <strong>2 Jacks -</strong> တရားဥပဒေရေးရာ၊ စာချုပ်စာတမ်း သို့မဟုတ် အမှုအခင်းကိစ္စ ပေါ်ပေါက်တတ်သည်။");
+            if (rankCounts["J"] >= 3) alerts.push("👥 <strong>3+ Jacks -</strong> အပေါင်းအသင်းဖိအား သို့မဟုတ် လူငယ်အဖွဲ့အစည်းကိစ္စ။");
+            if (rankCounts["Q"] === 2) alerts.push("🤫 <strong>2 Queens -</strong> လျှို့ဝှက်ချက်များ ဝေမျှခြင်း သို့မဟုတ် အမျိုးသမီးနှစ်ဦး တိုင်ပင်ဆွေးနွေးခြင်း။");
+            if (rankCounts["Q"] >= 3) alerts.push("👭 <strong>3+ Queens -</strong> အမျိုးသမီး မိတ်ဆွေများ စုဝေးခြင်း။");
+            if (rankCounts["K"] === 2) alerts.push("🤝 <strong>2 Kings -</strong> စီးပွားရေး လက်ဆွဲနှုတ်ဆက်ခြင်း၊ အကြံပေးကောင်းရခြင်း သို့မဟုတ် ယူနီဖောင်းဝတ် အာဏာပိုင်များနှင့် တွေ့ဆုံခြင်း။");
+            if (rankCounts["K"] >= 3) alerts.push("👑 <strong>3+ Kings -</strong> အများပြည်သူဆိုင်ရာ အသိအမှတ်ပြုခံရမှု၊ အဖွဲ့အစည်းကြီးများနှင့် အောင်မြင်ကျော်ကြားမှု။");
+            if (rankCounts["2"] >= 2) alerts.push("♊ <strong>2 များ ဆုံခြင်း -</strong> ပျော်ရွှင်မှု သို့မဟုတ် ကိစ္စရပ်များ အစုံလိုက် နှစ်ဆဖြစ်ပေါ်တတ်သည်။");
+
+            const hasKing = cards.some(c => c.rankKey === "K");
+            const hasQueen = cards.some(c => c.rankKey === "Q");
+            const hasJack = cards.some(c => c.rankKey === "J");
+            const hasFace = hasKing || hasQueen || hasJack;
+
+            if (hasKing && hasJack) alerts.push("🔄 <strong>K + J ကတ်တွဲ -</strong> အတိတ်မှ အမျိုးသားမိတ်ဆွေဟောင်း သို့မဟုတ် ချစ်သူဟောင်း ပြန်လည်ရောက်ရှိလာတတ်သည်။");
+            if (hasQueen && hasJack) alerts.push("🔄 <strong>Q + J ကတ်တွဲ -</strong> အတိတ်မှ အမျိုးသမီးမိတ်ဆွေဟောင်း ပြန်လည်ရောက်ရှိလာတတ်သည်။");
+            if (ids.includes("AH") && ids.includes("KC")) alerts.push("🏗️ <strong>♥ A + ♣ K -</strong> အိမ်ဆောက်ပေးမည့် စေတနာရှင်၊ အိမ်ဆောက်ကန်ထရိုက်တာ သို့မဟုတ် မိသားစုကို ထောက်ပံ့မည့်သူ ပေါ်ပေါက်မည်။");
+            else if (ids.includes("AH") && hasFace) alerts.push("🏠 <strong>♥ A + ရုပ်ပုံကတ် -</strong> နေအိမ်သို့ ဧည့်သည်ရောက်ရှိလာခြင်း သို့မဟုတ် မိသားစုကို အဓိကဦးစားပေးသူ ဖြစ်ခြင်း။");
+            if (ids.includes("10C") && hasFace) alerts.push("💼 <strong>♣ 10 + ရုပ်ပုံကတ် -</strong> ကိုယ်ပိုင်စီးပွားရေးလုပ်ကိုင်သူ သို့မဟုတ် ရာထူးတက်မည့် စီးပွားရေးအကြီးအကဲကို ညွှန်းသည်။");
+            if (ids.includes("JH") && ids.includes("JS")) alerts.push("🎖️ <strong>♥ J + ♠ J -</strong> မေးမြန်းသူ၏ သား၊ ညီ သို့မဟုတ် ချစ်သူသည် စစ်တပ် သို့မဟုတ် ရဲတပ်ဖွဲ့တွင် တာဝန်ထမ်းဆောင်နေခြင်း။");
+            if (ids.includes("8S") && ids.includes("4S")) alerts.push("🏥 <strong>♠ 8 + ♠ 4 -</strong> ဆေးစစ်ချက်ခံယူရခြင်းနှင့် ကျန်းမာရေး အနားယူကုသရန် အထူးသတိပေးချက်။");
+            if (ids.includes("8S") && ids.includes("9S")) alerts.push("⚕️ <strong>♠ 8 + ♠ 9 -</strong> ကျန်းမာရေးနှင့် စိတ်ဖိစီးမှုကို အထူးဂရုစိုက်ရန် သတိပေးချက်။");
+            if (ids.includes("9D") && ids.includes("10D")) alerts.push("🚢 <strong>♦ 9 + ♦ 10 -</strong> ငွေကြေးအောင်မြင်မှုနှင့် ရေကြောင်း သို့မဟုတ် အဝေးခရီးစဉ်။");
+            if (ids.includes("9H") && ids.includes("3D")) alerts.push("💖 <strong>♥ 9 + ♦ 3 -</strong> တည်ငြိမ်ခိုင်မာပြီး ပျော်ရွှင်ဖွယ်ကောင်းသော အချစ်ရေး။");
+
+            if (alerts.length === 0) return "";
+            return `<div class="multiples-alert"><strong>🔮 ကတ်တွဲ အထူးနိမိတ်ချုပ်</strong><br>${alerts.join("<br>")}</div>`;
         }
 
-        function drawCard(cardElement, cardData) {
-            document.querySelectorAll('.card').forEach(c => c.classList.remove('picked'));
-            cardElement.classList.add('picked');
-            
-            setTimeout(() => {
-                showReading(cardData);
-            }, 550);
+        function renderCardBlock(card, titleLabel, isHighlight = false, startCollapsed = false) {
+            const uniqueId = 'rev-' + Math.random().toString(36).substring(2, 9);
+            return `
+                <div class="card-reading-block ${isHighlight ? 'highlight-final' : ''}">
+                    ${titleLabel ? `<div class="block-position">${titleLabel}</div>` : ''}
+                    <h3 class="block-title">
+                        <span>${card.suit.symbol} ${card.rankKey}</span>
+                        <button class="btn" style="padding:4px 12px; font-size:0.75rem;" onclick="document.getElementById('${uniqueId}').classList.toggle('open')">
+                            👁️ ဖော်မြူလာ အဖြေဖွင့်/ပိတ်
+                        </button>
+                    </h3>
+                    <div id="${uniqueId}" class="reveal-section ${startCollapsed ? '' : 'open'}">
+                        ${card.parisFigure ? `<div class="paris-figure">🏛️ <strong>Paris Pattern -</strong> ${card.parisFigure}</div>` : ''}
+                        ${card.specific.omen ? `<div class="special-omen">${card.specific.omen}</div>` : ''}
+                        <div class="reading-section"><strong>🎨 အဆင့် ၁ အရောင်စွမ်းအင် -</strong> ${card.suit.colorEnergy}</div>
+                        <div class="reading-section"><strong>🛡️ အဆင့် ၂ ဖဲပွင့်နယ်ပယ် -</strong> ${card.suit.domain}</div>
+                        <div class="reading-section"><strong>🔢 အဆင့် ၃ ဂဏန်းစွမ်းအင် -</strong> ${card.rank.action}</div>
+                        <div class="formula-box">
+                            <strong>⚡ Master Formula</strong><br>
+                            [ ${card.suit.domain.split('၊')[0]} ] + [ ${card.rank.action.split('၊')[0]} ] = <strong>${card.specific.meaning}</strong>
+                        </div>
+                        <div class="grandma-box">
+                            <strong>👵 အဘွားသင်ကြားချက်နှင့် ရှေးဟောင်းနိမိတ် -</strong> ${card.specific.grandma}
+                        </div>
+                        <div class="reading-section"><strong>💡 လမ်းညွှန်အကြံပြုချက် -</strong> ${card.specific.advice}</div>
+                    </div>
+                </div>
+            `;
         }
 
-        function showReading(data) {
-            document.getElementById('m-title').innerText = `${data.rank.label} of ${data.suit.name}`;
-            document.getElementById('m-subtitle').innerText = `[ ${data.suit.mm} - ${data.suit.elem} ]`;
-            document.getElementById('m-essence').innerText = `"${data.essence}"`;
-            
-            let detailsHTML = '';
-            if (data.career) detailsHTML += `<div class="reading-section"><strong>💼 လုပ်ငန်းခွင်နှင့် ရာထူး</strong> ${data.career}</div>`;
-            if (data.finance) detailsHTML += `<div class="reading-section"><strong>💰 စီးပွားရေးနှင့် ဓနဥစ္စာ</strong> ${data.finance}</div>`;
-            if (data.love) detailsHTML += `<div class="reading-section"><strong>❤️ အချစ်ရေးနှင့် သံယောဇဉ်</strong> ${data.love}</div>`;
-            if (data.health) detailsHTML += `<div class="reading-section"><strong>🌿 ကျန်းမာရေးနှင့် စွမ်းအင်</strong> ${data.health}</div>`;
-            
-            document.getElementById('m-details').innerHTML = detailsHTML;
-            modal.classList.add('active');
+        function showReadingModal() {
+            if (selectedCards.length === 0) return;
+            const headerEl = document.getElementById('m-header');
+            const bodyEl = document.getElementById('m-body');
+            let html = "";
+
+            if (spreadMode === 'yn') {
+                headerEl.innerText = "⚖️ Yes / No အဖြေရှာစနစ်";
+                const redCount = selectedCards.filter(c => c.suit.color === 'red').length;
+                let verdict = "", desc = "";
+                if (redCount === 3) {
+                    verdict = "✅ ABSOLUTELY YES — ၁၀၀% သေချာပေါက် အောင်မြင်မည်";
+                    desc = "ဖဲချပ် ၃ ချပ်လုံး အနီရောင် ဖြစ်သဖြင့် သင်မေးမြန်းသောကိစ္စသည် အတားအဆီးမရှိ ချောမွေ့စွာ အောင်မြင်ပါမည်။";
+                } else if (redCount === 2) {
+                    verdict = "☑️ YES — အဆင်ပြေအောင်မြင်မည်";
+                    desc = "အနီရောင် ၂ ချပ်၊ အနက်ရောင် ၁ ချပ် ဖြစ်သဖြင့် အနည်းငယ် ကြိုးစားအားထုတ်ရမည်ဖြစ်သော်လည်း အပြုသဘောဆောင်ကာ အောင်မြင်ပါမည်။";
+                } else if (redCount === 1) {
+                    verdict = "⚠️ NO / DELAY — အခက်အခဲနှင့် ကြန့်ကြာမှုရှိသည်";
+                    desc = "အနက်ရောင် ၂ ချပ် ပါဝင်နေသဖြင့် လက်ရှိအချိန်တွင် အတားအဆီးနှင့် စိန်ခေါ်မှုများနေပါသည်။ အလျင်စလို မဆုံးဖြတ်သင့်သေးပါ။";
+                } else {
+                    verdict = "❌ ABSOLUTELY NO — လုံးဝ မသင့်တော်ပါ";
+                    desc = "ဖဲချပ် ၃ ချပ်လုံး အနက်ရောင် ဖြစ်နေသဖြင့် ဤကိစ္စကို လက်ရှောင်ရန် သို့မဟုတ် အစီအစဉ်ကို ပြန်လည်ပြင်ဆင်ရန် ကတ်များက အပြင်းအထန် သတိပေးနေပါသည်။";
+                }
+                html += `
+                    <div class="card-reading-block highlight-final" style="text-align:center;">
+                        <h3 style="color:var(--gold-bright); margin:4px 0;">${verdict}</h3>
+                        <p style="font-size:0.9rem; margin:6px 0;">${desc}</p>
+                    </div>
+                `;
+                selectedCards.forEach((c, idx) => {
+                    html += renderCardBlock(c, `ကတ် #${idx + 1}`, false, true);
+                });
+
+            } else if (spreadMode === 7) {
+                headerEl.innerText = "🧲 ကံကြမ္မာ မြင်းခွာ ၇ ချပ်စနစ်";
+                html += evaluateCombinations(selectedCards);
+                const hsTitles = [
+                    "၁။ အတိတ်၏ လွှမ်းမိုးမှု",
+                    "၂။ ရွေးချယ်စရာ လမ်းကြောင်းများ",
+                    "၃။ တည်ငြိမ်မှု သို့မဟုတ် မတည်ငြိမ်မှု",
+                    "၄။ လက်ရှိ စိန်ခေါ်မှုနှင့် လွှမ်းမိုးမှုများ",
+                    "၅။ အခွင့်အလမ်း သို့မဟုတ် အတားအဆီးများ",
+                    "၆။ မိတ်ဆွေ သို့မဟုတ် ပြိုင်ဘက်များ",
+                    "၇။ အနာဂတ် နောက်ဆုံးရလဒ် ★"
+                ];
+                selectedCards.forEach((c, idx) => {
+                    html += renderCardBlock(c, hsTitles[idx], idx === 6, false);
+                });
+
+            } else if (spreadMode === 9) {
+                headerEl.innerText = "⊞ ၉ ချပ်စနစ် — အလျားလိုက်၊ ဒေါင်လိုက်၊ ထောင့်ဖြတ်";
+                html += `<div class="grid-3x3">`;
+                selectedCards.forEach((c, i) => {
+                    html += `
+                        <div class="grid-cell ${c.suit.color}">
+                            <span class="cell-num">#${i + 1} ${i === 4 ? 'ဗဟို' : ''}</span>
+                            <span class="cell-sym">${c.suit.symbol} ${c.rankKey}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
+                html += evaluateCombinations(selectedCards);
+
+                const centerCard = selectedCards[4];
+                html += `
+                    <div class="formula-box" style="border-left-color:var(--emerald-mystic);">
+                        <strong>🎯 ဗဟိုချက်မကတ် #5 — ${centerCard.suit.symbol} ${centerCard.rankKey}</strong><br>
+                        ဖဲခင်းကျင်းမှုတစ်ခုလုံး၏ အဓိကအချက်အချာမှာ <strong>${centerCard.specific.meaning}</strong> ဖြစ်ပါသည်။
+                    </div>
+                `;
+
+                const rows = [
+                    { name: "အလျားလိုက် အတန်း ၁ — အတိတ် အကြောင်းရင်း (#1, #2, #3)", idx: [0, 1, 2] },
+                    { name: "အလျားလိုက် အတန်း ၂ — ပစ္စုပ္ပန် အခြေအနေ (#4, #5, #6)", idx: [3, 4, 5] },
+                    { name: "အလျားလိုက် အတန်း ၃ — အနာဂတ် ရလဒ် (#7, #8, #9)", idx: [6, 7, 8] },
+                    { name: "ဒေါင်လိုက် အတိုင် ၃ — အနာဂတ် ဦးတည်ချက် (#3, #6, #9)", idx: [2, 5, 8] },
+                    { name: "ထောင့်ဖြတ် ၁ — အတိတ်မှ အနာဂတ်သို့ တိုက်ရိုက်စီးကြောင်း (#1 ➔ #5 ➔ #9)", idx: [0, 4, 8] }
+                ];
+
+                rows.forEach((r, rIdx) => {
+                    const c1 = selectedCards[r.idx[0]], c2 = selectedCards[r.idx[1]], c3 = selectedCards[r.idx[2]];
+                    const rowId = 'row9-' + rIdx;
+                    html += `
+                        <div class="card-reading-block">
+                            <div class="block-position">${r.name}</div>
+                            <div class="block-title">
+                                <span>${c1.suit.symbol} ${c1.rankKey} + ${c2.suit.symbol} ${c2.rankKey} + ${c3.suit.symbol} ${c3.rankKey}</span>
+                                <button class="btn" style="padding:3px 10px; font-size:0.74rem;" onclick="document.getElementById('${rowId}').classList.toggle('open')">👁️ အဖြေဖွင့်/ပိတ်</button>
+                            </div>
+                            <div id="${rowId}" class="reveal-section open">
+                                <div class="reading-section">• <strong>${c1.suit.symbol} ${c1.rankKey} -</strong> ${c1.specific.meaning}</div>
+                                <div class="reading-section">• <strong>${c2.suit.symbol} ${c2.rankKey} -</strong> ${c2.specific.meaning}</div>
+                                <div class="reading-section">• <strong>${c3.suit.symbol} ${c3.rankKey} -</strong> ${c3.specific.meaning}</div>
+                            </div>
+                        </div>
+                    `;
+                });
+
+            } else if (spreadMode === 13) {
+                headerEl.innerText = "🎡 ၁ နှစ်တာ ၁၂ လရာသီ စက်ဝန်းဟောကိန်း";
+                html += evaluateCombinations(selectedCards);
+                const center13 = selectedCards[12];
+                html += renderCardBlock(center13, "🌟 ကတ် #13 — ၁ နှစ်တာလုံး၏ အဓိက လွှမ်းမိုးမှုစွမ်းအင်", true, false);
+
+                for (let i = 0; i < 12; i++) {
+                    const c = selectedCards[i];
+                    html += renderCardBlock(c, `🗓️ ${i + 1} လမြောက် ကံဇာတာ`, false, true);
+                }
+
+            } else {
+                headerEl.innerText = spreadMode === 1
+                    ? "🔮 ၁ ချပ်တည်း ဖော်မြူလာ နိမိတ်ဖတ်ကြားချက်"
+                    : "⏳ ၃ ချပ်တွဲ အတိတ် • ပစ္စုပ္ပန် • အနာဂတ် ဇာတ်လမ်းဆင်ဟောကိန်း";
+
+                html += evaluateCombinations(selectedCards);
+
+                const posTitles = [
+                    "၁။ အတိတ်အကြောင်းရင်း",
+                    "၂။ ပစ္စုပ္ပန်အခြေအနေ",
+                    "၃။ အနာဂတ်ရလဒ် — အရေးအကြီးဆုံး အဆုံးအဖြတ်ကတ် ★"
+                ];
+
+                selectedCards.forEach((card, idx) => {
+                    const isFinal = (spreadMode === 3 && idx === 2);
+                    html += renderCardBlock(card, spreadMode === 3 ? posTitles[idx] : "", isFinal, false);
+                });
+
+                if (spreadMode === 3 && selectedCards.length === 3) {
+                    const finalCard = selectedCards[2];
+                    const finalTone = finalCard.suit.color === "red"
+                        ? "တတိယကတ်သည် အနီရောင် အပြုသဘောဖြစ်သဖြင့် ရှေ့ကတ်များတွင် မည်သို့သော အခက်အခဲရှိစေကာမူ အဆုံးသတ်တွင် အဆိုးများကို ကျော်လွှားအောင်မြင်ပါမည်။"
+                        : "တတိယကတ်သည် အနက်ရောင်ကတ် ဖြစ်သဖြင့် လက်တွေ့ကြိုးစားအားထုတ်မှုနှင့် သတိပညာဖြင့် ရင်ဆိုင်ကျော်လွှားရန် လိုအပ်ပါသည်။";
+                    html += `
+                        <div class="formula-box" style="border-left-color: #fceea7;">
+                            <strong>📌 တတိယကတ် အဆုံးအဖြတ်စည်းမျဉ်း</strong><br>${finalTone}
+                        </div>
+                    `;
+                }
+            }
+
+            bodyEl.innerHTML = html;
+            document.getElementById('reading-modal').classList.add('active');
         }
 
         function closeModal() {
-            modal.classList.remove('active');
+            const modal = document.getElementById('reading-modal');
+            if (modal) modal.classList.remove('active');
         }
 
-        function onModalBackdropClick(e) {
-            if (e.target === modal) closeModal();
+        function calculateBirthdayDestiny() {
+            if (fullDeck.length === 0) build52Deck();
+            const dobInput = document.getElementById('dob-input');
+            if (!dobInput || !dobInput.value) return;
+            const dobVal = dobInput.value;
+            const roleVal = document.getElementById('gender-role').value;
+            const compVal = document.getElementById('complexion-type').value;
+
+            const parts = dobVal.split('-');
+            const year = parseInt(parts[0], 10);
+            const month = parseInt(parts[1], 10);
+            const day = parseInt(parts[2], 10);
+
+            const digits = dobVal.replace(/-/g, '').split('').map(Number);
+            let sum = digits.reduce((a, b) => a + b, 0);
+            while (sum > 10) {
+                sum = String(sum).split('').map(Number).reduce((a, b) => a + b, 0);
+            }
+            const lifePathRankKey = sum === 1 ? "A" : String(sum);
+
+            const seasonRanks = ["A", "K", "Q", "J", "10", "9", "8", "7", "6", "5", "4", "3", "2"];
+            const nonLeapDaysInMonths = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+            function dayOfYearNonLeap(m, d) {
+                if (m === 2 && d === 29) return 59;
+                let total = 0;
+                for (let i = 0; i < m - 1; i++) total += nonLeapDaysInMonths[i];
+                return total + d;
+            }
+
+            const march1 = dayOfYearNonLeap(3, 1);
+            const curDOY = dayOfYearNonLeap(month, day);
+            let daysSinceMarch1 = curDOY - march1;
+            if (daysSinceMarch1 < 0) daysSinceMarch1 += 365;
+
+            let weekIndex = Math.floor(daysSinceMarch1 / 7);
+            if (weekIndex > 51) weekIndex = 51;
+
+            const suitOrder = ["D", "C", "H", "S"];
+            const seasonIdx = Math.floor(weekIndex / 13);
+            const weekInSeason = weekIndex % 13;
+
+            const birthSuitKey = suitOrder[seasonIdx];
+            const birthRankKey = seasonRanks[weekInSeason];
+            const birthCard = cardMap[birthRankKey + birthSuitKey];
+
+            let engSigId = "QH";
+            if (roleVal === "J") {
+                engSigId = "J" + birthSuitKey;
+            } else if (roleVal === "Q_under40") {
+                engSigId = compVal === "fair" ? "QH" : "QC";
+            } else if (roleVal === "Q_over40") {
+                engSigId = compVal === "fair" ? "QD" : "QS";
+            } else if (roleVal === "K_under40") {
+                engSigId = compVal === "fair" ? "KH" : "KC";
+            } else if (roleVal === "K_over40") {
+                engSigId = compVal === "fair" ? "KD" : "KS";
+            }
+            const sigCard = cardMap[engSigId];
+
+            const synthCard = cardMap[lifePathRankKey + birthSuitKey];
+            const isFeb29 = (month === 2 && day === 29);
+
+            let resHTML = `
+                <div class="special-omen" style="text-align:center; font-size:0.88rem;">
+                    🗓️ <strong>မွေးသက္ကရာဇ် -</strong> ${day}.${month}.${year} | <strong>ရာသီစက်ဝန်း -</strong> ${birthCard.suit.season}<br>
+                    🌿 <strong>သဘာဝဓာတ် -</strong> ${birthCard.suit.element} | <strong>ဘဝခရီးစဉ်ဂဏန်း -</strong> ${sum}<br>
+                    <span style="color:var(--gold-bright);">👇 အောက်ပါ မွေးနေ့ကတ် ၃ ကတ်ကို ကိုယ်တိုင် အရင်သုံးသပ်ကြည့်ပြီးမှ <strong>"👁️ ဖော်မြူလာ အဖြေဖွင့်/ပိတ်"</strong> ကိုနှိပ်ပါ။</span>
+                    ${isFeb29 ? `<br>🃏 <strong>ဖေဖော်ဝါရီ ၂၉ ရက်ထပ်နှစ် ထူးခြားချက် -</strong> သင်သည် <strong>Joker</strong> ၏ အထူးဆန်းကြယ်သော စွမ်းအင်ကိုပါ ပိုင်ဆိုင်ထားသည်!` : ''}
+                </div>
+
+                ${renderCardBlock(birthCard, `🌟 ၁။ မွေးနေ့ကိုယ်စားပြု ပင်မဖဲချပ် — ရက်သတ္တပတ် #${weekIndex + 1} အုပ်စိုးသူ`, true, true)}
+                ${renderCardBlock(synthCard, `🔢 ၂။ ဘဝခရီးစဉ် ဂဏန်းစွမ်းအင်ကတ် — ဂဏန်း #${sum}`, false, true)}
+                ${renderCardBlock(sigCard, `👑 ၃။ သင့်ကိုယ်စားပြု ရုပ်ပုံကတ်`, false, true)}
+            `;
+
+            document.getElementById('birthday-result').innerHTML = resHTML;
         }
 
-        window.onload = spreadDeck;
+        function exploreCard() {
+            if (fullDeck.length === 0) build52Deck();
+            const sEl = document.getElementById('exp-suit');
+            const rEl = document.getElementById('exp-rank');
+            if (!sEl || !rEl) return;
+            const s = sEl.value;
+            const r = rEl.value;
+            const card = cardMap[r + s];
+            if (!card) return;
+            document.getElementById('explorer-output').innerHTML = renderCardBlock(
+                card,
+                `🔍 ရွေးချယ်ထားသောကတ် — ကိုယ်တိုင်စဉ်းစားပြီးမှ အဖြေဖွင့်ကြည့်ပါ`,
+                true,
+                true
+            );
+        }
+
+        function renderFlashcard() {
+            const stage = document.getElementById('fc-stage');
+            if (!stage) return;
+            stage.classList.remove('flipped');
+            const item = flashcardsData[currentFcIndex];
+            document.getElementById('fc-counter').innerText = `Flashcard ${currentFcIndex + 1} / ${flashcardsData.length}`;
+            document.getElementById('fc-q').innerText = item.q;
+            document.getElementById('fc-a').innerText = item.a;
+        }
+
+        function nextFlashcard() {
+            currentFcIndex = (currentFcIndex + 1) % flashcardsData.length;
+            renderFlashcard();
+        }
+
+        function prevFlashcard() {
+            currentFcIndex = (currentFcIndex - 1 + flashcardsData.length) % flashcardsData.length;
+            renderFlashcard();
+        }
+
+        function randomFlashcard() {
+            currentFcIndex = Math.floor(Math.random() * flashcardsData.length);
+            renderFlashcard();
+        }
+
+        function generateCaseStudy(count) {
+            if (fullDeck.length === 0) build52Deck();
+            const copy = [...fullDeck];
+            shuffleArray(copy);
+            const picked = copy.slice(0, count);
+            const out = document.getElementById('tutor-output');
+
+            if (count === 2) {
+                const c1 = picked[0], c2 = picked[1];
+                out.innerHTML = `
+                    <div class="block-position">🃏 လက်တွေ့ ကတ်နှစ်ချပ်တွဲ ပုစ္ဆာ</div>
+                    <div class="drawn-preview-list" style="margin:12px 0;">
+                        <div class="mini-card-item ${c1.suit.color}">
+                            <span class="mini-pos">ကတ် #၁</span>
+                            <span class="mini-sym">${c1.suit.symbol} ${c1.rankKey}</span>
+                        </div>
+                        <div class="mini-card-item ${c2.suit.color}">
+                            <span class="mini-pos">ကတ် #၂</span>
+                            <span class="mini-sym">${c2.suit.symbol} ${c2.rankKey}</span>
+                        </div>
+                    </div>
+                    <p style="font-size:0.84rem; color:#ccc; text-align:center;">
+                        အပေါ်ပါ <strong>${c1.suit.symbol} ${c1.rankKey} + ${c2.suit.symbol} ${c2.rankKey}</strong> ကတ်တွဲကို Master Formula ဖြင့် ကိုယ်တိုင် အရင်သုံးသပ်ကြည့်ပါ။
+                    </p>
+                    <div class="center-act">
+                        <button class="btn btn-gold-glow" onclick="document.getElementById('case-ans').classList.toggle('open')">
+                            👁️ ဖော်မြူလာ အဖြေနှင့် ဟောကိန်းကြည့်မည်
+                        </button>
+                    </div>
+                    <div id="case-ans" class="reveal-section">
+                        <div class="reading-section">
+                            <strong>၁။ ${c1.suit.symbol} ${c1.rankKey} -</strong> [ ${c1.suit.domain.split('၊')[0]} ] + [ ${c1.rank.action.split('၊')[0]} ] = ${c1.specific.meaning}
+                        </div>
+                        <div class="reading-section">
+                            <strong>၂။ ${c2.suit.symbol} ${c2.rankKey} -</strong> [ ${c2.suit.domain.split('၊')[0]} ] + [ ${c2.rank.action.split('၊')[0]} ] = ${c2.specific.meaning}
+                        </div>
+                        <div class="formula-box">
+                            <strong>🔮 ပေါင်းစပ်ဟောကိန်း</strong><br>
+                            ပထမကတ်ဖြစ်သော <strong>${c1.specific.meaning.replace('။','')}</strong> မှတစ်ဆင့် ဒုတိယကတ်ဖြစ်သော <strong>${c2.specific.meaning}</strong> သို့ ဦးတည်ဖြစ်ပေါ်နေပါသည်။<br>
+                            <strong>💡 အကြံပြုချက် -</strong> ${c2.specific.advice}
+                        </div>
+                    </div>
+                `;
+            } else {
+                const c1 = picked[0], c2 = picked[1], c3 = picked[2];
+                out.innerHTML = `
+                    <div class="block-position">⏳ ၃ ချပ်တွဲ ဇာတ်လမ်းဆင် ပုစ္ဆာ</div>
+                    <div class="drawn-preview-list" style="margin:12px 0;">
+                        <div class="mini-card-item ${c1.suit.color}">
+                            <span class="mini-pos">၁။ အတိတ်</span>
+                            <span class="mini-sym">${c1.suit.symbol} ${c1.rankKey}</span>
+                        </div>
+                        <div class="mini-card-item ${c2.suit.color}">
+                            <span class="mini-pos">၂။ ပစ္စုပ္ပန်</span>
+                            <span class="mini-sym">${c2.suit.symbol} ${c2.rankKey}</span>
+                        </div>
+                        <div class="mini-card-item ${c3.suit.color}">
+                            <span class="mini-pos">၃။ အနာဂတ် ★</span>
+                            <span class="mini-sym">${c3.suit.symbol} ${c3.rankKey}</span>
+                        </div>
+                    </div>
+                    <p style="font-size:0.84rem; color:#ccc; text-align:center;">
+                        အတိတ်၊ ပစ္စုပ္ပန်နှင့် တတိယကတ် အနာဂတ်ရလဒ်တို့ကို ကိုယ်တိုင် အရင်ချိတ်ဆက် ဟောကြည့်ပါ။
+                    </p>
+                    <div class="center-act">
+                        <button class="btn btn-gold-glow" onclick="document.getElementById('case-ans-3').classList.toggle('open')">
+                            👁️ ဖော်မြူလာ အဖြေနှင့် ဟောကိန်းကြည့်မည်
+                        </button>
+                    </div>
+                    <div id="case-ans-3" class="reveal-section">
+                        <div class="reading-section"><strong>၁။ အတိတ် (${c1.suit.symbol} ${c1.rankKey}) -</strong> ${c1.specific.meaning}</div>
+                        <div class="reading-section"><strong>၂။ ပစ္စုပ္ပန် (${c2.suit.symbol} ${c2.rankKey}) -</strong> ${c2.specific.meaning}</div>
+                        <div class="reading-section"><strong>၃။ အနာဂတ်ရလဒ် ★ (${c3.suit.symbol} ${c3.rankKey}) -</strong> ${c3.specific.meaning}</div>
+                        <div class="formula-box">
+                            <strong>📌 တတိယကတ် အဆုံးအဖြတ် သုံးသပ်ချက် -</strong> တတိယကတ်သည် <strong>${c3.suit.color === 'red' ? 'အနီရောင် အပြုသဘော' : 'အနက်ရောင် ကြိုးစားအားထုတ်ရမည့်သဘော'}</strong> ဖြစ်သည်။ ${c3.specific.advice}
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        function generateQuizCard() {
+            if (fullDeck.length === 0) build52Deck();
+            const card = fullDeck[Math.floor(Math.random() * fullDeck.length)];
+            const out = document.getElementById('tutor-output');
+            out.innerHTML = `
+                <div class="block-position">🧠 သင်တန်းသား ဉာဏ်စမ်းပုစ္ဆာ</div>
+                <div class="drawn-preview-list" style="margin:10px 0;">
+                    <div class="mini-card-item ${card.suit.color}">
+                        <span class="mini-pos">ဉာဏ်စမ်းကတ်</span>
+                        <span class="mini-sym">${card.suit.symbol} ${card.rankKey}</span>
+                    </div>
+                </div>
+                <p style="font-size:0.85rem; color:#ccc; text-align:center;">
+                    <strong>${card.suit.symbol} ${card.rankKey}</strong> ၏ အဆင့် ၁ အရောင်၊ အဆင့် ၂ ဖဲပွင့်နယ်ပယ် နှင့် အဆင့် ၃ ဂဏန်းစွမ်းအင်တို့ကို စိတ်ထဲတွင် ပေါင်းစပ်ကြည့်ပြီးမှ အောက်ပါအဖြေခလုတ်ကို နှိပ်ပါ။
+                </p>
+                <div class="center-act">
+                    <button class="btn btn-gold-glow" onclick="document.getElementById('quiz-ans').classList.toggle('open')">👁️ အဖြေမှန် ကြည့်မည်</button>
+                </div>
+                <div id="quiz-ans" class="reveal-section">
+                    <div class="formula-box">
+                        <strong>✅ ${card.suit.symbol} ${card.rankKey} ဖော်မြူလာ အဖြေမှန်</strong><br>
+                        • <strong>ဖဲပွင့်နယ်ပယ် -</strong> ${card.suit.domain}<br>
+                        • <strong>ဂဏန်းစွမ်းအင် -</strong> ${card.rank.action}<br>
+                        • <strong>ဟောကိန်း -</strong> ${card.specific.meaning}<br>
+                        • <strong>အဘွားသင်ကြားချက် -</strong> ${card.specific.grandma}
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderDailyLessonPost() {
+            const sel = document.getElementById('lesson-day-select');
+            if (!sel) return;
+            const dayKey = sel.value;
+            const post = dailyLessonPosts[dayKey];
+            if (!post) return;
+            const out = document.getElementById('lesson-post-output');
+            out.innerHTML = `
+                <h4 style="color:var(--gold-bright); margin:0 0 8px 0; white-space:pre-line;">${post.title}</h4>
+                <div class="reading-section" style="white-space:pre-line;">${post.content}</div>
+                <div class="formula-box" style="white-space:pre-line; margin-top:10px;">${post.homework}</div>
+            `;
+        }
+
+        function renderQAAccordion() {
+            const container = document.getElementById('qa-accordion-container');
+            if (!container || container.innerHTML.trim() !== "") return;
+            container.innerHTML = qaDatabase.map(item => `
+                <div class="day-card" onclick="this.classList.toggle('open')">
+                    <h4><span>${item.q}</span> <span>▼</span></h4>
+                    <div class="day-card-content">${item.a}</div>
+                </div>
+            `).join("");
+        }
+
+        window.onload = () => {
+            initDeck();
+            renderFlashcard();
+            renderDailyLessonPost();
+            renderQAAccordion();
+        };
     </script>
 </body>
 </html>
+
