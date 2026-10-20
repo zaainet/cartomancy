@@ -14,8 +14,8 @@
             --bg-abyss: #02040a;
             --bg-midnight: #080d20;
             --bg-velvet: #130826;
-            --glass-surface: rgba(10, 16, 38, 0.88);
-            --glass-card: rgba(255, 255, 255, 0.04);
+            --glass-surface: rgba(10, 16, 38, 0.92);
+            --glass-card: rgba(255, 255, 255, 0.05);
             
             --gold-primary: #d4af37;
             --gold-bright: #fff2be;
@@ -118,7 +118,7 @@
         header h1 {
             margin: 5px 0 0 0;
             font-family: 'Cinzel Decorative', 'Cinzel', serif;
-            font-size: 1.45rem;
+            font-size: 1.4rem;
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -361,7 +361,7 @@
             font-size: 0.6rem;
             color: #d63031;
             font-weight: bold;
-            background: rgba(0,0,0,0.1);
+            background: rgba(0,0,0,0.08);
             padding: 1px 4px;
             border-radius: 4px;
         }
@@ -1166,7 +1166,7 @@
         let cardMap = {};
         let spreadMode = 1;
         let selectedCards = [];
-        let bottomCards = []; // Under-cards 3 ပုံခွဲဖြတ်ချက်
+        let bottomCards = [];
 
         function build52Deck() {
             fullDeck = [];
@@ -1184,7 +1184,7 @@
                         suit: suitsData[s],
                         rank: ranksData[r],
                         specific: cardSpecifics[id],
-                        isReversed: false // Dignified / Ill-Dignified
+                        isReversed: false
                     };
                     fullDeck.push(cardObj);
                     cardMap[id] = cardObj;
@@ -1225,7 +1225,7 @@
         }
 
         function getRequiredCount() {
-            if (spreadMode === 'yn') return 3; // Yes/No mode draws 3 piles directly
+            if (spreadMode === 'yn') return 3;
             return spreadMode;
         }
 
@@ -1269,9 +1269,8 @@
             if (fullDeck.length === 0) build52Deck();
             shuffleArray(fullDeck);
             
-            // Feature 5: Auto Dignified / Ill-Dignified State Assignment
             fullDeck.forEach(c => {
-                c.isReversed = Math.random() < 0.28; // 28% probability for reversed state
+                c.isReversed = Math.random() < 0.28;
             });
 
             selectedCards = [];
@@ -1336,12 +1335,10 @@
             `).join("");
         }
 
-        // Feature 8: Auto Under-card / Hidden Influence Scanner (Three Piles)
         function cleanseDeck() {
             const status = document.getElementById('status-text');
             status.innerHTML = `<span>✊ ဘယ်လက်ဖြင့် ဘယ်ဘက်သို့ ၃ ပုံခွဲဖြတ်၍ Under-card (အောက်ခံနိမိတ်) ၃ ချပ်ကို ထုတ်ယူနေပါသည်...</span>`;
             
-            // Auto-extract bottom cards of 3 piles
             const pile1Bottom = fullDeck[16];
             const pile2Bottom = fullDeck[33];
             const pile3Bottom = fullDeck[51];
@@ -1357,7 +1354,6 @@
             initDeck();
         }
 
-        // Feature 6: Auto-Modifying Principle & Feature 9: Special Pairs + Multiples
         function evaluateCombinations(cards) {
             if (cards.length < 2) return "";
             let alerts = [];
@@ -1370,7 +1366,6 @@
                 suitCounts[c.suitKey] = (suitCounts[c.suitKey] || 0) + 1;
             });
 
-            // Feature 6: Modifying Principle & Intensity Meter
             if (suitCounts["C"] > 0 && suitCounts["H"] > 0) {
                 alerts.push("⚠️ <strong>Unfriendly Suits (Clubs vs Hearts):</strong> Clubs နှင့် Hearts သည် မဟာမိတ် မဟုတ်သဖြင့် Clubs စွမ်းအင်က Hearts ၏ နူးညံ့သော မေတ္တာရေးကို အားနည်းစေတတ်ပါသည်။ (စွမ်းအားပြင်းအား: ၆၅% သို့ လျော့ကျ)");
             }
@@ -1378,7 +1373,6 @@
                 alerts.push("⚠️ <strong>Unfriendly Suits (Spades vs Diamonds):</strong> Spades နှင့် Diamonds သည် မဟာမိတ် မဟုတ်သဖြင့် Spades စွမ်းအင်က Diamonds ၏ ငွေကြေးစီးဆင်းမှုကို အဟန့်အတား ဖြစ်စေတတ်ပါသည်။ (စွမ်းအားပြင်းအား: ၆၀% သို့ လျော့ကျ)");
             }
 
-            // Feature 9: Auto-Special Pair Detector
             if (ids.includes("AH") && ids.includes("KC")) alerts.push("🏗️ <strong>♥ A + ♣ K (ကျမ်းစာလာ အထူးနိမိတ်):</strong> အိမ်ဆောက်ကန်ထရိုက်တာ သို့မဟုတ် မိသားစုကို ကူညီမည့် စေတနာရှင် ပေါ်ပေါက်မည်။");
             if (ids.includes("10C") && cards.some(c => ["K","Q","J"].includes(c.rankKey))) alerts.push("💼 <strong>♣ 10 + Face Card:</strong> ကိုယ်ပိုင်စီးပွားရေးလုပ်ငန်းရှင်၊ စီးပွားရေးထက်သန်သူ သို့မဟုတ် ရာထူးတက်မည့် အကြီးအကဲ။");
             if (ids.includes("AH") && cards.some(c => ["K","Q","J"].includes(c.rankKey))) alerts.push("🏠 <strong>♥ A + Face Card:</strong> နေအိမ်သို့ ဧည့်သည် ရောက်ရှိလာခြင်း သို့မဟုတ် အိမ်နှင့် မိသားစုကို အဓိက ဦးစားပေးသူ ဖြစ်ခြင်း။");
@@ -1387,7 +1381,6 @@
             if (ids.includes("9S") && ids.includes("10S")) alerts.push("🌑 <strong>♠ 9 + ♠ 10:</strong> အလွန်ဆိုးရွားသော ကံကြမ္မာ အကျပ်အတည်းနှင့် အမှောင်ထု။");
             if (ids.includes("JS") && ids.includes("5D")) alerts.push("⚖️ <strong>♠ J + ♦ 5:</strong> တရားရုံး အမှုအခင်း ပိုမိုခိုင်မာလာခြင်း။");
 
-            // Multiples Rules
             if (rankCounts["K"] === 4) alerts.push("👑 <strong>4 Kings:</strong> နိုင်ငံတော်အစိုးရ သို့မဟုတ် အဖွဲ့အစည်းကြီးများနှင့် အောင်မြင်ကျော်ကြားမှု၊ အများပြည်သူ အသိအမှတ်ပြုခြင်း။");
             else if (rankCounts["K"] === 3) alerts.push("🤝 <strong>3 Kings:</strong> အသင်းအဖွဲ့များနှင့် မိတ်ဆွေကောင်းများ ရရှိခြင်း။");
             else if (rankCounts["K"] === 2) alerts.push("🤝 <strong>2 Kings:</strong> ယူနီဖောင်းဝတ် အရာရှိများနှင့် တွေ့ရခြင်း၊ စီးပွားရေး လက်ဆွဲနှုတ်ဆက်ခြင်း။");
@@ -1415,7 +1408,6 @@
             return `<div class="multiples-box"><strong>🔮 စနစ်က အလိုအလျောက် စိစစ်တွေ့ရှိသော အတွဲအစပ်များနှင့် နိမိတ်များ</strong><br>${alerts.join("<br>")}</div>`;
         }
 
-        // Feature 10: Auto-Date Predictor
         function calculateEstimatedDate(card) {
             const today = new Date();
             let estDate = new Date(today);
@@ -1468,11 +1460,9 @@
             `;
         }
 
-        // Feature 1: Auto-Knighting Logic (9 Cards Spread)
         function generateKnightingAnalysis(cards) {
-            const c1 = cards[0], c2 = cards[1], c3 = cards[2];
-            const c4 = cards[3], c5 = cards[4], c6 = cards[5];
-            const c7 = cards[6], c8 = cards[7], c9 = cards[8];
+            const c1 = cards[0], c2 = cards[1];
+            const c6 = cards[5], c7 = cards[6], c9 = cards[8];
 
             return `
                 <div class="card-reading-block" style="border-left:4px solid var(--emerald-mystic);">
@@ -1489,9 +1479,7 @@
             `;
         }
 
-        // Feature 7: Auto 3-Piles Ace Scanner (Yes / No & When)
         function generateYesNoPilesAnalysis() {
-            // Cut 52 deck into three 13-card piles automatically
             const pile1 = fullDeck.slice(0, 13);
             const pile2 = fullDeck.slice(13, 26);
             const pile3 = fullDeck.slice(26, 39);
@@ -1542,7 +1530,6 @@
             const bodyEl = document.getElementById('m-body');
             let html = "";
 
-            // Feature 8: Render Under-cards if available
             if (bottomCards.length === 3) {
                 html += `
                     <div class="grandma-box">
@@ -1597,7 +1584,6 @@
                     </div>
                 `;
 
-                // Diagonals
                 const d1_c1 = selectedCards[0], d1_c2 = selectedCards[4], d1_c3 = selectedCards[8];
                 const d2_c1 = selectedCards[6], d2_c2 = selectedCards[4], d2_c3 = selectedCards[2];
 
@@ -1616,7 +1602,6 @@
                     </div>
                 `;
 
-                // Feature 1: Knighting Analysis
                 html += generateKnightingAnalysis(selectedCards);
 
                 selectedCards.forEach((c, idx) => {
@@ -1688,25 +1673,12 @@
             document.getElementById('reading-modal').classList.remove('active');
         }
 
-        // Feature 4: Auto-Significator Detector from Zodiac Element
         function autoDetectSignificator() {
             const dobVal = document.getElementById('dob-input').value;
             if (!dobVal) return;
             const parts = dobVal.split('-');
             const m = parseInt(parts[1], 10);
             const d = parseInt(parts[2], 10);
-
-            // Simple zodiac element detection
-            let zElement = "Clubs"; // Fire default
-            if ((m == 3 && d >= 21) || (m == 4 && d <= 19) || (m == 7 && d >= 23) || (m == 8 && d <= 22) || (m == 11 && d >= 22) || (m == 12 && d <= 21)) {
-                zElement = "Clubs"; // Fire: Aries, Leo, Sagittarius
-            } else if ((m == 4 && d >= 20) || (m == 5 && d <= 20) || (m == 8 && d >= 23) || (m == 9 && d <= 22) || (m == 12 && d >= 22) || (m == 1 && d <= 19)) {
-                zElement = "Diamonds"; // Earth: Taurus, Virgo, Capricorn
-            } else if ((m == 5 && d >= 21) || (m == 6 && d <= 20) || (m == 9 && d >= 23) || (m == 10 && d <= 22) || (m == 1 && d >= 20) || (m == 2 && d <= 18)) {
-                zElement = "Spades"; // Air: Gemini, Libra, Aquarius
-            } else {
-                zElement = "Hearts"; // Water: Cancer, Scorpio, Pisces
-            }
 
             const currentYear = 2026;
             const birthYear = parseInt(parts[0], 10);
@@ -1718,7 +1690,6 @@
             else gSelect.value = "K";
         }
 
-        // Feature 2: Auto-Age, Pluto/Result Cards & Feature 3: Auto 7-Year Cycle Tracker
         function calculateBirthdayDestiny() {
             if (fullDeck.length === 0) build52Deck();
             const dobVal = document.getElementById('dob-input').value;
@@ -1767,12 +1738,9 @@
                 `;
             } else {
                 const birthCard = cardMap[rankKey + birthSuit];
-                
-                // Feature 2: Age Calculation
                 const currentYear = 2026;
                 const age = currentYear - birthYear;
 
-                // Feature 3: 7-Year Cycle Tracker
                 let cycleTitle = "", cyclePlanet = "", cycleDesc = "";
                 if (age < 7) { cycleTitle = "ပထမစက်ဝန်း (အသက် ၀-၆)"; cyclePlanet = "Mercury"; cycleDesc = "ငယ်စဉ်ကလေးဘဝ၊ လေ့လာသင်ယူမှုနှင့် စူးစမ်းရှာဖွေခြင်း။"; }
                 else if (age < 14) { cycleTitle = "ဒုတိယစက်ဝန်း (အသက် ၇-၁၃)"; cyclePlanet = "Venus"; cycleDesc = "စိတ်ခံစားမှု၊ အပေါင်းအသင်းနှင့် အလှအပကို စတင်ထိတွေ့ခြင်း။"; }
@@ -1783,7 +1751,6 @@
                 else if (age < 49) { cycleTitle = "သတ္တမစက်ဝန်း (အသက် ၄၂-၄၈)"; cyclePlanet = "Neptune"; cycleDesc = "ဝိညာဉ်ရေးရာရှာဖွေမှု၊ ခရီးဝေးနှင့် ဘဝသင်ခန်းစာများကို နားလည်ခြင်း။"; }
                 else { cycleTitle = "အဆင့်မြင့်စက်ဝန်း (အသက် ၄၉ နှစ်အထက်)"; cyclePlanet = "Mercury ပြန်လည်စတင်ခြင်း"; cycleDesc = "ရင့်ကျက်သော ဉာဏ်ပညာဖြင့် ဘဝဒုတိယပိုင်းကို ဦးဆောင်ခြင်း။"; }
 
-                // 52-Day Planetary Periods Calculation
                 let bDate = new Date(currentYear, month - 1, day);
                 const planets = [
                     { name: "Mercury (ဗုဒ္ဓဟူး)", focus: "သတင်းအချက်အလက်၊ စာချုပ်သစ်၊ ဆက်သွယ်ရေး၊ စိတ်မြန်လက်မြန် ဖြစ်ခြင်း" },
@@ -1814,7 +1781,6 @@
                 });
                 cycleHTML += `</div>`;
 
-                // Auto Match Pluto and Result Cards based on current age
                 const plutoSample = (birthCard.id === "4D") ? cardMap["9H"] : cardMap["JS"];
                 const resultSample = (birthCard.id === "4D") ? cardMap["KC"] : cardMap["8H"];
 
