@@ -2,8 +2,8 @@
 <html lang="my">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Numerological Cartomancy Masterclass |HmawSetShin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Numerological Cartomancy Masterclass | HmawSetShin</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,8 +14,8 @@
             --bg-abyss: #02040a;
             --bg-midnight: #080d20;
             --bg-velvet: #130826;
-            --glass-surface: rgba(10, 16, 38, 0.88);
-            --glass-card: rgba(255, 255, 255, 0.04);
+            --glass-surface: rgba(10, 16, 38, 0.90);
+            --glass-card: rgba(255, 255, 255, 0.045);
             
             --gold-primary: #d4af37;
             --gold-bright: #fff2be;
@@ -31,8 +31,8 @@
             --red-suit: #d63031;
             --black-suit: #1e272e;
 
-            --card-w: 86px;
-            --card-h: 132px;
+            --card-w: 88px;
+            --card-h: 134px;
         }
 
         * {
@@ -57,23 +57,24 @@
             overflow-x: hidden;
         }
 
+        /* Header & Navigation */
         header {
             width: 100%;
-            padding: 16px 20px;
+            padding: 14px 20px;
             text-align: center;
-            background: linear-gradient(180deg, rgba(2, 4, 10, 0.98) 0%, rgba(8, 13, 32, 0.92) 100%);
-            backdrop-filter: blur(15px);
+            background: linear-gradient(180deg, rgba(2, 4, 10, 0.98) 0%, rgba(8, 13, 32, 0.94) 100%);
+            backdrop-filter: blur(16px);
             border-bottom: 1.5px solid var(--gold-primary);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.85);
-            z-index: 50;
-            position: relative;
+            z-index: 100;
+            position: sticky;
+            top: 0;
         }
 
         .hamburger-btn {
             position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+            left: 18px;
+            top: 28px;
             background: rgba(212, 175, 55, 0.12);
             border: 1px solid var(--gold-primary);
             border-radius: 8px;
@@ -85,7 +86,12 @@
             align-items: center;
             gap: 5px;
             cursor: pointer;
-            z-index: 60;
+            z-index: 110;
+            transition: 0.25s;
+        }
+
+        .hamburger-btn:hover {
+            box-shadow: var(--gold-glow);
         }
 
         .hamburger-btn span {
@@ -94,12 +100,36 @@
             height: 2px;
             background: var(--gold-bright);
             border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        .sound-btn {
+            position: absolute;
+            right: 18px;
+            top: 28px;
+            background: rgba(212, 175, 55, 0.12);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-bright);
+            border-radius: 8px;
+            width: 42px;
+            height: 42px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1.1rem;
+            z-index: 110;
+            transition: 0.25s;
+        }
+
+        .sound-btn:hover {
+            box-shadow: var(--gold-glow);
         }
 
         .header-center {
-            max-width: 700px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 0 45px;
+            padding: 0 48px;
         }
 
         header .badge {
@@ -108,7 +138,7 @@
             border: 1px solid var(--gold-primary);
             color: var(--gold-bright);
             font-family: 'Cinzel', serif;
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 700;
             padding: 3px 14px;
             border-radius: 20px;
@@ -116,13 +146,13 @@
         }
 
         header h1 {
-            margin: 5px 0 0 0;
+            margin: 6px 0 0 0;
             font-family: 'Cinzel Decorative', 'Cinzel', serif;
-            font-size: 1.45rem;
+            font-size: clamp(1.15rem, 3.5vw, 1.5rem);
             background: var(--gold-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             text-transform: uppercase;
         }
 
@@ -133,13 +163,54 @@
             opacity: 0.9;
         }
 
+        /* Desktop Quick Tabs */
+        .desktop-tabs {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .tab-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(212, 175, 55, 0.35);
+            color: var(--text-ivory);
+            padding: 7px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-family: inherit;
+            cursor: pointer;
+            transition: 0.25s;
+        }
+
+        .tab-pill:hover {
+            border-color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.15);
+        }
+
+        .tab-pill.active {
+            background: var(--gold-gradient);
+            color: #03050c;
+            font-weight: 700;
+            border-color: #fff;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .desktop-tabs { display: none; }
+        }
+        @media (min-width: 769px) {
+            .hamburger-btn { display: none; }
+        }
+
         .nav-drawer {
             display: none;
             position: absolute;
             top: calc(100% + 8px);
             left: 16px;
             width: calc(100% - 32px);
-            max-width: 440px;
+            max-width: 420px;
             background: rgba(6, 10, 26, 0.98);
             border: 1px solid var(--gold-primary);
             border-radius: 14px;
@@ -172,15 +243,22 @@
             border-color: #fff;
         }
 
+        /* Sections */
         .view-section {
             display: none;
             width: 100%;
-            max-width: 940px;
+            max-width: 980px;
             flex-grow: 1;
             flex-direction: column;
             align-items: center;
-            padding: 12px 14px 40px;
+            padding: 14px 14px 50px;
             z-index: 10;
+            animation: fadeIn 0.35s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .view-section.active { display: flex; }
@@ -226,6 +304,11 @@
             font-family: inherit;
             text-align: left;
             cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .drop-item:hover {
+            background: rgba(212, 175, 55, 0.15);
         }
 
         .drop-item.active {
@@ -240,12 +323,12 @@
             margin: 8px 0;
             text-align: center;
             padding: 10px 18px;
-            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.1), transparent);
+            background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.12), transparent);
             border-top: 1px solid rgba(212, 175, 55, 0.35);
             border-bottom: 1px solid rgba(212, 175, 55, 0.35);
             width: 100%;
-            max-width: 800px;
-            line-height: 1.6;
+            max-width: 820px;
+            line-height: 1.65;
         }
 
         .ritual-notice span {
@@ -253,6 +336,25 @@
             font-weight: 700;
         }
 
+        /* Under-cards Banner */
+        .undercards-banner {
+            display: none;
+            width: 100%;
+            max-width: 820px;
+            background: rgba(0, 230, 118, 0.07);
+            border: 1px dashed var(--emerald-mystic);
+            border-radius: 12px;
+            padding: 10px 16px;
+            margin: 6px 0;
+            text-align: center;
+            font-size: 0.83rem;
+        }
+
+        .undercards-banner.active {
+            display: block;
+        }
+
+        /* Deck Ribbon */
         #deck-container {
             display: flex;
             align-items: center;
@@ -260,11 +362,28 @@
             width: 100%;
             overflow-x: auto;
             white-space: nowrap;
-            padding: 40px 36px;
-            min-height: 220px;
-            scrollbar-width: none;
+            padding: 42px 44px;
+            min-height: 225px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--gold-primary) rgba(255, 255, 255, 0.05);
+            cursor: grab;
         }
-        #deck-container::-webkit-scrollbar { display: none; }
+
+        #deck-container:active {
+            cursor: grabbing;
+        }
+
+        #deck-container::-webkit-scrollbar {
+            height: 6px;
+        }
+        #deck-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 10px;
+        }
+        #deck-container::-webkit-scrollbar-thumb {
+            background: var(--gold-primary);
+            border-radius: 10px;
+        }
 
         .card {
             width: var(--card-w);
@@ -273,7 +392,7 @@
             position: relative;
             perspective: 1200px;
             cursor: pointer;
-            transition: transform 0.4s ease, margin 0.3s ease;
+            transition: transform 0.38s cubic-bezier(0.2, 0.85, 0.3, 1.1), margin 0.3s ease;
             display: inline-block;
             flex-shrink: 0;
         }
@@ -295,7 +414,7 @@
             height: 100%;
             position: relative;
             transform-style: preserve-3d;
-            transition: transform 0.65s;
+            transition: transform 0.65s cubic-bezier(0.4, 0.2, 0.2, 1);
             border-radius: 10px;
             box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
         }
@@ -322,6 +441,7 @@
         .back::after {
             content: '⚜️';
             font-size: 1.8rem;
+            filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
         }
 
         .front {
@@ -353,22 +473,30 @@
         .card-center {
             font-size: 2.2rem;
             line-height: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .card.is-reversed .card-center {
+            transform: rotate(180deg);
         }
 
         .reversed-tag {
             position: absolute;
             bottom: 4px;
-            font-size: 0.6rem;
-            color: #d63031;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.58rem;
+            color: #fff;
             font-weight: bold;
-            background: rgba(0,0,0,0.1);
-            padding: 1px 4px;
+            background: var(--crimson-alert);
+            padding: 1px 5px;
             border-radius: 4px;
+            letter-spacing: 0.5px;
         }
 
         .slot-badge {
             position: absolute;
-            top: -26px;
+            top: -28px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--gold-gradient);
@@ -382,9 +510,10 @@
             border: 1px solid #fff;
         }
 
+        /* Study Tray */
         .study-tray {
             width: 100%;
-            max-width: 820px;
+            max-width: 840px;
             background: var(--glass-surface);
             backdrop-filter: blur(16px);
             border: 1.5px solid var(--gold-primary);
@@ -407,10 +536,17 @@
             border: 2px solid var(--gold-primary);
             border-radius: 10px;
             padding: 8px 14px;
-            min-width: 82px;
+            min-width: 92px;
             text-align: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.5);
             position: relative;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .mini-card-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 16px rgba(212, 175, 55, 0.5);
         }
 
         .mini-card-item.red { color: var(--red-suit); }
@@ -419,16 +555,30 @@
         .mini-card-item .mini-pos {
             display: block;
             font-size: 0.65rem;
-            color: #555;
-            font-weight: 600;
+            color: #444;
+            font-weight: 700;
         }
 
         .mini-card-item .mini-sym {
             font-family: 'Cinzel', serif;
             font-size: 1.35rem;
             font-weight: 700;
+            display: block;
+            margin: 2px 0;
         }
 
+        .mini-card-item .mini-state {
+            display: inline-block;
+            font-size: 0.6rem;
+            padding: 1px 6px;
+            border-radius: 6px;
+            font-weight: 700;
+        }
+
+        .mini-state.dig { background: rgba(0, 200, 83, 0.18); color: #00702e; }
+        .mini-state.ill { background: rgba(255, 71, 87, 0.2); color: #b71524; }
+
+        /* Buttons & Inputs */
         .btn {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.18) 0%, rgba(212, 175, 55, 0.06) 100%);
             border: 1px solid var(--gold-primary);
@@ -463,9 +613,9 @@
             backdrop-filter: blur(16px);
             border: 1px solid rgba(212, 175, 55, 0.45);
             border-radius: 18px;
-            padding: 20px;
+            padding: 22px;
             width: 100%;
-            max-width: 800px;
+            max-width: 840px;
             margin-top: 12px;
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85);
         }
@@ -488,15 +638,16 @@
 
         .form-group {
             flex: 1;
-            min-width: 180px;
+            min-width: 200px;
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
 
         .form-group label {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--gold-bright);
+            font-weight: 600;
         }
 
         .form-group input, .form-group select {
@@ -509,12 +660,13 @@
             font-family: inherit;
         }
 
+        /* Spread Layouts */
         .grid-3x3 {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
             margin: 16px auto;
-            max-width: 340px;
+            max-width: 350px;
         }
 
         .grid-cell {
@@ -524,11 +676,25 @@
             padding: 10px 6px;
             text-align: center;
             font-weight: 700;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
         .grid-cell.red { color: var(--red-suit); }
         .grid-cell.black { color: var(--black-suit); }
 
+        .celtic-grid-layout {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 460px;
+            margin: 16px auto;
+            padding: 12px;
+            background: rgba(0,0,0,0.35);
+            border-radius: 14px;
+            border: 1px dashed rgba(212, 175, 55, 0.4);
+        }
+
+        /* Reading Blocks */
         .card-reading-block {
             background: var(--glass-card);
             border: 1px solid rgba(212, 175, 55, 0.32);
@@ -539,11 +705,22 @@
 
         .card-reading-block.highlight-final {
             border: 2px solid var(--gold-primary);
-            background: linear-gradient(145deg, rgba(212, 175, 55, 0.15) 0%, rgba(16, 25, 54, 0.65) 100%);
+            background: linear-gradient(145deg, rgba(212, 175, 55, 0.16) 0%, rgba(16, 25, 54, 0.7) 100%);
+        }
+
+        .omen-badge {
+            display: inline-block;
+            background: var(--gold-gradient);
+            color: #050814;
+            font-weight: 700;
+            font-size: 0.74rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+            margin-left: 6px;
         }
 
         .formula-box {
-            background: rgba(2, 4, 10, 0.7);
+            background: rgba(2, 4, 10, 0.75);
             border-left: 4px solid var(--gold-primary);
             border-radius: 0 8px 8px 0;
             padding: 12px 16px;
@@ -561,23 +738,24 @@
             font-size: 0.86rem;
             margin: 10px 0;
             color: #d2fbe3;
-            line-height: 1.6;
+            line-height: 1.65;
         }
 
         .multiples-box {
-            background: linear-gradient(135deg, rgba(255, 71, 87, 0.25) 0%, rgba(110, 10, 25, 0.25) 100%);
+            background: linear-gradient(135deg, rgba(255, 71, 87, 0.22) 0%, rgba(110, 10, 25, 0.25) 100%);
             border: 1.5px solid var(--crimson-alert);
             border-radius: 10px;
             padding: 12px 16px;
             margin: 12px 0;
             font-size: 0.86rem;
-            line-height: 1.6;
+            line-height: 1.65;
             color: #ffdce0;
         }
 
+        /* Planetary Cycles */
         .planet-cycle-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
             gap: 10px;
             margin: 12px 0;
         }
@@ -586,12 +764,75 @@
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(212, 175, 55, 0.35);
             border-radius: 10px;
-            padding: 10px;
+            padding: 12px;
             font-size: 0.82rem;
+            position: relative;
+            transition: 0.25s;
+        }
+
+        .planet-card.active-period {
+            border: 2px solid var(--gold-primary);
+            background: rgba(212, 175, 55, 0.16);
+            box-shadow: var(--gold-glow);
+        }
+
+        .active-period-tag {
+            display: inline-block;
+            background: var(--emerald-mystic);
+            color: #02040a;
+            font-weight: 700;
+            font-size: 0.68rem;
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 4px;
         }
 
         .planet-card strong { color: var(--gold-bright); }
 
+        /* 52-Card Matrix Grid in Explorer */
+        .matrix-container {
+            margin-top: 18px;
+            border-top: 1px dashed rgba(212, 175, 55, 0.35);
+            padding-top: 14px;
+        }
+
+        .suit-matrix-row {
+            display: grid;
+            grid-template-columns: repeat(13, 1fr);
+            gap: 5px;
+            margin-bottom: 6px;
+        }
+
+        @media (max-width: 640px) {
+            .suit-matrix-row {
+                grid-template-columns: repeat(7, 1fr);
+            }
+        }
+
+        .matrix-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 6px;
+            padding: 6px 2px;
+            font-family: 'Cinzel', serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .matrix-btn.red { color: #ff6b6b; }
+        .matrix-btn.black { color: #e2e8f0; }
+
+        .matrix-btn:hover, .matrix-btn.selected {
+            background: var(--gold-gradient);
+            color: #02040a;
+            border-color: #fff;
+            transform: scale(1.06);
+        }
+
+        /* Modal */
         #reading-modal {
             position: fixed;
             inset: 0;
@@ -616,7 +857,7 @@
             background: linear-gradient(165deg, rgba(16, 25, 56, 0.98) 0%, rgba(4, 7, 20, 0.99) 100%);
             border: 2px solid var(--gold-primary);
             width: 100%;
-            max-width: 720px;
+            max-width: 760px;
             max-height: 90vh;
             border-radius: 20px;
             padding: 22px;
@@ -637,6 +878,12 @@
             height: 36px;
             cursor: pointer;
             font-weight: bold;
+            z-index: 10;
+        }
+
+        .close-btn:hover {
+            background: var(--crimson-alert);
+            color: #fff;
         }
     </style>
 </head>
@@ -648,16 +895,29 @@
             <span></span>
             <span></span>
         </button>
+
         <div class="header-center">
             <div class="badge">HMAW SET SHIN • MASTER CARTOMANCY</div>
             <h1>NUMEROLOGICAL CARTOMANCY</h1>
             <p>ဖဲပွင့် + ဂဏန်း = ဟောကိန်း</p>
         </div>
+
+        <button class="sound-btn" id="sound-toggle-btn" onclick="toggleSound()" title="အသံ ဖွင့်/ပိတ်">🔊</button>
+
+        <!-- Desktop Quick Navigation -->
+        <div class="desktop-tabs">
+            <button class="tab-pill active" data-tab="spreads" onclick="switchTab('spreads')">🔮 အဟောကတ် လေ့ကျင့်ခန်း</button>
+            <button class="tab-pill" data-tab="birthday" onclick="switchTab('birthday')">🎂 မွေးနေ့ဖဲချပ်နှင့် ဂြိုဟ်စက်ဝန်းများ</button>
+            <button class="tab-pill" data-tab="explorer" onclick="switchTab('explorer')">🔍 ၅၂ ချပ် ဖော်မြူလာ အဘိဓာန်</button>
+            <button class="tab-pill" data-tab="ethics" onclick="switchTab('ethics')">📜 ကျင့်ဝတ် (၃) ပါး</button>
+        </div>
+
+        <!-- Mobile Drawer Navigation -->
         <div id="main-nav-drawer" class="nav-drawer">
-            <button class="nav-item active" onclick="switchTab('spreads', this)">🔮 အဟောကတ် လေ့ကျင့်ခန်း</button>
-            <button class="nav-item" onclick="switchTab('birthday', this)">🎂 မွေးနေ့ဖဲချပ်နှင့် ဂြိုဟ်စက်ဝန်းများ</button>
-            <button class="nav-item" onclick="switchTab('explorer', this)">🔍 ၅၂ ချပ် ဖော်မြူလာ အဘိဓာန်</button>
-            <button class="nav-item" onclick="switchTab('ethics', this)">📜 ကျင့်ဝတ် (၃) ပါး</button>
+            <button class="nav-item active" data-tab="spreads" onclick="switchTab('spreads')">🔮 အဟောကတ် လေ့ကျင့်ခန်း</button>
+            <button class="nav-item" data-tab="birthday" onclick="switchTab('birthday')">🎂 မွေးနေ့ဖဲချပ်နှင့် ဂြိုဟ်စက်ဝန်းများ</button>
+            <button class="nav-item" data-tab="explorer" onclick="switchTab('explorer')">🔍 ၅၂ ချပ် ဖော်မြူလာ အဘိဓာန်</button>
+            <button class="nav-item" data-tab="ethics" onclick="switchTab('ethics')">📜 ကျင့်ဝတ် (၃) ပါး</button>
         </div>
     </header>
 
@@ -677,26 +937,31 @@
                 </div>
             </div>
             <button class="btn" onclick="cleanseDeck()">✊ ၃ ပုံခွဲဖြတ်၍ Under-card စစ်မည်</button>
-            <button class="btn" onclick="shuffleDeck()">🔀 ဖဲမွှေမည် (Clockwise Washing)</button>
+            <button class="btn" onclick="shuffleDeck(true)">🔀 ဖဲမွှေမည် (Clockwise Washing)</button>
         </div>
 
         <div class="ritual-notice" id="status-text">
             <span>🖐️ ဘယ်လက်စည်းမျဉ်း -</span> မသိစိတ် နှင့် ချိတ်ဆက်ရန် ဘယ်လက်ဖြင့်သာ ကတ်ကို ရွေးချယ်ပါ။
         </div>
 
+        <div id="undercards-banner" class="undercards-banner"></div>
+
         <div id="deck-container"></div>
 
         <div id="self-study-tray" class="study-tray" style="display: none;">
             <div style="text-align:center; margin-bottom:12px;">
                 <h4 style="margin:0; color:var(--gold-bright);">🧐 သင်ရွေးချယ်ထားသော ကတ်များ</h4>
-                <p style="margin:4px 0 0; font-size:0.82rem; color:var(--text-muted);">
-                    ကတ်လှန်ရာတွင် အထက်အောက်မလှန်ဘဲ စာအုပ်စာမျက်နှာကဲ့သို့ ဘေးဘက်သို့သာ လှန်ပါ (Turn Horizontally)။
+                <p style="margin:4px 0 0; font-size:0.8rem; color:var(--text-muted);">
+                    💡 ကတ်အသေးလေးများကို တစ်ချက်နှိပ်၍ <strong>အတည့် (Dignified) ⇄ ပြောင်းပြန် (Ill-Dignified)</strong> စိတ်ကြိုက်ပြောင်းလဲ လေ့လာနိုင်ပါသည်။
                 </p>
             </div>
             <div id="drawn-cards-preview" class="drawn-preview-list"></div>
-            <div style="text-align:center;">
+            <div style="text-align:center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
                 <button class="btn btn-gold-glow" onclick="showReadingModal()">
                     👁️ အဟောနှင့် ဖော်မြူလာ အဖြေကြည့်မည်
+                </button>
+                <button class="btn" onclick="shuffleDeck(true)">
+                    🔄 အသစ်ပြန်ရွေးမည်
                 </button>
             </div>
         </div>
@@ -706,8 +971,8 @@
     <section id="view-birthday" class="view-section">
         <div class="panel-box">
             <h3 class="panel-title">🎂 မွေးနေ့ဖဲချပ်၊ Pluto/Result Cards နှင့် ၇ နှစ်/၅၂ ရက် စက်ဝန်း</h3>
-            <p style="font-size:0.84rem; color:var(--text-muted); text-align:center;">
-                Cardology Solar Formula: X = 55 - (2M + D) နှင့် အသက်အလိုက် ၇ နှစ်တာ မဟာစက်ဝန်းများကို တွက်ချက်ခြင်း
+            <p style="font-size:0.84rem; color:var(--text-muted); text-align:center; margin-top:0;">
+                Cardology Solar Formula: <strong>X = 55 - (2M + D)</strong> နှင့် လက်ရှိဖြတ်သန်းနေသော ဂြိုဟ်စက်ဝန်း အတိအကျ တွက်ချက်ခြင်း
             </p>
             <div class="form-row">
                 <div class="form-group">
@@ -765,7 +1030,15 @@
                     </select>
                 </div>
             </div>
+
             <div id="explorer-output"></div>
+
+            <div class="matrix-container">
+                <div style="font-size:0.82rem; color:var(--gold-bright); text-align:center; margin-bottom:10px; font-weight:600;">
+                    ⚡ ၅၂ ချပ် အမြန်ရွေးချယ်ရန် ဇယား (Quick 52-Card Matrix)
+                </div>
+                <div id="explorer-matrix"></div>
+            </div>
         </div>
     </section>
 
@@ -774,16 +1047,16 @@
         <div class="panel-box">
             <h3 class="panel-title">📜 မဖြစ်မနေ လိုက်နာရမည့် ကျင့်ဝတ် (၃) ပါး</h3>
             <div class="formula-box" style="border-left-color: var(--crimson-alert);">
-                <strong>၁။ သေဆုံးခြင်း သို့မဟုတ် ပြင်းထန်သော ဘေးအန္တရာယ်အတွက် တိုက်ရိုက်သတိပေးခြင်း လုံးဝ မပြုလုပ်ရ။သေချာစစ်ဆေးတွက်ချက်ပါ။</strong><br>
-                <strong>၂။ ပျက်စီးခြင်းဆိုင်ရာ ဟောကိန်းများကို သေချာတွက်ချက်ပြီးမှသတိပေးပါ။ (No Bald statement of impending doom)။</strong><br>
-                <strong>၃။ ထိတ်လန့်ဖွယ်ရာ အခြေအနေများကိုမသေချာပဲ ရိပ်ဖမ်းသံဖမ်းပင် လုံးဝ အရိပ်အမြွက် မပြရ။</strong>
+                <strong>၁။ သေဆုံးခြင်း သို့မဟုတ် ပြင်းထန်သော ဘေးအန္တရာယ်အတွက် တိုက်ရိုက်သတိပေးခြင်း လုံးဝ မပြုလုပ်ရ။ သေချာစစ်ဆေးတွက်ချက်ပါ။</strong><br>
+                <strong>၂။ ပျက်စီးခြင်းဆိုင်ရာ ဟောကိန်းများကို သေချာတွက်ချက်ပြီးမှ သတိပေးပါ။ (No Bald statement of impending doom)။</strong><br>
+                <strong>၃။ ထိတ်လန့်ဖွယ်ရာ အခြေအနေများကို မသေချာဘဲ ရိပ်ဖမ်းသံဖမ်းပင် လုံးဝ အရိပ်အမြွက် မပြရ။</strong>
             </div>
-            <p style="font-size:0.86rem; line-height:1.65; color:#d8e4f8;">
+            <p style="font-size:0.88rem; line-height:1.7; color:#d8e4f8;">
                 ဗေဒင်ဆရာ၏ အဓိကတာဝန်မှာ ကြောက်ရွံ့မှုသွင်းရန် မဟုတ်ဘဲ၊ ပြဿနာ၏ မြစ်ဖျားခံရာ အကြောင်းတရားကို ဖော်ထုတ်ပေးပြီး မေးမြန်းသူ ပြန်လည်ထွက်ခွာချိန်တွင် စိတ်ချမ်းသာ တည်ငြိမ်၍ အပြုသဘောဆောင်သော စိတ်ဓာတ်ဖြင့် ရှေ့ဆက်နိုင်အောင် ကူညီလမ်းပြပေးရန် ဖြစ်ပါသည်။
             </p>
             <div class="grandma-box">
                 <strong>🧘 Altered State & Grounding ပြုလုပ်နည်း -</strong><br>
-                ဟောပြောနေချိန်တွင် စာဖတ်သူ၏ အသိစိတ်သည် မသိစိတ်၏ လွှမ်းမိုးမှု  သို့ ရောက်ရှိတတ်ပါသည်။ ဟောပြောမှု ပြီးဆုံးပါက စွမ်းအင်ဆိုးများ မကျန်ရစ်စေရန် မြေပြင်ပေါ် ခြေထောက် ခပ်ပြင်းပြင်းပုတ်ခြင်း၊ ရေနွေးကြမ်းသောက်ခြင်း သို့မဟုတ် လမ်းလျှောက်ခြင်းဖြင့် မိမိကိုယ်ကို မူလအခြေအနေသို့ ပြန်လည်ပို့ဆောင်ပါ။ကဒ်များကိုအစဥ်တကျ​​​စီပါ။​​။
+                ဟောပြောနေချိန်တွင် စာဖတ်သူ၏ အသိစိတ်သည် မသိစိတ်၏ လွှမ်းမိုးမှုသို့ ရောက်ရှိတတ်ပါသည်။ ဟောပြောမှု ပြီးဆုံးပါက စွမ်းအင်ဆိုးများ မကျန်ရစ်စေရန် မြေပြင်ပေါ် ခြေထောက် ခပ်ပြင်းပြင်းပုတ်ခြင်း၊ ရေနွေးကြမ်းသောက်ခြင်း သို့မဟုတ် လမ်းလျှောက်ခြင်းဖြင့် မိမိကိုယ်ကို မူလအခြေအနေသို့ ပြန်လည်ပို့ဆောင်ပါ။ ကတ်များကို အစဉ်တကျ ပြန်လည်စီပါ။
             </div>
         </div>
     </section>
@@ -791,13 +1064,46 @@
     <!-- Reading Modal -->
     <div id="reading-modal" onclick="if(event.target === this) closeModal()">
         <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">✕</button>
-            <h2 style="color:var(--gold-bright); text-align:center; font-size:1.15rem; border-bottom:1px dashed var(--gold-primary); padding-bottom:10px;" id="m-header">🔮 ဖော်မြူလာ နိမိတ်ဖတ်ကြားချက်</h2>
+            <button class="close-btn" onclick="closeModal()" aria-label="Close">✕</button>
+            <h2 style="color:var(--gold-bright); text-align:center; font-size:1.15rem; border-bottom:1px dashed var(--gold-primary); padding-bottom:10px; margin-top:0;" id="m-header">🔮 ဖော်မြူလာ နိမိတ်ဖတ်ကြားချက်</h2>
             <div id="m-body"></div>
         </div>
     </div>
 
     <script>
+        /* =========================================================
+           1. AUDIO SYNTHESIZER (Mystic Card Sound Effects)
+        ========================================================= */
+        let soundEnabled = true;
+        let audioCtx = null;
+
+        function playTone(freq = 528, duration = 0.08, type = 'sine') {
+            if (!soundEnabled) return;
+            try {
+                if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                if (audioCtx.state === 'suspended') audioCtx.resume();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = type;
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0.06, audioCtx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duration);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + duration);
+            } catch (e) {}
+        }
+
+        function toggleSound() {
+            soundEnabled = !soundEnabled;
+            document.getElementById('sound-toggle-btn').innerText = soundEnabled ? '🔊' : '🔇';
+            if (soundEnabled) playTone(660, 0.1);
+        }
+
+        /* =========================================================
+           2. MASTER DATA DEFINITIONS
+        ========================================================= */
         const suitsData = {
             D: {
                 symbol: "♦", name: "Diamonds", color: "red",
@@ -982,7 +1288,8 @@
                 dignified: "Marriage Card — မင်္ဂလာဆောင်ကတ်၊ ပျော်ရွှင်ဖွယ် ရေရှည်ပေါင်းသင်းမှုနှင့် အထွတ်အထိပ်။", 
                 illDignified: "မိသားစု ရန်ဖြစ်မှုနှင့် မိတ်ပျက်ခြင်း။",
                 grandma: "l'innamorato (အချစ်ကြီးသူ)။ ဘေးမှ အနုတ်ကတ်များကို အကောင်းဘက်သို့ ပြောင်းစေသည်။", 
-                advice: "ချစ်ခြင်းမေတ္တာကို အပြည့်အဝ ယုံကြည်ပါ။" 
+                advice: "ချစ်ခြင်းမေတ္တာကို အပြည့်အဝ ယုံကြည်ပါ။",
+                omen: "💍 Marriage Card"
             },
             "JH": { 
                 dignified: "စိတ်ကူးယဉ်ဆန်ပြီး သဘောကောင်းသော လူငယ်၊ ချစ်ရသော ချစ်သူ၊ သား သို့မဟုတ် ညီ။", 
@@ -1140,7 +1447,8 @@
                 dignified: "တစ်သက်တာ ကြွယ်ဝချမ်းသာမည့် အခြေအနေ၊ အပြည့်အဝ ငွေကြေးလုံခြုံမှုနှင့် ဘဏ်တိုက်ကြီး။", 
                 illDignified: "အမွေခွဲဝေမှုကြောင့် မိသားစု ပြဿနာဖြစ်ခြင်း။",
                 grandma: "Bank (ဘဏ်ကတ်)။ ပင်စင်ရန်ပုံငွေနှင့် မေးမြန်းသူ၏ တကယ့် နိမိတ်ပြတန်ဖိုး အစစ်အမှန်။", 
-                advice: "ကြီးမားသော ဓနဥစ္စာကို ခိုင်မာအောင် တည်ဆောက်ပါ။" 
+                advice: "ကြီးမားသော ဓနဥစ္စာကို ခိုင်မာအောင် တည်ဆောက်ပါ။",
+                omen: "🏦 The Bank Card"
             },
             "JD": { 
                 dignified: "လက်တွေ့ဆန်ပြီး ငွေကြေးချောင်လည်သော လူငယ်၊ ဘဏ်ဝန်ထမ်း သို့မဟုတ် အစိုးရဝန်ထမ်းငယ်။", 
@@ -1163,6 +1471,7 @@
         };
 
         let fullDeck = [];
+        let solarOrderedDeck = []; // Unshuffled Solar Order Deck (Spades, Hearts, Diamonds, Clubs)
         let cardMap = {};
         let spreadMode = 1;
         let selectedCards = [];
@@ -1170,11 +1479,13 @@
 
         function build52Deck() {
             fullDeck = [];
+            solarOrderedDeck = [];
             cardMap = {};
-            const suits = ["D", "C", "H", "S"];
+            // Solar Value Order: 1-13 Spades, 14-26 Hearts, 27-39 Diamonds, 40-52 Clubs
+            const solarSuits = ["S", "H", "D", "C"];
             const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
 
-            for (let s of suits) {
+            for (let s of solarSuits) {
                 for (let r of ranks) {
                     const id = r + s;
                     const cardObj = {
@@ -1187,11 +1498,15 @@
                         isReversed: false
                     };
                     fullDeck.push(cardObj);
+                    solarOrderedDeck.push(cardObj);
                     cardMap[id] = cardObj;
                 }
             }
         }
 
+        /* =========================================================
+           3. NAVIGATION & UI CONTROLS
+        ========================================================= */
         function toggleMainMenu() {
             document.getElementById('main-nav-drawer').classList.toggle('open');
         }
@@ -1207,16 +1522,34 @@
             if (navDrawer && !e.target.closest('header')) navDrawer.classList.remove('open');
         });
 
-        function switchTab(tabName, el) {
-            document.querySelectorAll('.nav-item').forEach(t => t.classList.remove('active'));
-            if (el) el.classList.add('active');
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        function switchTab(tabName) {
+            document.querySelectorAll('.nav-item, .tab-pill').forEach(t => {
+                t.classList.toggle('active', t.getAttribute('data-tab') === tabName);
+            });
             document.getElementById('main-nav-drawer').classList.remove('open');
             document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
             document.getElementById('view-' + tabName).classList.add('active');
-            if (tabName === 'explorer') exploreCard();
-            if (tabName === 'birthday') autoDetectSignificator();
+            playTone(580, 0.06);
+
+            if (tabName === 'explorer') {
+                renderExplorerMatrix();
+                exploreCard();
+            }
+            if (tabName === 'birthday') {
+                autoDetectSignificator();
+                if (!document.getElementById('birthday-result').innerHTML.trim()) {
+                    calculateBirthdayDestiny();
+                }
+            }
         }
 
+        /* =========================================================
+           4. DECK SHUFFLING & INTERACTION
+        ========================================================= */
         function shuffleArray(arr) {
             for (let i = arr.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
@@ -1232,8 +1565,11 @@
         function setSpreadMode(mode, labelText) {
             spreadMode = mode;
             document.getElementById('current-spread-label').innerText = labelText;
+            document.querySelectorAll('#spread-dropdown .drop-item').forEach(btn => btn.classList.remove('active'));
+            const activeBtn = document.getElementById('btn-mode-' + mode);
+            if (activeBtn) activeBtn.classList.add('active');
             document.getElementById('spread-dropdown').classList.remove('open');
-            shuffleDeck();
+            shuffleDeck(true);
         }
 
         function updateStatusText() {
@@ -1242,7 +1578,7 @@
             const rem = req - selectedCards.length;
 
             if (rem === 0) {
-                statusEl.innerHTML = `<span>ကတ်ရွေးချယ်မှု ပြည့်စုံပါပြီ —</span> အောက်ပါခလုတ်ကို နှိပ်၍ အဟောကို ကြည့်ရှုပါ။`;
+                statusEl.innerHTML = `<span>✅ ကတ်ရွေးချယ်မှု ပြည့်စုံပါပြီ —</span> အောက်ပါခလုတ်ကို နှိပ်၍ အဟောနှင့် ဖော်မြူလာအဖြေကို ကြည့်ရှုပါ။`;
                 return;
             }
 
@@ -1250,7 +1586,7 @@
                 statusEl.innerHTML = `<span>🖐️ ဘယ်လက်စည်းမျဉ်း -</span> မသိစိတ်နှင့်ချိတ်ဆက်ရန် ဘယ်လက်ဖြင့် ဖဲချပ် <span>၁ ချပ်</span> ရွေးပါ။`;
             } else if (spreadMode === 3) {
                 const labels = ["၁။ အတိတ်", "၂။ ပစ္စုပ္ပန်", "၃။ အနာဂတ် (အဆုံးအဖြတ်)"];
-                statusEl.innerHTML = `<span>⏳ ၃ ချပ်တွဲစနစ် -</span> ${labels[selectedCards.length]} အတွက် ကတ်ရွေးပါ — ကျန် ${rem} ချပ်။`;
+                statusEl.innerHTML = `<span>⏳ ၃ ချပ်တွဲစနစ် -</span> [ ${labels[selectedCards.length]} ] အတွက် ကတ်ရွေးပါ — ကျန် ${rem} ချပ်။`;
             } else if (spreadMode === 9) {
                 statusEl.innerHTML = `<span>⊞ ၉ ချပ်စနစ် (3x3 Grid) -</span> ဖဲချပ် ၉ ချပ် ရွေးချယ်ပါ — ရွေးပြီး ${selectedCards.length}/၉ ချပ်။`;
             } else if (spreadMode === 10) {
@@ -1261,11 +1597,11 @@
                 ];
                 statusEl.innerHTML = `<span>✝️ Celtic Cross (၁၀ ချပ်စနစ်) -</span> [ ${cLabels[selectedCards.length]} ] အတွက် ရွေးပါ — ကျန် ${rem} ချပ်။`;
             } else if (spreadMode === 'yn') {
-                statusEl.innerHTML = `<span>⚖️ Yes / No & When စနစ် -</span> အောက်ပါ <strong>"✊ ၃ ပုံခွဲဖြတ်၍ Under-card စစ်မည်"</strong> ကို နှိပ်ပြီးပါက ကတ် ၃ ချပ် ဆွဲယူစစ်ဆေးပါ။`;
+                statusEl.innerHTML = `<span>⚖️ Yes / No & When စနစ် -</span> ဖဲပုံ ၃ ပုံ စစ်ဆေးရန် နှင့် လမ်းညွှန်ကတ် <span>${rem} ချပ်</span> ရွေးချယ်ပါ။`;
             }
         }
 
-        function initDeck() {
+        function initDeck(clearUndercards = true) {
             if (fullDeck.length === 0) build52Deck();
             shuffleArray(fullDeck);
             
@@ -1274,6 +1610,11 @@
             });
 
             selectedCards = [];
+            if (clearUndercards) {
+                bottomCards = [];
+                renderUndercardsBanner();
+            }
+
             document.getElementById('self-study-tray').style.display = 'none';
             updateStatusText();
 
@@ -1282,7 +1623,7 @@
 
             fullDeck.forEach((cardData) => {
                 const cardElem = document.createElement('div');
-                cardElem.className = 'card';
+                cardElem.className = 'card' + (cardData.isReversed ? ' is-reversed' : '');
                 cardElem.innerHTML = `
                     <div class="card-inner">
                         <div class="face back"></div>
@@ -1303,6 +1644,7 @@
             const req = getRequiredCount();
             if (cardElem.classList.contains('picked') || selectedCards.length >= req) return;
 
+            playTone(620 + (selectedCards.length * 40), 0.09);
             cardElem.classList.add('picked');
             selectedCards.push(cardData);
 
@@ -1322,38 +1664,72 @@
             renderSelfStudyTray();
         }
 
+        function toggleDrawnCardOrientation(idx) {
+            if (!selectedCards[idx]) return;
+            selectedCards[idx].isReversed = !selectedCards[idx].isReversed;
+            playTone(480, 0.07);
+            renderSelfStudyTray();
+        }
+
         function renderSelfStudyTray() {
             const tray = document.getElementById('self-study-tray');
             const previewList = document.getElementById('drawn-cards-preview');
             tray.style.display = 'block';
 
             previewList.innerHTML = selectedCards.map((c, i) => `
-                <div class="mini-card-item ${c.suit.color}">
-                    <span class="mini-pos">#${i + 1} ${c.isReversed ? '(Ill-Dignified)' : ''}</span>
+                <div class="mini-card-item ${c.suit.color}" onclick="toggleDrawnCardOrientation(${i})" title="နှိပ်၍ အတည့်/ပြောင်းပြန် လှန်ပါ">
+                    <span class="mini-pos">#${i + 1}</span>
                     <span class="mini-sym">${c.suit.symbol} ${c.rankKey}</span>
+                    <span class="mini-state ${c.isReversed ? 'ill' : 'dig'}">
+                        ${c.isReversed ? 'Ill-Dignified ↺' : 'Dignified ↑'}
+                    </span>
                 </div>
             `).join("");
         }
 
+        function renderUndercardsBanner() {
+            const banner = document.getElementById('undercards-banner');
+            if (bottomCards.length === 3) {
+                banner.classList.add('active');
+                banner.innerHTML = `
+                    <strong style="color:var(--emerald-mystic);">✊ ၃ ပုံခွဲ အောက်ခံနိမိတ် (Under-cards):</strong>
+                    ပုံ (၁) <strong>${bottomCards[0].suit.symbol}${bottomCards[0].rankKey}</strong> •
+                    ပုံ (၂) <strong>${bottomCards[1].suit.symbol}${bottomCards[1].rankKey}</strong> •
+                    ပုံ (၃) <strong>${bottomCards[2].suit.symbol}${bottomCards[2].rankKey}</strong>
+                    <span style="color:var(--text-muted); font-size:0.78rem;">(အဟော Modal တွင် အသေးစိတ် ပါဝင်မည်)</span>
+                `;
+            } else {
+                banner.classList.remove('active');
+                banner.innerHTML = '';
+            }
+        }
+
         function cleanseDeck() {
+            playTone(440, 0.12);
             const status = document.getElementById('status-text');
             status.innerHTML = `<span>✊ ဘယ်လက်ဖြင့် ဘယ်ဘက်သို့ ၃ ပုံခွဲဖြတ်၍ Under-card (အောက်ခံနိမိတ်) ၃ ချပ်ကို ထုတ်ယူနေပါသည်...</span>`;
             
+            shuffleArray(fullDeck);
             const pile1Bottom = fullDeck[16];
             const pile2Bottom = fullDeck[33];
             const pile3Bottom = fullDeck[51];
             bottomCards = [pile1Bottom, pile2Bottom, pile3Bottom];
 
             setTimeout(() => {
-                shuffleDeck();
-                status.innerHTML = `<span>✅ ၃ ပုံခွဲဖြတ်ပြီးပါပြီ —</span> Under-cards (မသိစိတ် အောက်ခံနိမိတ် ၃ ချပ်) အဆင်သင့် ဖြစ်ပါပြီ။ ကတ်များ ဆက်လက် ရွေးချယ်နိုင်ပါသည်။`;
-            }, 600);
+                initDeck(false); // Preserve bottomCards
+                renderUndercardsBanner();
+                status.innerHTML = `<span>✅ ၃ ပုံခွဲဖြတ်ပြီးပါပြီ —</span> Under-cards ၃ ချပ် အဆင်သင့်ဖြစ်ပါပြီ။ ကတ်များ ဆက်လက် ရွေးချယ်နိုင်ပါသည်။`;
+            }, 450);
         }
 
-        function shuffleDeck() {
-            initDeck();
+        function shuffleDeck(clearUndercards = true) {
+            playTone(520, 0.1);
+            initDeck(clearUndercards);
         }
 
+        /* =========================================================
+           5. COMBINATION & READING ENGINE
+        ========================================================= */
         function evaluateCombinations(cards) {
             if (cards.length < 2) return "";
             let alerts = [];
@@ -1430,13 +1806,16 @@
 
         function renderCardBlock(card, titleLabel, isHighlight = false) {
             const meaningText = card.isReversed ? card.specific.illDignified : card.specific.dignified;
-            const stateLabel = card.isReversed ? `<span style="color:var(--crimson-alert); font-weight:bold;">[ Ill-Dignified - ပြောင်းပြန်/စိန်ခေါ်မှု ]</span>` : `<span style="color:var(--emerald-mystic); font-weight:bold;">[ Dignified - အပြုသဘော ]</span>`;
+            const stateLabel = card.isReversed
+                ? `<span style="color:var(--crimson-alert); font-weight:bold;">[ Ill-Dignified - ပြောင်းပြန်/စိန်ခေါ်မှု ]</span>`
+                : `<span style="color:var(--emerald-mystic); font-weight:bold;">[ Dignified - အပြုသဘော ]</span>`;
+            const omenBadge = card.specific.omen ? `<span class="omen-badge">${card.specific.omen}</span>` : '';
 
             return `
                 <div class="card-reading-block ${isHighlight ? 'highlight-final' : ''}">
-                    ${titleLabel ? `<div style="font-size:0.75rem; color:var(--gold-bright); text-transform:uppercase;">${titleLabel}</div>` : ''}
+                    ${titleLabel ? `<div style="font-size:0.76rem; color:var(--gold-bright); text-transform:uppercase; font-weight:700;">${titleLabel}</div>` : ''}
                     <h3 style="color:var(--gold-primary); margin:4px 0 8px 0; font-size:1.1rem;">
-                        ${card.suit.symbol} ${card.rankKey} (${card.rank.title} of ${card.suit.name}) ${stateLabel}
+                        ${card.suit.symbol} ${card.rankKey} (${card.rank.title} of ${card.suit.name}) ${stateLabel} ${omenBadge}
                     </h3>
                     <div style="font-size:0.85rem; margin-bottom:4px;">
                         <strong>🎨 ဖဲပွင့်နှင့် ဓာတ်သဘာဝ -</strong> ${card.suit.domain} [ ${card.suit.element} ]
@@ -1466,7 +1845,7 @@
 
             return `
                 <div class="card-reading-block" style="border-left:4px solid var(--emerald-mystic);">
-                    <div style="font-size:0.8rem; color:var(--gold-bright); font-weight:bold;">♞ Auto-Knighting (စစ်တုရင်မြင်းရွှေ့ကွက် လျှို့ဝှက်နိမိတ်များ)</div>
+                    <div style="font-size:0.82rem; color:var(--gold-bright); font-weight:bold;">♞ Auto-Knighting (စစ်တုရင်မြင်းရွှေ့ကွက် လျှို့ဝှက်နိမိတ်များ)</div>
                     <p style="font-size:0.85rem; margin:6px 0; line-height:1.6;">
                         • <strong>ကတ် ၆ (${c6.suit.symbol} ${c6.rankKey}) မှ ကတ် ၁ (${c1.suit.symbol} ${c1.rankKey}) နှင့် ကတ် ၇ (${c7.suit.symbol} ${c7.rankKey}) သို့ လှမ်းခြင်း:</strong><br>
                         အနာဂတ်အဖြစ်အပျက် [${c6.suit.symbol} ${c6.rankKey}] သည် အတိတ်က စတင်ခဲ့သော ချစ်ခြင်း/ဆက်ဆံရေး [${c1.suit.symbol} ${c1.rankKey}] နှင့် အတူတကွ တည်ဆောက်ခဲ့သော အခြေခံအုတ်မြစ် [${c7.suit.symbol} ${c7.rankKey}] အပေါ်တွင် အပြည့်အဝ မှီတည်နေကြောင်း လျှို့ဝှက်နိမိတ်က ဖော်ပြနေသည်။
@@ -1525,7 +1904,13 @@
         }
 
         function showReadingModal() {
-            if (selectedCards.length === 0 && spreadMode !== 'yn') return;
+            const req = getRequiredCount();
+            if (selectedCards.length < req && spreadMode !== 'yn') {
+                alert(`ကျေးဇူးပြု၍ ဖဲချပ် (${req}) ချပ် ပြည့်အောင် အရင်ရွေးချယ်ပေးပါ။`);
+                return;
+            }
+            playTone(740, 0.12);
+
             const headerEl = document.getElementById('m-header');
             const bodyEl = document.getElementById('m-body');
             let html = "";
@@ -1569,8 +1954,8 @@
                 selectedCards.forEach((c, i) => {
                     html += `
                         <div class="grid-cell ${c.suit.color}">
-                            <span style="font-size:0.65rem; display:block;">#${i + 1} ${i === 4 ? 'ဗဟို' : ''}</span>
-                            <span>${c.suit.symbol} ${c.rankKey}</span>
+                            <span style="font-size:0.65rem; display:block; color:#555;">#${i + 1} ${i === 4 ? '(ဗဟို)' : ''}</span>
+                            <span style="font-size:1.2rem;">${c.suit.symbol} ${c.rankKey}</span>
                         </div>
                     `;
                 });
@@ -1610,7 +1995,6 @@
 
             } else if (spreadMode === 10) {
                 headerEl.innerText = "✝️ Celtic Cross (၁၀ ချပ်စနစ် အပြည့်အစုံ)";
-                // ပေးထားသော လက်စွဲစာအုပ်ပါ မူရင်းအတိုင်း တိကျစွာ ပြင်ဆင်ထားသော နေရာသတ်မှတ်ချက်များ
                 const celticTitles = [
                     "(၁) စိတ်ထဲရှိသောအရာ (The Crown)",
                     "(၂) အတားအဆီးများ (The Obstacle)",
@@ -1623,6 +2007,18 @@
                     "(၉) မျှော်လင့်ချက်နှင့် စိုးရိမ်မှုများ (Hopes & Fears)",
                     "(၁၀) နောက်ဆုံးရလဒ် (Final Outcome ★)"
                 ];
+
+                // Visual summary of 10 cards
+                html += `<div class="celtic-grid-layout">`;
+                selectedCards.forEach((c, idx) => {
+                    html += `
+                        <div class="grid-cell ${c.suit.color}" style="padding:6px 4px;">
+                            <span style="font-size:0.6rem; display:block; color:#444;">#${idx + 1}</span>
+                            <span style="font-size:1rem;">${c.suit.symbol}${c.rankKey}</span>
+                        </div>
+                    `;
+                });
+                html += `</div>`;
 
                 const c4 = selectedCards[3];
                 const c10 = selectedCards[9];
@@ -1674,17 +2070,28 @@
             document.getElementById('reading-modal').classList.remove('active');
         }
 
+        /* =========================================================
+           6. BIRTHDAY DESTINY & CARDOLOGY ENGINE (Fixed Deterministic Logic)
+        ========================================================= */
+        function getExactAge(birthYear, month, day) {
+            const today = new Date();
+            let age = today.getFullYear() - birthYear;
+            const mDiff = (today.getMonth() + 1) - month;
+            if (mDiff < 0 || (mDiff === 0 && today.getDate() < day)) {
+                age--;
+            }
+            return Math.max(0, age);
+        }
+
         function autoDetectSignificator() {
             const dobVal = document.getElementById('dob-input').value;
             if (!dobVal) return;
             const parts = dobVal.split('-');
+            const birthYear = parseInt(parts[0], 10);
             const m = parseInt(parts[1], 10);
             const d = parseInt(parts[2], 10);
 
-            const currentYear = 2026;
-            const birthYear = parseInt(parts[0], 10);
-            const age = currentYear - birthYear;
-
+            const age = getExactAge(birthYear, m, d);
             const gSelect = document.getElementById('gender-role');
             if (age < 30) gSelect.value = "J";
             else if (age >= 30 && age < 40) gSelect.value = "Q";
@@ -1692,9 +2099,10 @@
         }
 
         function calculateBirthdayDestiny() {
-            if (fullDeck.length === 0) build52Deck();
+            if (solarOrderedDeck.length === 0) build52Deck();
             const dobVal = document.getElementById('dob-input').value;
             if (!dobVal) return;
+            playTone(640, 0.08);
 
             const parts = dobVal.split('-');
             const birthYear = parseInt(parts[0], 10);
@@ -1733,14 +2141,20 @@
             if (birthSuit === "Joker") {
                 resHTML = `
                     <div class="card-reading-block highlight-final" style="text-align:center;">
-                        <h3>🃏 The Joker</h3>
-                        <p>ဒီဇင်ဘာ ၃၁ ရက်ဖွားများသည် မဟာစကြဝဠာ၏ လျှို့ဝှက်နက်နဲသော Joker စွမ်းအင်ကို ပိုင်ဆိုင်ထားပါသည်။</p>
+                        <h3>🃏 The Joker (ဒီဇင်ဘာ ၃၁ ရက်ဖွား)</h3>
+                        <p>ဒီဇင်ဘာ ၃၁ ရက်ဖွားများသည် Solar Value (X = 0) ဖြစ်ပြီး မဟာစကြဝဠာ၏ လျှို့ဝှက်နက်နဲသော Joker စွမ်းအင်ကို ပိုင်ဆိုင်ထားပါသည်။ မည်သည့်ဖဲချပ်၏ စွမ်းအင်ကိုမဆို ကူးပြောင်းအသုံးချနိုင်စွမ်း ရှိသူဖြစ်သည်။</p>
                     </div>
                 `;
             } else {
                 const birthCard = cardMap[rankKey + birthSuit];
-                const currentYear = 2026;
-                const age = currentYear - birthYear;
+                const today = new Date();
+                const age = getExactAge(birthYear, month, day);
+
+                // Most recent birthday for 52-day cycle calculation
+                let lastBirthday = new Date(today.getFullYear(), month - 1, day);
+                if (today < lastBirthday) {
+                    lastBirthday = new Date(today.getFullYear() - 1, month - 1, day);
+                }
 
                 let cycleTitle = "", cyclePlanet = "", cycleDesc = "";
                 if (age < 7) { cycleTitle = "ပထမစက်ဝန်း (အသက် ၀-၆)"; cyclePlanet = "Mercury"; cycleDesc = "ငယ်စဉ်ကလေးဘဝ၊ လေ့လာသင်ယူမှုနှင့် စူးစမ်းရှာဖွေခြင်း။"; }
@@ -1752,7 +2166,6 @@
                 else if (age < 49) { cycleTitle = "သတ္တမစက်ဝန်း (အသက် ၄၂-၄၈)"; cyclePlanet = "Neptune"; cycleDesc = "ဝိညာဉ်ရေးရာရှာဖွေမှု၊ ခရီးဝေးနှင့် ဘဝသင်ခန်းစာများကို နားလည်ခြင်း။"; }
                 else { cycleTitle = "အဆင့်မြင့်စက်ဝန်း (အသက် ၄၉ နှစ်အထက်)"; cyclePlanet = "Mercury ပြန်လည်စတင်ခြင်း"; cycleDesc = "ရင့်ကျက်သော ဉာဏ်ပညာဖြင့် ဘဝဒုတိယပိုင်းကို ဦးဆောင်ခြင်း။"; }
 
-                let bDate = new Date(currentYear, month - 1, day);
                 const planets = [
                     { name: "Mercury (ဗုဒ္ဓဟူး)", focus: "သတင်းအချက်အလက်၊ စာချုပ်သစ်၊ ဆက်သွယ်ရေး၊ စိတ်မြန်လက်မြန် ဖြစ်ခြင်း" },
                     { name: "Venus (သောကြာ)", focus: "အချစ်ရေး၊ အလှအပ၊ အနုပညာ၊ ဇိမ်ခံပစ္စည်းနှင့် ငွေကြေးသုံးစွဲမှု ထိန်းရန်" },
@@ -1764,39 +2177,42 @@
                 ];
 
                 let cycleHTML = `<div class="planet-cycle-grid">`;
-                let startDate = new Date(bDate);
+                let startDate = new Date(lastBirthday);
 
                 planets.forEach((p, idx) => {
                     let endDate = new Date(startDate);
                     endDate.setDate(endDate.getDate() + 52);
-                    const sStr = `${startDate.getDate()}.${startDate.getMonth() + 1}`;
-                    const eStr = `${endDate.getDate()}.${endDate.getMonth() + 1}`;
+                    const isCurrentPeriod = today >= startDate && today < endDate;
+
+                    const sStr = `${startDate.getDate()}.${startDate.getMonth() + 1}.${startDate.getFullYear()}`;
+                    const eStr = `${endDate.getDate()}.${endDate.getMonth() + 1}.${endDate.getFullYear()}`;
                     cycleHTML += `
-                        <div class="planet-card">
+                        <div class="planet-card ${isCurrentPeriod ? 'active-period' : ''}">
+                            ${isCurrentPeriod ? `<span class="active-period-tag">✨ လက်ရှိ ဖြတ်သန်းနေသောကာလ</span><br>` : ''}
                             <strong>${idx + 1}။ ${p.name}</strong><br>
-                            <span style="color:var(--gold-bright); font-size:0.75rem;">📅 ${sStr} မှ ${eStr} အထိ</span><br>
-                            <span style="font-size:0.78rem; color:#ccc;">${p.focus}</span>
+                            <span style="color:var(--gold-bright); font-size:0.75rem;">📅 ${sStr} မှ ${eStr}</span><br>
+                            <span style="font-size:0.78rem; color:#d8e4f8;">${p.focus}</span>
                         </div>
                     `;
                     startDate = new Date(endDate);
                 });
                 cycleHTML += `</div>`;
 
-                // Cardology Quadrate Shift အရ Pluto/Result Cards ကို တွက်ချက်ခြင်း
-                const plutoIndex = (X + age) % 52;
-                const resultIndex = (X + age + 7) % 52;
-                const plutoSample = fullDeck[plutoIndex];
-                const resultSample = fullDeck[resultIndex];
+                // Deterministic Solar Ordered Deck lookup (Fixed Bug!)
+                const plutoIndex = (X - 1 + age) % 52;
+                const resultIndex = (X - 1 + age + 7) % 52;
+                const plutoSample = solarOrderedDeck[plutoIndex];
+                const resultSample = solarOrderedDeck[resultIndex];
 
                 resHTML = `
                     <div class="formula-box">
                         <strong>📐 Cardology Solar Formula ရလဒ် -</strong><br>
-                        မွေးလ (${month}) ၊ မွေးရက် (${day}) | လက်ရှိအသက်: <strong>${age} နှစ်</strong><br>
+                        မွေးလ (${month}) ၊ မွေးရက် (${day}) | လက်ရှိအသက်အတိအကျ: <strong>${age} နှစ်</strong><br>
                         ဖော်မြူလာ: X = 55 - (2 × ${month} + ${day}) = <strong>${X}</strong><br>
                         သင့်မွေးနေ့ကတ်မှာ <strong>${birthCard.rankKey} of ${birthCard.suit.name} (${birthCard.suit.symbol} ${birthCard.rankKey})</strong> ဖြစ်ပါသည်။
                     </div>
 
-                    ${renderCardBlock(birthCard, "🌟 သင့်မွေးနေ့ ပင်မဖဲချပ် (Birth Card)", true)}
+                    ${renderCardBlock({ ...birthCard, isReversed: false }, "🌟 သင့်မွေးနေ့ ပင်မဖဲချပ် (Birth Card)", true)}
 
                     <div class="card-reading-block" style="border-left:4px solid var(--gold-primary);">
                         <h4 style="color:var(--gold-bright); margin:0 0 4px 0;">🌀 လက်ရှိ ၇ နှစ်တာ မဟာကာလစက်ဝန်း: ${cycleTitle}</h4>
@@ -1808,9 +2224,9 @@
 
                     <div class="card-reading-block highlight-final">
                         <h4 style="color:var(--gold-bright); margin:0 0 6px 0;">🪐 အသက် ${age} နှစ်အတွက် Pluto & Result Cards (တစ်နှစ်တာ အထွတ်အထိပ်)</h4>
-                        <div style="font-size:0.86rem; line-height:1.6;">
-                            • <strong>Pluto Card (အဓိက စိန်ခေါ်မှု):</strong> ${plutoSample.suit.symbol} ${plutoSample.rankKey} (${plutoSample.rank.title} of ${plutoSample.suit.name}) — ${plutoSample.specific.dignified}<br>
-                            • <strong>Result Card (အောင်မြင်မည့် ဆုလာဘ်):</strong> ${resultSample.suit.symbol} ${resultSample.rankKey} (${resultSample.rank.title} of ${resultSample.suit.name}) — ${resultSample.specific.dignified}
+                        <div style="font-size:0.86rem; line-height:1.65;">
+                            • <strong>Pluto Card (အဓိက စိန်ခေါ်မှုနှင့် ပြုပြင်ပြောင်းလဲရမည့်အရာ):</strong> ${plutoSample.suit.symbol} ${plutoSample.rankKey} (${plutoSample.rank.title} of ${plutoSample.suit.name}) — ${plutoSample.specific.dignified}<br>
+                            • <strong>Result Card (နှစ်ကုန်တွင် အောင်မြင်ရရှိမည့် ဆုလာဘ်):</strong> ${resultSample.suit.symbol} ${resultSample.rankKey} (${resultSample.rank.title} of ${resultSample.suit.name}) — ${resultSample.specific.dignified}
                         </div>
                     </div>
 
@@ -1824,19 +2240,111 @@
             document.getElementById('birthday-result').innerHTML = resHTML;
         }
 
+        /* =========================================================
+           7. 52-CARD FORMULA EXPLORER & INTERACTIVE MATRIX
+        ========================================================= */
+        function renderExplorerMatrix() {
+            const container = document.getElementById('explorer-matrix');
+            if (!container) return;
+            const suits = ["H", "D", "C", "S"];
+            const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+            const curS = document.getElementById('exp-suit').value;
+            const curR = document.getElementById('exp-rank').value;
+
+            let html = "";
+            suits.forEach(s => {
+                const sData = suitsData[s];
+                html += `<div class="suit-matrix-row">`;
+                ranks.forEach(r => {
+                    const isSel = (s === curS && r === curR) ? "selected" : "";
+                    html += `
+                        <button class="matrix-btn ${sData.color} ${isSel}" onclick="selectMatrixCard('${s}', '${r}')">
+                            ${sData.symbol}${r}
+                        </button>
+                    `;
+                });
+                html += `</div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function selectMatrixCard(suit, rank) {
+            document.getElementById('exp-suit').value = suit;
+            document.getElementById('exp-rank').value = rank;
+            playTone(600, 0.06);
+            exploreCard();
+        }
+
         function exploreCard() {
             if (fullDeck.length === 0) build52Deck();
             const s = document.getElementById('exp-suit').value;
             const r = document.getElementById('exp-rank').value;
             const card = cardMap[r + s];
+            renderExplorerMatrix();
+
             if (card) {
-                document.getElementById('explorer-output').innerHTML = renderCardBlock(card, "အဘိဓာန် အသေးစိတ်", true);
+                document.getElementById('explorer-output').innerHTML = `
+                    <div class="card-reading-block highlight-final">
+                        <div style="font-size:0.75rem; color:var(--gold-bright); text-transform:uppercase;">၅၂ ချပ် မဟာဖော်မြူလာ အဘိဓာန်</div>
+                        <h3 style="color:var(--gold-primary); margin:4px 0 8px 0; font-size:1.2rem;">
+                            ${card.suit.symbol} ${card.rankKey} (${card.rank.title} of ${card.suit.name})
+                            ${card.specific.omen ? `<span class="omen-badge">${card.specific.omen}</span>` : ''}
+                        </h3>
+                        <div style="font-size:0.86rem; margin-bottom:4px;">
+                            <strong>🎨 ဖဲပွင့်နယ်ပယ်နှင့် ဓာတ်သဘာဝ -</strong> ${card.suit.domain} [ ${card.suit.element} | ${card.suit.season} ]
+                        </div>
+                        <div style="font-size:0.86rem; margin-bottom:8px;">
+                            <strong>🔢 ဂဏန်းလှုပ်ရှားမှု -</strong> ${card.rank.action} (အချိန်ယူနစ်: ${card.suit.timeUnit})
+                        </div>
+                        <div class="formula-box" style="border-left-color:var(--emerald-mystic);">
+                            <strong>✅ Dignified (အတည့် / အပြုသဘော ဟောကိန်း) -</strong><br>
+                            ${card.specific.dignified}
+                        </div>
+                        <div class="formula-box" style="border-left-color:var(--crimson-alert);">
+                            <strong>⚠️ Ill-Dignified (ပြောင်းပြန် / စိန်ခေါ်မှု ဟောကိန်း) -</strong><br>
+                            ${card.specific.illDignified}
+                        </div>
+                        <div class="grandma-box">
+                            <strong>👵 ရှေးဟောင်းနိမိတ်နှင့် အဘွားသင်ကြားချက် -</strong><br>
+                            ${card.specific.grandma}
+                        </div>
+                        <div style="font-size:0.86rem; color:#d8e4f8; margin-top:8px;">
+                            <strong>💡 အကြံပြု လမ်းညွှန်ချက် -</strong> ${card.specific.advice}
+                        </div>
+                    </div>
+                `;
             }
+        }
+
+        /* =========================================================
+           8. DESKTOP DRAG-TO-SCROLL FOR DECK RIBBON
+        ========================================================= */
+        function enableDeckDragScroll() {
+            const slider = document.getElementById('deck-container');
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
+            });
+            slider.addEventListener('mouseleave', () => { isDown = false; });
+            slider.addEventListener('mouseup', () => { isDown = false; });
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 1.8;
+                slider.scrollLeft = scrollLeft - walk;
+            });
         }
 
         window.onload = () => {
             initDeck();
             autoDetectSignificator();
+            enableDeckDragScroll();
         };
     </script>
 </body>
