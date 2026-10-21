@@ -14,7 +14,7 @@
             --bg-abyss: #02040a;
             --bg-midnight: #080d20;
             --bg-velvet: #130826;
-            --glass-surface: rgba(10, 16, 38, 0.90);
+            --glass-surface: rgba(10, 16, 38, 0.92);
             --glass-card: rgba(255, 255, 255, 0.045);
             
             --gold-primary: #d4af37;
@@ -31,8 +31,8 @@
             --red-suit: #d63031;
             --black-suit: #1e272e;
 
-            --card-w: 88px;
-            --card-h: 134px;
+            --card-w: 86px;
+            --card-h: 132px;
         }
 
         * {
@@ -103,10 +103,16 @@
             transition: 0.3s;
         }
 
-        .sound-btn {
+        .header-actions {
             position: absolute;
             right: 18px;
             top: 28px;
+            display: flex;
+            gap: 8px;
+            z-index: 110;
+        }
+
+        .header-icon-btn {
             background: rgba(212, 175, 55, 0.12);
             border: 1px solid var(--gold-primary);
             color: var(--gold-bright);
@@ -118,12 +124,12 @@
             align-items: center;
             cursor: pointer;
             font-size: 1.1rem;
-            z-index: 110;
             transition: 0.25s;
         }
 
-        .sound-btn:hover {
+        .header-icon-btn:hover {
             box-shadow: var(--gold-glow);
+            background: rgba(212, 175, 55, 0.25);
         }
 
         .header-center {
@@ -336,7 +342,6 @@
             font-weight: 700;
         }
 
-        /* Under-cards Banner */
         .undercards-banner {
             display: none;
             width: 100%;
@@ -354,59 +359,139 @@
             display: block;
         }
 
-        /* Deck Ribbon */
-        #deck-container {
-            display: flex;
-            align-items: center;
-            justify-content: flex-start;
+        /* ==========================================
+           ADVANCED SPREAD & TABLE LAYOUT ENGINE
+        ========================================== */
+        #spread-table-canvas {
             width: 100%;
-            overflow-x: auto;
-            white-space: nowrap;
-            padding: 42px 44px;
-            min-height: 225px;
-            scrollbar-width: thin;
-            scrollbar-color: var(--gold-primary) rgba(255, 255, 255, 0.05);
-            cursor: grab;
+            max-width: 860px;
+            min-height: 380px;
+            background: radial-gradient(circle, rgba(16, 28, 64, 0.6) 0%, rgba(4, 8, 20, 0.85) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.35);
+            border-radius: 20px;
+            margin: 14px 0;
+            position: relative;
+            padding: 24px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+            overflow: hidden;
         }
 
-        #deck-container:active {
-            cursor: grabbing;
-        }
-
-        #deck-container::-webkit-scrollbar {
-            height: 6px;
-        }
-        #deck-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.04);
-            border-radius: 10px;
-        }
-        #deck-container::-webkit-scrollbar-thumb {
-            background: var(--gold-primary);
-            border-radius: 10px;
+        /* Deck Pile View (When unshuffled / washing animation) */
+        .deck-pile-area {
+            position: absolute;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
         }
 
         .card {
             width: var(--card-w);
             height: var(--card-h);
-            margin: 0 -22px;
             position: relative;
             perspective: 1200px;
             cursor: pointer;
-            transition: transform 0.38s cubic-bezier(0.2, 0.85, 0.3, 1.1), margin 0.3s ease;
-            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.2, 0.85, 0.3, 1.1), box-shadow 0.3s ease;
             flex-shrink: 0;
         }
 
         .card:hover {
-            transform: translateY(-22px) scale(1.08);
-            margin: 0 6px;
-            z-index: 25;
+            transform: translateY(-12px) scale(1.06);
+            z-index: 50;
         }
 
         .card.picked {
-            transform: translateY(-28px) scale(1.1);
-            margin: 0 10px;
-            z-index: 35;
+            transform: translateY(-18px) scale(1.08);
+            z-index: 60;
+        }
+
+        /* Layout specific positioning inside table canvas */
+        .layout-slot {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: all 0.5s ease;
+        }
+
+        .layout-slot-label {
+            font-size: 0.68rem;
+            color: var(--gold-bright);
+            background: rgba(2, 4, 10, 0.85);
+            border: 1px solid var(--gold-primary);
+            padding: 2px 8px;
+            border-radius: 10px;
+            margin-bottom: 6px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
+            z-index: 10;
+        }
+
+        /* Empty Slot Placeholder */
+        .empty-slot-placeholder {
+            width: var(--card-w);
+            height: var(--card-h);
+            border: 2px dashed rgba(212, 175, 55, 0.3);
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: rgba(212, 175, 55, 0.4);
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.02);
+            cursor: pointer;
+            transition: 0.25s;
+        }
+        .empty-slot-placeholder:hover {
+            border-color: var(--gold-primary);
+            color: var(--gold-bright);
+            background: rgba(212, 175, 55, 0.08);
+        }
+
+        /* Wash / Shuffle Animation Overlay */
+        .washing-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(2, 4, 10, 0.85);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .washing-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .washing-cards-cluster {
+            position: relative;
+            width: 220px;
+            height: 150px;
+        }
+
+        .washing-flying-card {
+            position: absolute;
+            width: 50px;
+            height: 75px;
+            background: linear-gradient(145deg, #180d33, #03050e);
+            border: 1.5px solid var(--gold-primary);
+            border-radius: 6px;
+            animation: washSpin 1.2s infinite ease-in-out;
+        }
+
+        @keyframes washSpin {
+            0% { transform: translate(0, 0) rotate(0deg) scale(0.9); }
+            50% { transform: translate(70px, -30px) rotate(180deg) scale(1.1); }
+            100% { transform: translate(0, 0) rotate(360deg) scale(0.9); }
         }
 
         .card-inner {
@@ -496,7 +581,7 @@
 
         .slot-badge {
             position: absolute;
-            top: -28px;
+            top: -26px;
             left: 50%;
             transform: translateX(-50%);
             background: var(--gold-gradient);
@@ -508,12 +593,13 @@
             white-space: nowrap;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.8);
             border: 1px solid #fff;
+            z-index: 20;
         }
 
         /* Study Tray */
         .study-tray {
             width: 100%;
-            max-width: 840px;
+            max-width: 860px;
             background: var(--glass-surface);
             backdrop-filter: blur(16px);
             border: 1.5px solid var(--gold-primary);
@@ -615,7 +701,7 @@
             border-radius: 18px;
             padding: 22px;
             width: 100%;
-            max-width: 840px;
+            max-width: 860px;
             margin-top: 12px;
             box-shadow: 0 10px 35px rgba(0, 0, 0, 0.85);
         }
@@ -658,40 +744,6 @@
             color: var(--text-ivory);
             font-size: 0.88rem;
             font-family: inherit;
-        }
-
-        /* Spread Layouts */
-        .grid-3x3 {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin: 16px auto;
-            max-width: 350px;
-        }
-
-        .grid-cell {
-            background: radial-gradient(circle, #fffdf7 0%, #f3e6c8 100%);
-            border: 2px solid var(--gold-primary);
-            border-radius: 10px;
-            padding: 10px 6px;
-            text-align: center;
-            font-weight: 700;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-
-        .grid-cell.red { color: var(--red-suit); }
-        .grid-cell.black { color: var(--black-suit); }
-
-        .celtic-grid-layout {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-            max-width: 460px;
-            margin: 16px auto;
-            padding: 12px;
-            background: rgba(0,0,0,0.35);
-            border-radius: 14px;
-            border: 1px dashed rgba(212, 175, 55, 0.4);
         }
 
         /* Reading Blocks */
@@ -827,13 +879,13 @@
 
         .matrix-btn:hover, .matrix-btn.selected {
             background: var(--gold-gradient);
-            color: #02040a;
+            color: #03050c;
             border-color: #fff;
             transform: scale(1.06);
         }
 
-        /* Modal */
-        #reading-modal {
+        /* Modal & Settings Panel */
+        #reading-modal, #settings-modal {
             position: fixed;
             inset: 0;
             background: rgba(2, 4, 10, 0.92);
@@ -848,7 +900,7 @@
             padding: 16px;
         }
 
-        #reading-modal.active {
+        #reading-modal.active, #settings-modal.active {
             opacity: 1;
             pointer-events: auto;
         }
@@ -902,7 +954,10 @@
             <p>ဖဲပွင့် + ဂဏန်း = ဟောကိန်း</p>
         </div>
 
-        <button class="sound-btn" id="sound-toggle-btn" onclick="toggleSound()" title="အသံ ဖွင့်/ပိတ်">🔊</button>
+        <div class="header-actions">
+            <button class="header-icon-btn" onclick="openSettingsModal()" title="အဆင့်မြင့် ဆက်တင်များ (Advanced Settings)">⚙️</button>
+            <button class="header-icon-btn" id="sound-toggle-btn" onclick="toggleSound()" title="အသံ ဖွင့်/ပိတ်">🔊</button>
+        </div>
 
         <!-- Desktop Quick Navigation -->
         <div class="desktop-tabs">
@@ -937,7 +992,7 @@
                 </div>
             </div>
             <button class="btn" onclick="cleanseDeck()">✊ ၃ ပုံခွဲဖြတ်၍ Under-card စစ်မည်</button>
-            <button class="btn" onclick="shuffleDeck(true)">🔀 ဖဲမွှေမည် (Clockwise Washing)</button>
+            <button class="btn" onclick="performWashAndShuffle()">🔀 ဖဲမွှေမည် (Washing & Shuffling)</button>
         </div>
 
         <div class="ritual-notice" id="status-text">
@@ -946,11 +1001,25 @@
 
         <div id="undercards-banner" class="undercards-banner"></div>
 
-        <div id="deck-container"></div>
+        <!-- Professional Cartomancy Spread Canvas -->
+        <div id="spread-table-canvas">
+            <div id="washing-overlay" class="washing-overlay">
+                <div class="washing-cards-cluster">
+                    <div class="washing-flying-card" style="top:20px; left:30px; animation-delay:0s;"></div>
+                    <div class="washing-flying-card" style="top:40px; left:90px; animation-delay:0.3s;"></div>
+                    <div class="washing-flying-card" style="top:10px; left:130px; animation-delay:0.6s;"></div>
+                </div>
+                <div style="font-family:'Cinzel',serif; color:var(--gold-bright); font-weight:700; font-size:0.95rem; letter-spacing:1px;">
+                    ✨ ကံကြမ္မာဖတ်ရန်ကဒ်များသန့်စင်နေပါသည် (Washing & Riffle Shuffle)...
+                </div>
+            </div>
+            <!-- Dynamic layout slots or deck pile rendered here -->
+            <div id="spread-layout-container" style="position:relative; width:100%; height:100%; min-height:340px; display:flex; justify-content:center; align-items:center;"></div>
+        </div>
 
         <div id="self-study-tray" class="study-tray" style="display: none;">
             <div style="text-align:center; margin-bottom:12px;">
-                <h4 style="margin:0; color:var(--gold-bright);">🧐 သင်ရွေးချယ်ထားသော ကတ်များ</h4>
+                <h4 style="margin:0; color:var(--gold-bright);">သင်ရွေးချယ်ထားသော ကတ်များ</h4>
                 <p style="margin:4px 0 0; font-size:0.8rem; color:var(--text-muted);">
                     💡 ကတ်အသေးလေးများကို တစ်ချက်နှိပ်၍ <strong>အတည့် (Dignified) ⇄ ပြောင်းပြန် (Ill-Dignified)</strong> စိတ်ကြိုက်ပြောင်းလဲ လေ့လာနိုင်ပါသည်။
                 </p>
@@ -958,10 +1027,10 @@
             <div id="drawn-cards-preview" class="drawn-preview-list"></div>
             <div style="text-align:center; display:flex; justify-content:center; gap:10px; flex-wrap:wrap;">
                 <button class="btn btn-gold-glow" onclick="showReadingModal()">
-                    👁️ အဟောနှင့် ဖော်မြူလာ အဖြေကြည့်မည်
+                    👁️ မိမိအဟောနှင့်​စနစ်၏တွက်ကိန်းတိုက်ဆိုင်စစ်ဆေးရန်
                 </button>
-                <button class="btn" onclick="shuffleDeck(true)">
-                    🔄 အသစ်ပြန်ရွေးမည်
+                <button class="btn" onclick="performWashAndShuffle()">
+                    🔄 ဖဲမွှေ၍ အသစ်ပြန်ခင်းမည်
                 </button>
             </div>
         </div>
@@ -982,15 +1051,15 @@
                 <div class="form-group">
                     <label for="gender-role">ကိုယ်စားပြုကတ် (Auto-Detected Significator)</label>
                     <select id="gender-role">
-                        <option value="J">လူငယ် / ကျောင်းသား — Jack</option>
-                        <option value="Q">အရွယ်ရောက် အမျိုးသမီး / မိခင် — Queen</option>
+                        <option value="J">လူငယ်လူရွယ်ကျားမအစုံ — Jack</option>
+                        <option value="Q">အရွယ်ရောက် အမျိုးသမီး / မ — Queen</option>
                         <option value="K">အာဏာပိုင် / ခေါင်းဆောင် — King</option>
                     </select>
                 </div>
             </div>
             <div style="text-align:center; margin-top:12px;">
                 <button class="btn btn-gold-glow" onclick="calculateBirthdayDestiny()">
-                    ✨ မွေးနေ့ကံဇာတာနှင့် စက်ဝန်းများ အလိုအလျောက် တွက်ချက်မည်
+                    ✨ မွေးနေ့ကံဇာတာနှင့် စက်ဝန်းများ တွက်ချက်မည်
                 </button>
             </div>
             <div id="birthday-result" style="margin-top:18px;"></div>
@@ -1000,7 +1069,7 @@
     <!-- TAB 3: 52-CARD FORMULA EXPLORER -->
     <section id="view-explorer" class="view-section">
         <div class="panel-box">
-            <h3 class="panel-title">🔍 ဖဲချပ် ၅၂ ချပ် Master Formula နှင့် ရှေးဟောင်းနိမိတ် အဘိဓာန်</h3>
+            <h3 class="panel-title">🔍 ဖဲချပ် ၅၂ ချပ် Master Formula နှင့် နိမိတ် အဘိဓာန်</h3>
             <div class="form-row">
                 <div class="form-group">
                     <label for="exp-suit">ဖဲပွင့် ရွေးချယ်ပါ</label>
@@ -1020,7 +1089,7 @@
                         <option value="4" selected>4 — ခိုင်မာသော အုတ်မြစ်၊ တည်ငြိမ်မှု၊ ဇွဲလုံ့လ</option>
                         <option value="5">5 — အပြောင်းအလဲ၊ လှုပ်ရှားမှု၊ မငြိမ်မသက်ဖြစ်ခြင်း</option>
                         <option value="6">6 — ညီညွတ်မျှတမှု၊ အမှန်တရား၊ ပေါင်းစည်းခြင်း</option>
-                        <option value="7">7 — ဆန်းကြယ်သော အလှည့်အပြောင်း၊ အခွင့်အရေး</option>
+                        <option value="7">7 — ဆန်းကြယ်သော အလှည့်အပြောင်း၊ ကံကြမ္မာအခွင့်အရေး</option>
                         <option value="8">8 — အာဏာ၊ ဂုဏ်သိက္ခာ၊ အချိန်၊ တုံ့ပြန်မှု</option>
                         <option value="9">9 — ပြီးမြောက်ခြင်း၊ ခရီးသွားခြင်း၊ လိုအင်ဆန္ဒ</option>
                         <option value="10">10 — သံသရာတစ်ပတ်လည်ခြင်း၊ အထွတ်အထိပ်</option>
@@ -1061,6 +1130,41 @@
         </div>
     </section>
 
+    <!-- ADVANCED SETTINGS MODAL -->
+    <div id="settings-modal" onclick="if(event.target === this) closeSettingsModal()">
+        <div class="modal-content" style="max-width: 480px;">
+            <button class="close-btn" onclick="closeSettingsModal()" aria-label="Close">✕</button>
+            <h3 style="color:var(--gold-bright); text-align:center; font-size:1.15rem; border-bottom:1px dashed var(--gold-primary); padding-bottom:10px; margin-top:0;">⚙️ အဆင့်မြင့် ဆက်တင်များ (Advanced Settings)</h3>
+            <div style="display:flex; flex-direction:column; gap:16px; margin-top:16px;">
+                <div class="form-group">
+                    <label>🃏 ဖဲထုပ်အမျိုးအစား (Deck Type)</label>
+                    <select id="setting-deck-type" onchange="updateSettings()">
+                        <option value="52">၅၂ ချပ် အပြည့်</option>
+                        <option value="32">၃၂ ချပ် ရှေးဟောင်းစနစ်</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🔀 ဖဲမွှေစနစ် (Shuffle Rigor)</label>
+                    <select id="setting-shuffle-rigor" onchange="updateSettings()">
+                        <option value="standard">စံနှုန်းအတိုင်း (Standard Random & Wash)</option>
+                        <option value="deep">အလွန်လေးနက်သော ရောနှောမှု (Deep Mystic Wash)</option>
+                    </select>
+                </div>
+                <div class="form-group" style="flex-direction:row; justify-content:space-between; align-items:center;">
+                    <label style="margin:0;">🔊 အသံအကျိုးသက်ရောက်မှု (Sound FX)</label>
+                    <input type="checkbox" id="setting-sound" checked onchange="toggleSoundFromSettings()" style="width:20px; height:20px; accent-color:var(--gold-primary); cursor:pointer;">
+                </div>
+                <div class="form-group" style="flex-direction:row; justify-content:space-between; align-items:center;">
+                    <label style="margin:0;">✨ အထူးပြုလုပ်ချက် အန်နီမေးရှင်း (Animations)</label>
+                    <input type="checkbox" id="setting-anim" checked onchange="updateSettings()" style="width:20px; height:20px; accent-color:var(--gold-primary); cursor:pointer;">
+                </div>
+            </div>
+            <div style="text-align:center; margin-top:20px;">
+                <button class="btn btn-gold-glow" onclick="closeSettingsModal()">ဆက်တင်များ သိမ်းဆည်းမည်</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Reading Modal -->
     <div id="reading-modal" onclick="if(event.target === this) closeModal()">
         <div class="modal-content">
@@ -1072,7 +1176,7 @@
 
     <script>
         /* =========================================================
-           1. AUDIO SYNTHESIZER (Mystic Card Sound Effects)
+           1. AUDIO SYNTHESIZER
         ========================================================= */
         let soundEnabled = true;
         let audioCtx = null;
@@ -1098,6 +1202,13 @@
         function toggleSound() {
             soundEnabled = !soundEnabled;
             document.getElementById('sound-toggle-btn').innerText = soundEnabled ? '🔊' : '🔇';
+            document.getElementById('setting-sound').checked = soundEnabled;
+            if (soundEnabled) playTone(660, 0.1);
+        }
+
+        function toggleSoundFromSettings() {
+            soundEnabled = document.getElementById('setting-sound').checked;
+            document.getElementById('sound-toggle-btn').innerText = soundEnabled ? '🔊' : '🔇';
             if (soundEnabled) playTone(660, 0.1);
         }
 
@@ -1105,30 +1216,10 @@
            2. MASTER DATA DEFINITIONS
         ========================================================= */
         const suitsData = {
-            D: {
-                symbol: "♦", name: "Diamonds", color: "red",
-                season: "နွေဦးရာသီ (Spring)", timeUnit: "ရက် (Days)",
-                element: "Earth / Air (မြေ/လေ)",
-                domain: "ငွေကြေး၊ ဥစ္စာဓန၊ ရုပ်ဝတ္ထု၊ အခွင့်အလမ်း၊ စီးပွားရေး"
-            },
-            H: {
-                symbol: "♥", name: "Hearts", color: "red",
-                season: "နွေရာသီ (Summer)", timeUnit: "ရက်သတ္တပတ် (Weeks)",
-                element: "Water (ရေ)",
-                domain: "အချစ်ရေး၊ ခံစားချက်၊ မိသားစု၊ မေတ္တာ၊ အနုပညာ"
-            },
-            C: {
-                symbol: "♣", name: "Clubs", color: "black",
-                season: "ဆောင်းရာသီ (Winter)", timeUnit: "နှစ် (Years)",
-                element: "Fire (မီး)",
-                domain: "အလုပ်အကိုင်၊ ကြိုးစားအားထုတ်မှု၊ ပညာသင်ယူမှု၊ တိုးတက်ရေး"
-            },
-            S: {
-                symbol: "♠", name: "Spades", color: "black",
-                season: "ဆောင်းဦးရာသီ (Autumn)", timeUnit: "လ (Months)",
-                element: "Air / Earth (လေ/မြေ)",
-                domain: "စိန်ခေါ်မှု၊ အတားအဆီး၊ တိုက်ပွဲ၊ စိတ်ဖိစီးမှု၊ ဥပဒေရေးရာ"
-            }
+            D: { symbol: "♦", name: "Diamonds", color: "red", season: "နွေဦးရာသီ (Spring)", timeUnit: "ရက် (Days)", element: "Earth / Air (မြေ/လေ)", domain: "ငွေကြေး၊ ဥစ္စာဓန၊ ရုပ်ဝတ္ထု၊ အခွင့်အလမ်း၊ စီးပွားရေး" },
+            H: { symbol: "♥", name: "Hearts", color: "red", season: "နွေရာသီ (Summer)", timeUnit: "ရက်သတ္တပတ် (Weeks)", element: "Water (ရေ)", domain: "အချစ်ရေး၊ ခံစားချက်၊ မိသားစု၊ မေတ္တာ၊ အနုပညာ" },
+            C: { symbol: "♣", name: "Clubs", color: "black", season: "ဆောင်းရာသီ (Winter)", timeUnit: "နှစ် (Years)", element: "Fire (မီး)", domain: "အလုပ်အကိုင်၊ ကြိုးစားအားထုတ်မှု၊ ပညာသင်ယူမှု၊ တိုးတက်ရေး" },
+            S: { symbol: "♠", name: "Spades", color: "black", season: "ဆောင်းဦးရာသီ (Autumn)", timeUnit: "လ (Months)", element: "Air / Earth (လေ/မြေ)", domain: "စိန်ခေါ်မှု၊ အတားအဆီး၊ တိုက်ပွဲ၊ စိတ်ဖိစီးမှု၊ ဥပဒေရေးရာ" }
         };
 
         const ranksData = {
@@ -1148,342 +1239,84 @@
         };
 
         const cardSpecifics = {
-            "AS": { 
-                dignified: "ဘဝပုံစံ သို့မဟုတ် နေအိမ် ပြောင်းလဲရန် ဆုံးဖြတ်ခြင်း။ အဆုံးသတ်နှင့် အစသစ် (Rebirth)။", 
-                illDignified: "ဖျားနာမှု သို့မဟုတ် နာရေးကြောင့် မဖြစ်မနေ ပြောင်းလဲရခြင်း။ ပြင်းထန်သော စိုးရိမ်ပူပန်မှု။",
-                grandma: "Apex Up အပေါ်လှည့်ပါက စိတ်ဆင်းရဲပူပန်မှုဖြစ်ပြီး၊ Spades များစွာ ဝန်းရံမှသာ အန္တရာယ်ကို သတိပေးသည်။", 
-                advice: "ကြောက်ရွံ့မှုကို ကျော်လွှား၍ ပြတ်သားစွာ ဆုံးဖြတ်ပါ။" 
-            },
-            "2S": { 
-                dignified: "စစ်ပြေငြိမ်းခြင်း၊ ပဋိပက္ခကို ဖြေရှင်းနိုင်ခြင်း။", 
-                illDignified: "သစ္စာဖောက်ခံရခြင်း၊ ပြင်းထန်စွာ စကားများခြင်း၊ သဘောထားကွဲလွဲ၍ လမ်းခွဲရခြင်းနှင့် မုန်းတီးမှု။",
-                grandma: "မေတ္တာရေးကတ်များနှင့် တွဲကျပါက အချစ်ရေး လမ်းခွဲရတတ်သည်။ ခေါင်းတလားနိမိတ်။", 
-                advice: "စိတ်အေးအေးထား၍ အငြင်းပွားမှုကို ဖြေရှင်းပါ။" 
-            },
-            "3S": { 
-                dignified: "မိတ်ဆွေနှင့် အဆက်အသွယ်သစ် ရရှိခြင်း။", 
-                illDignified: "ဒေါသ၊ မနာလိုမှု၊ မျက်ရည်ကျရခြင်းနှင့် အချစ်တြိဂံတွင် တတိယလူ ဝင်ရောက်စွက်ဖက်ခြင်း။",
-                grandma: "La Suocera (စွက်ဖက်တတ်သော ယောက္ခမ သို့မဟုတ် အဆစ်အမြစ် အာရုံကြော နာကျင်မှု)။", 
-                advice: "ဘေးစကားများနှင့် မသမာသူများကို သတိပြုပါ။" 
-            },
-            "4S": { 
-                dignified: "စာရေးခြင်း၊ ဆက်သွယ်ရေးဆိုင်ရာ သင်တန်းများ တက်ရောက်ခွင့်ရခြင်း။", 
-                illDignified: "ဖျားနာမှု၊ ဆေးရုံ၊ အနားယူရခြင်း သို့မဟုတ် အခြေအနေများ နှေးကွေးတုံ့ဆိုင်းနေခြင်း။",
-                grandma: "ခုတင်ခြေ ၄ ချောင်း။ Hearts နှင့်ယှဉ်ပါက အသည်းကွဲခြင်း၊ ၈ စပိတ်နှင့်တွဲပါက အိပ်ရာထဲလဲခြင်း။", 
-                advice: "ခန္ဓာကိုယ်နှင့် စိတ်ကို အနားပေးပါ။" 
-            },
-            "5S": { 
-                dignified: "ခရီးသွားလာရခြင်း၊ ပြောင်းလဲမှုသစ် စတင်ခြင်း။", 
-                illDignified: "စွန့်လွှတ်ခြင်း၊ ဖြတ်တောက်ခြင်း၊ ခွဲစိတ်ကုသခြင်းနှင့် အလုပ်မှထွက်ခြင်း။",
-                grandma: "လက်ထဲတွင် ဓားကိုင်ထားသော ဘယ်လက် (Left Hand)။ ၂ Jacks + ၅ စိန်နှင့်တွဲပါက တရားရုံးကွာရှင်းခြင်း။", 
-                advice: "မလိုအပ်သော အရာများကို ပြတ်သားစွာ လက်လွှတ်ပါ။" 
-            },
-            "6S": { 
-                dignified: "အရေးကြီးသော သတင်းစကားများ ရရှိခြင်း။", 
-                illDignified: "ပြီးဆုံးခြင်းနှင့် လက်လွှတ်ရခြင်း။ ယာဉ်ကြောပို့ဆောင်ရေးနှင့် နေရာပြောင်းရွှေ့ခြင်း။ စာရွက်စာတမ်း ကြန့်ကြာခြင်း။",
-                grandma: "အဟောင်းများကို စွန့်လွှတ်၍ ရှေ့သို့ ဆက်လက် လျှောက်လှမ်းရမည်။ စီးပွားရေးကတ်နှင့်တွဲပါက လုပ်ငန်းဖျက်သိမ်းရခြင်း။", 
-                advice: "အပြောင်းအလဲကို အကောင်းဘက်မှ လက်ခံပါ။" 
-            },
-            "7S": { 
-                dignified: "အဆက်အသွယ် ဖြတ်တောက်သွားခြင်း (သဘာဝအလျောက် အနားယူခြင်း)။", 
-                illDignified: "ဆုံးရှုံးမှုနှင့် စိတ်ပျက်ခြင်း။ ရေ၊ အရက်၊ ဆေးဝါးနှင့် စွဲလမ်းမှုများကြောင့် ကျန်းမာရေးထိခိုက်ခြင်း။",
-                grandma: "Sfortuna (ကံဆိုးမှု)။ ၈ စပိတ်နှင့်တွဲပါက အရက်/ဆေးဝါးကြောင့် ကျန်းမာရေး ထိခိုက်တတ်သည်။", 
-                advice: "မူးယစ်ဆေးနှင့် စိတ်လိုက်မာန်ပါ စွန့်စားမှုကို ရှောင်ကြဉ်ပါ။" 
-            },
-            "8S": { 
-                dignified: "နှုတ်ထွက်စကား ကောင်းမွန်သဖြင့် အောင်မြင်ခြင်း။", 
-                illDignified: "ထောင်ကျသကဲ့သို့ ပိတ်မိနေခြင်း၊ စိတ်ဖိစီးမှုနှင့် ဆေးစစ်ချက်/ဥပဒေ စစ်ဆေးမှု ခံယူရခြင်း။",
-                grandma: "Medical / Police exam။ ၄ စပိတ်နှင့်တွဲပါက အိပ်ရာထဲလဲသည်အထိ ဖျားနာတတ်သည်။", 
-                advice: "သည်းခံစိတ်မွေးပြီး စနစ်တကျ စစ်ဆေးမှု ခံယူပါ။" 
-            },
-            "9S": { 
-                dignified: "ဉာဏ်အလင်း သို့မဟုတ် အိပ်မက်မှတစ်ဆင့် အရေးကြီးသတင်း ရရှိခြင်း။", 
-                illDignified: "ဝမ်းနည်းခြင်း၊ ကြေကွဲခြင်း၊ Karmic debts (ကံကြမ္မာအကြွေးများ) နှင့် စိုးရိမ်မှု။ စိတ်ဓာတ်ကျဆင်းခြင်း။",
-                grandma: "ထိန်းချုပ်မရသော စိတ်ဖိစီးမှု။ ၁၀ စပိတ်နှင့်တွဲပါက အလွန်ဆိုးရွားသော အကျပ်အတည်း။", 
-                advice: "အဆိုးမြင်စိတ်ကို လျှော့ချပါ။" 
-            },
-            "10S": { 
-                dignified: "ယာယီ လူမှုရေးမှ ဖယ်ကြဉ်ခံရခြင်း (ဆေးရုံတက်ရခြင်း စသည်ဖြင့် အနားယူရခြင်း)။", 
-                illDignified: "The Nightmare Card — အကြောက်ဆုံးအရာများ လက်တွေ့ဖြစ်လာခြင်း၊ လျှို့ဝှက်ချက် ပေါက်ကြားခြင်း၊ ဘဝ၏ အမှောင်ဆုံး အကျပ်အတည်း။",
-                grandma: "အလွန်ဆိုးရွားသော ကံဆိုးမှု။ မည်သည့် အကောင်းကတ်မဆို ဤကတ်ဘေးတွင် ကျပါက အရိပ်မည်း လွှမ်းမိုးခံရသည်။", 
-                advice: "အမှောင်ဆုံးကာလ ပြီးလျှင် အရုဏ်တက်မည်ဖြစ်၍ စိတ်ဓာတ်မကျပါနှင့်။", 
-                omen: "⚠️ The Nightmare Card" 
-            },
-            "JS": { 
-                dignified: "ပါးနပ်ထက်မြက်သော ပုဂ္ဂိုလ်၊ နိုင်ငံခြားသားလူငယ် သို့မဟုတ် စစ်သား/ရဲ။", 
-                illDignified: "လိမ်လည်လှည့်ဖြားတတ်သူ၊ ပြဿနာရှာတတ်သော လူငယ်။",
-                grandma: "ဆံပင်နက်၊ မျက်လုံးနက်ရှိသူ။ Spades များ ဝန်းရံပါက ဒုစရိုက်သမား။", 
-                advice: "လူငယ်များ၏ လှည့်စားမှုကို သတိပြုပါ။" 
-            },
-            "QS": { 
-                dignified: "ဉာဏ်ထက်မြက်သော အမျိုးသမီး၊ ဆရာဝန်၊ ရှေ့နေ၊ တစ်ကိုယ်တော် ရပ်တည်သူ။", 
-                illDignified: "မနာလို အတင်းပြောတတ်သူ၊ ကောက်ကျစ်သော အမျိုးသမီး။",
-                grandma: "အမှောင်ဆုံးကတ်။ Spades များ ဝန်းရံပါက လင်ကွာ သို့မဟုတ် မုဆိုးမ။", 
-                advice: "ခံစားချက်ထက် ဦးနှောက်နှင့် ဉာဏ်ပညာကို ဦးစားပေးပါ။" 
-            },
-            "KS": { 
-                dignified: "ဥပဒေရေးရာ ပုဂ္ဂိုလ်၊ တရားသူကြီး၊ စနစ်ကျသော အာဏာပိုင်။", 
-                illDignified: "ရက်စက်ပြီး မတရားသော အာဏာရှင်ဆန်သူ။",
-                grandma: "David (ဒါဝိဒ်မင်းကြီး)။ ၂ Kings ကျပါက ယူနီဖောင်းဝတ်များနှင့် တွေ့ဆုံရခြင်း။", 
-                advice: "စည်းမျဉ်းဥပဒေအတိုင်း တိကျစွာ လိုက်နာပါ။" 
-            },
+            "AS": { dignified: "ဘဝပုံစံ သို့မဟုတ် နေအိမ် ပြောင်းလဲရန် ဆုံးဖြတ်ခြင်း။ အဆုံးသတ်နှင့် အစသစ် (Rebirth)။", illDignified: "ဖျားနာမှု သို့မဟုတ် နာရေးကြောင့် မဖြစ်မနေ ပြောင်းလဲရခြင်း။ ပြင်းထန်သော စိုးရိမ်ပူပန်မှု။", grandma: "Apex Up အပေါ်လှည့်ပါက စိတ်ဆင်းရဲပူပန်မှုဖြစ်ပြီး၊ Spades များစွာ ဝန်းရံမှသာ အန္တရာယ်ကို သတိပေးသည်။", advice: "ကြောက်ရွံ့မှုကို ကျော်လွှား၍ ပြတ်သားစွာ ဆုံးဖြတ်ပါ။" },
+            "2S": { dignified: "စစ်ပြေငြိမ်းခြင်း၊ ပဋိပက္ခကို ဖြေရှင်းနိုင်ခြင်း။", illDignified: "သစ္စာဖောက်ခံရခြင်း၊ ပြင်းထန်စွာ စကားများခြင်း၊ သဘောထားကွဲလွဲ၍ လမ်းခွဲရခြင်းနှင့် မုန်းတီးမှု။", grandma: "မေတ္တာရေးကတ်များနှင့် တွဲကျပါက အချစ်ရေး လမ်းခွဲရတတ်သည်။ ခေါင်းတလားနိမိတ်။", advice: "စိတ်အေးအေးထား၍ အငြင်းပွားမှုကို ဖြေရှင်းပါ။" },
+            "3S": { dignified: "မိတ်ဆွေနှင့် အဆက်အသွယ်သစ် ရရှိခြင်း။", illDignified: "ဒေါသ၊ မနာလိုမှု၊ မျက်ရည်ကျရခြင်းနှင့် အချစ်တြိဂံတွင် တတိယလူ ဝင်ရောက်စွက်ဖက်ခြင်း။", grandma: "La Suocera (စွက်ဖက်တတ်သော ယောက္ခမ သို့မဟုတ် အဆစ်အမြစ် အာရုံကြော နာကျင်မှု)။", advice: "ဘေးစကားများနှင့် မသမာသူများကို သတိပြုပါ။" },
+            "4S": { dignified: "စာရေးခြင်း၊ ဆက်သွယ်ရေးဆိုင်ရာ သင်တန်းများ တက်ရောက်ခွင့်ရခြင်း။", illDignified: "ဖျားနာမှု၊ ဆေးရုံ၊ အနားယူရခြင်း သို့မဟုတ် အခြေအနေများ နှေးကွေးတုံ့ဆိုင်းနေခြင်း။", grandma: "ခုတင်ခြေ ၄ ချောင်း။ Hearts နှင့်ယှဉ်ပါက အသည်းကွဲခြင်း၊ ၈ စပိတ်နှင့်တွဲပါက အိပ်ရာထဲလဲခြင်း။", advice: "ခန္ဓာကိုယ်နှင့် စိတ်ကို အနားပေးပါ။" },
+            "5S": { dignified: "ခရီးသွားလာရခြင်း၊ ပြောင်းလဲမှုသစ် စတင်ခြင်း။", illDignified: "စွန့်လွှတ်ခြင်း၊ ဖြတ်တောက်ခြင်း၊ ခွဲစိတ်ကုသခြင်းနှင့် အလုပ်မှထွက်ခြင်း။", grandma: "လက်ထဲတွင် ဓားကိုင်ထားသော ဘယ်လက် (Left Hand)။ ၂ Jacks + ၅ စိန်နှင့်တွဲပါက တရားရုံးကွာရှင်းခြင်း။", advice: "မလိုအပ်သော အရာများကို ပြတ်သားစွာ လက်လွှတ်ပါ။" },
+            "6S": { dignified: "အရေးကြီးသော သတင်းစကားများ ရရှိခြင်း။", illDignified: "ပြီးဆုံးခြင်းနှင့် လက်လွှတ်ရခြင်း။ ယာဉ်ကြောပို့ဆောင်ရေးနှင့် နေရာပြောင်းရွှေ့ခြင်း။ စာရွက်စာတမ်း ကြန့်ကြာခြင်း။", grandma: "အဟောင်းများကို စွန့်လွှတ်၍ ရှေ့သို့ ဆက်လက် လျှောက်လှမ်းရမည်။ စီးပွားရေးကတ်နှင့်တွဲပါက လုပ်ငန်းဖျက်သိမ်းရခြင်း။", advice: "အပြောင်းအလဲကို အကောင်းဘက်မှ လက်ခံပါ။" },
+            "7S": { dignified: "အဆက်အသွယ် ဖြတ်တောက်သွားခြင်း (သဘာဝအလျောက် အနားယူခြင်း)။", illDignified: "ဆုံးရှုံးမှုနှင့် စိတ်ပျက်ခြင်း။ ရေ၊ အရက်၊ ဆေးဝါးနှင့် စွဲလမ်းမှုများကြောင့် ကျန်းမာရေးထိခိုက်ခြင်း။", grandma: "Sfortuna (ကံဆိုးမှု)။ ၈ စပိတ်နှင့်တွဲပါက အရက်/ဆေးဝါးကြောင့် ကျန်းမာရေး ထိခိုက်တတ်သည်။", advice: "မူးယစ်ဆေးနှင့် စိတ်လိုက်မာန်ပါ စွန့်စားမှုကို ရှောင်ကြဉ်ပါ။" },
+            "8S": { dignified: "နှုတ်ထွက်စကား ကောင်းမွန်သဖြင့် အောင်မြင်ခြင်း။", illDignified: "ထောင်ကျသကဲ့သို့ ပိတ်မိနေခြင်း၊ စိတ်ဖိစီးမှုနှင့် ဆေးစစ်ချက်/ဥပဒေ စစ်ဆေးမှု ခံယူရခြင်း။", grandma: "Medical / Police exam။ ၄ စပိတ်နှင့်တွဲပါက အိပ်ရာထဲလဲသည်အထိ ဖျားနာတတ်သည်။", advice: "သည်းခံစိတ်မွေးပြီး စနစ်တကျ စစ်ဆေးမှု ခံယူပါ။" },
+            "9S": { dignified: "ဉာဏ်အလင်း သို့မဟုတ် အိပ်မက်မှတစ်ဆင့် အရေးကြီးသတင်း ရရှိခြင်း။", illDignified: "ဝမ်းနည်းခြင်း၊ ကြေကွဲခြင်း၊ Karmic debts (ကံကြမ္မာအကြွေးများ) နှင့် စိုးရိမ်မှု။ စိတ်ဓာတ်ကျဆင်းခြင်း။", grandma: "ထိန်းချုပ်မရသော စိတ်ဖိစီးမှု။ ၁၀ စပိတ်နှင့်တွဲပါက အလွန်ဆိုးရွားသော အကျပ်အတည်း။", advice: "အဆိုးမြင်စိတ်ကို လျှော့ချပါ။" },
+            "10S": { dignified: "ယာယီ လူမှုရေးမှ ဖယ်ကြဉ်ခံရခြင်း (ဆေးရုံတက်ရခြင်း စသည်ဖြင့် အနားယူရခြင်း)။", illDignified: "The Nightmare Card — အကြောက်ဆုံးအရာများ လက်တွေ့ဖြစ်လာခြင်း၊ လျှို့ဝှက်ချက် ပေါက်ကြားခြင်း၊ ဘဝ၏ အမှောင်ဆုံး အကျပ်အတည်း။", grandma: "အလွန်ဆိုးရွားသော ကံဆိုးမှု။ မည်သည့် အကောင်းကတ်မဆို ဤကတ်ဘေးတွင် ကျပါက အရိပ်မည်း လွှမ်းမိုးခံရသည်။", advice: "အမှောင်ဆုံးကာလ ပြီးလျှင် အရုဏ်တက်မည်ဖြစ်၍ စိတ်ဓာတ်မကျပါနှင့်။", omen: "⚠️ The Nightmare Card" },
+            "JS": { dignified: "ပါးနပ်ထက်မြက်သော ပုဂ္ဂိုလ်၊ နိုင်ငံခြားသားလူငယ် သို့မဟုတ် စစ်သား/ရဲ။", illDignified: "လိမ်လည်လှည့်ဖြားတတ်သူ၊ ပြဿနာရှာတတ်သော လူငယ်။", grandma: "ဆံပင်နက်၊ မျက်လုံးနက်ရှိသူ။ Spades များ ဝန်းရံပါက ဒုစရိုက်သမား။", advice: "လူငယ်များ၏ လှည့်စားမှုကို သတိပြုပါ။" },
+            "QS": { dignified: "ဉာဏ်ထက်မြက်သော အမျိုးသမီး၊ ဆရာဝန်၊ ရှေ့နေ၊ တစ်ကိုယ်တော် ရပ်တည်သူ။", illDignified: "မနာလို အတင်းပြောတတ်သူ၊ ကောက်ကျစ်သော အမျိုးသမီး။", grandma: "အမှောင်ဆုံးကတ်။ Spades များ ဝန်းရံပါက လင်ကွာ သို့မဟုတ် မုဆိုးမ။", advice: "ခံစားချက်ထက် ဦးနှောက်နှင့် ဉာဏ်ပညာကို ဦးစားပေးပါ။" },
+            "KS": { dignified: "ဥပဒေရေးရာ ပုဂ္ဂိုလ်၊ တရားသူကြီး၊ စနစ်ကျသော အာဏာပိုင်။", illDignified: "ရက်စက်ပြီး မတရားသော အာဏာရှင်ဆန်သူ။", grandma: "David (ဒါဝိဒ်မင်းကြီး)။ ၂ Kings ကျပါက ယူနီဖောင်းဝတ်များနှင့် တွေ့ဆုံရခြင်း။", advice: "စည်းမျဉ်းဥပဒေအတိုင်း တိကျစွာ လိုက်နာပါ။" },
 
-            "AH": { 
-                dignified: "ချစ်ခြင်းမေတ္တာ၊ ပျော်ရွှင်မှုနှင့် အိမ်ထောင်အစပြုခြင်း။ နေအိမ်ဂေဟာ (Casa)။", 
-                illDignified: "အိမ်ရာပြောင်းရွှေ့ရခြင်းကြောင့် မငြိမ်မသက်ဖြစ်ခြင်း၊ အိမ်တွင်းအငြင်းပွားမှု။",
-                grandma: "Face Card နှင့်တွဲပါက ဧည့်သည်လာခြင်း၊ KC နှင့်တွဲပါက အိမ်ဆောက်ကန်ထရိုက်တာ။", 
-                advice: "မိသားစုနှင့် အိမ်တွင်းအေးချမ်းရေးကို အလေးထားပါ။" 
-            },
-            "2H": { 
-                dignified: "အချစ်သစ်၊ ရင်ခုန်ဖွယ် အချစ်စာ၊ အပြန်အလှန် မေတ္တာမျှခြင်းနှင့် မိတ်ဆွေသစ်။", 
-                illDignified: "စိတ်ကစားခြင်း၊ ကတိမတည်ခြင်း၊ အထင်လွဲမှားမှုများ။",
-                grandma: "အချိန်နိမိတ်အရ ၂ ရက်၊ ၂ ပတ်၊ ၂ လ သို့မဟုတ် ၂ နှစ်အတွင်း အဆင်ပြေမည်။", 
-                advice: "ပွင့်လင်းရိုးသားစွာ ဆက်ဆံပါ။" 
-            },
-            "3H": { 
-                dignified: "Small Wish Card — မေတ္တာတိုးပွားခြင်း၊ ပျော်ရွှင်စရာ အခမ်းအနားနှင့် ဆန္ဒအသေးစားများ ပြည့်ဝခြင်း။", 
-                illDignified: "မဆင်မခြင်ပြုမူ၍ မိမိကိုယ်ကို ထိခိုက်ခြင်း၊ အချစ်တြိဂံတွင် တတိယလူ ဝင်ရောက်ခြင်း။",
-                grandma: "ဘုရားကျောင်းနိမိတ်။ သန္ဓေတည်ခြင်း။ Spades နှင့်တွဲပါက အချစ်တြိဂံ။", 
-                advice: "ရရှိလာသော အခွင့်အလမ်းများကို တန်ဖိုးထားပါ။", 
-                omen: "✨ Small Wish Card" 
-            },
-            "4H": { 
-                dignified: "မင်္ဂလာတောင်းရမ်းခြင်း၊ အိမ်ထောင်ပြုခြင်း၊ အချစ်သိုက် (Love Nest)။", 
-                illDignified: "ပုံမှန်ဘဝကို ငြီးငွေ့လာခြင်း၊ အိမ်ထောင်ရေး အေးစက်လာခြင်း။",
-                grandma: "မင်္ဂလာခုတင်၏ ခြေ ၄ ချောင်း။ ညစာဖိတ်ကြားလွှာ။", 
-                advice: "အိမ်ထောင်ရေးအုတ်မြစ်ကို ခိုင်မာအောင် တည်ဆောက်ပါ။" 
-            },
-            "5H": { 
-                dignified: "ကြင်နာမှု၊ အမျိုးသမီးစွမ်းအင် (Female Gender)၊ မင်္ဂလာဆောင်ရန် တောင်းဆိုခြင်း။", 
-                illDignified: "စိုးရိမ်ပူပန်မှု၊ နောင်တရခြင်း၊ ခါးသီးမှုနှင့် မကျေနပ်မှု။",
-                grandma: "ညာလက် (Right Hand)။ မှန်ကန်သောအရာကို ပြုလုပ်ခြင်း။", 
-                advice: "မှန်ကန်သော ဆန္ဒအတိုင်း ဆုံးဖြတ်ပါ။" 
-            },
-            "6H": { 
-                dignified: "စိတ်ပိုင်းဆိုင်ရာ လုံခြုံမှု၊ သစ္စာရှိမှုနှင့် အမျိုးသားစွမ်းအင် (Male Gender)။ ဆန္ဒပြည့်ဝခြင်း။", 
-                illDignified: "အတိတ်ကို လွမ်းဆွတ်ပြီး လက်ရှိကို မကျေနပ်ခြင်း။",
-                grandma: "သစ္စာတရားနှင့် ချစ်ကြည်ရေး။ ကလေးမွေးလျှင် ယောက်ျားလေး ဖြစ်တတ်သည်။", 
-                advice: "သစ္စာတရားကို ဦးစားပေးပါ။" 
-            },
-            "7H": { 
-                dignified: "Second Chances — ပြန်လည်ဆန်းသစ်ခြင်း၊ ငြိမ်းချမ်းမှု၊ ကျန်းမာရေး ပြန်လည်ကောင်းမွန်လာခြင်း။", 
-                illDignified: "အတင်းအဖျင်း၊ မကောင်းသတင်းများကြောင့် စိတ်ဝမ်းကွဲရခြင်း၊ သဝန်တိုမှု။",
-                grandma: "ဒုတိယအကြိမ် အခွင့်အရေး။ ဆုံးရှုံးမှုပြီးနောက် ပြန်လည်စတင်နိုင်ခြင်း။", 
-                advice: "အခွင့်အရေးသစ်ကို ရဲဝံ့စွာ ဆုပ်ကိုင်ပါ။" 
-            },
-            "8H": { 
-                dignified: "မိတ်ဆွေများနှင့် ပျော်ရွှင်ရခြင်း၊ အပြန်အလှန် ယုံကြည်မှု။", 
-                illDignified: "The Relationship Card — အခြေအမြစ်မရှိသော သံသယ၊ သစ္စာဖောက်ခံရခြင်း၊ ချစ်သူဟောင်းကို စွဲလမ်းနေခြင်း။",
-                grandma: "အချစ်ရေး မေးခွန်းတွင် ကျပါက အခြားသူတစ်ဦးနှင့် ငြိတွယ်နေသူ ဖြစ်နိုင်ခြင်း။", 
-                advice: "ဟန်ချက်ညီအောင် အချိန်ပေးပါ။" 
-            },
-            "9H": { 
-                dignified: "The Big Wish Card — ဖဲထုပ်တစ်ခုလုံးတွင် အကောင်းဆုံးကတ်ဖြစ်ပြီး ဆန္ဒကြီး အပြည့်အဝ ပြည့်ဝမည်။", 
-                illDignified: "စာရိတ္တ မာနထောင်လွှားခြင်း (သို့သော် ပင်မဆန္ဒကြီးမှာမူ မလွဲဧကန် အောင်မြင်မည်)။",
-                grandma: "Spades များ ဝန်းရံထားစေကာမူ အဟန့်အတားသာဖြစ်ပြီး မူလဆန္ဒကြီးကို မဖျက်စီးနိုင်ပါ။", 
-                advice: "ယုံကြည်ချက်အပြည့်ဖြင့် ရည်မှန်းချက်ကို အကောင်အထည်ဖော်ပါ။", 
-                omen: "🌟 The Big Wish Card" 
-            },
-            "10H": { 
-                dignified: "Marriage Card — မင်္ဂလာဆောင်ကတ်၊ ပျော်ရွှင်ဖွယ် ရေရှည်ပေါင်းသင်းမှုနှင့် အထွတ်အထိပ်။", 
-                illDignified: "မိသားစု ရန်ဖြစ်မှုနှင့် မိတ်ပျက်ခြင်း။",
-                grandma: "l'innamorato (အချစ်ကြီးသူ)။ ဘေးမှ အနုတ်ကတ်များကို အကောင်းဘက်သို့ ပြောင်းစေသည်။", 
-                advice: "ချစ်ခြင်းမေတ္တာကို အပြည့်အဝ ယုံကြည်ပါ။",
-                omen: "💍 Marriage Card"
-            },
-            "JH": { 
-                dignified: "စိတ်ကူးယဉ်ဆန်ပြီး သဘောကောင်းသော လူငယ်၊ ချစ်ရသော ချစ်သူ၊ သား သို့မဟုတ် ညီ။", 
-                illDignified: "ပျင်းရိပြီး စနစ်တကျ လိမ်လည်တတ်သူ၊ စိတ်ဒဏ်ရာရလွယ်သူ။",
-                grandma: "Giovin Biond (အလိုလိုက်ခံရသော အချစ်တော်လူငယ်)။", 
-                advice: "နူးညံ့သော စေတနာဖြင့် ဆက်ဆံပါ။" 
-            },
-            "QH": { 
-                dignified: "စိတ်ကူးဉာဏ်ကောင်းပြီး စာနာတတ်သော အမျိုးသမီး၊ မိခင် သို့မဟုတ် အရင်းနှီးဆုံး မိတ်ဆွေ။", 
-                illDignified: "စိတ်ဒဏ်ရာရလွယ်ပြီး ယုံကြည်ရခက်သူ၊ သဝန်တိုတတ်သူ။",
-                grandma: "Judith (ဂျူးဒစ်)။ မေးမြန်းသူ၏ အချစ်ဆုံး မိခင် သို့မဟုတ် သူငယ်ချင်း။", 
-                advice: "မေတ္တာနှင့် စာနာမှုကို ရှေ့တန်းတင်ပါ။" 
-            },
-            "KH": { 
-                dignified: "ကျွမ်းကျင်သော ညှိနှိုင်းသူ၊ ကြင်နာသော ဖခင် သို့မဟုတ် ခင်ပွန်း။", 
-                illDignified: "မရိုးသားသော နှစ်ဖက်လှည့် လိမ်လည်သူ၊ စိတ်နုနယ်လွန်းသူ။",
-                grandma: "Charlemagne (ရှားလမိန်ဘုရင်)။ စိတ်ဓာတ်နုနယ်၍ အထိမခံသော ပုဂ္ဂိုလ်။", 
-                advice: "ရင့်ကျက်သော မေတ္တာဖြင့် ဦးဆောင်ပါ။" 
-            },
+            "AH": { dignified: "ချစ်ခြင်းမေတ္တာ၊ ပျော်ရွှင်မှုနှင့် အိမ်ထောင်အစပြုခြင်း။ နေအိမ်ဂေဟာ (Casa)။", illDignified: "အိမ်ရာပြောင်းရွှေ့ရခြင်းကြောင့် မငြိမ်မသက်ဖြစ်ခြင်း၊ အိမ်တွင်းအငြင်းပွားမှု။", grandma: "Face Card နှင့်တွဲပါက ဧည့်သည်လာခြင်း၊ KC နှင့်တွဲပါက အိမ်ဆောက်ကန်ထရိုက်တာ။", advice: "မိသားစုနှင့် အိမ်တွင်းအေးချမ်းရေးကို အလေးထားပါ။" },
+            "2H": { dignified: "အချစ်သစ်၊ ရင်ခုန်ဖွယ် အချစ်စာ၊ အပြန်အလှန် မေတ္တာမျှခြင်းနှင့် မိတ်ဆွေသစ်။", illDignified: "စိတ်ကစားခြင်း၊ ကတိမတည်ခြင်း၊ အထင်လွဲမှားမှုများ။", grandma: "အချိန်နိမိတ်အရ ၂ ရက်၊ ၂ ပတ်၊ ၂ လ သို့မဟုတ် ၂ နှစ်အတွင်း အဆင်ပြေမည်။", advice: "ပွင့်လင်းရိုးသားစွာ ဆက်ဆံပါ။" },
+            "3H": { dignified: "Small Wish Card — မေတ္တာတိုးပွားခြင်း၊ ပျော်ရွှင်စရာ အခမ်းအနားနှင့် ဆန္ဒအသေးစားများ ပြည့်ဝခြင်း။", illDignified: "မဆင်မခြင်ပြုမူ၍ မိမိကိုယ်ကို ထိခိုက်ခြင်း၊ အချစ်တြိဂံတွင် တတိယလူ ဝင်ရောက်ခြင်း။", grandma: "ဘုရားကျောင်းနိမိတ်။ သန္ဓေတည်ခြင်း။ Spades နှင့်တွဲပါက အချစ်တြိဂံ။", advice: "ရရှိလာသော အခွင့်အလမ်းများကို တန်ဖိုးထားပါ။", omen: "✨ Small Wish Card" },
+            "4H": { dignified: "မင်္ဂလာတောင်းရမ်းခြင်း၊ အိမ်ထောင်ပြုခြင်း၊ အချစ်သိုက် (Love Nest)။", illDignified: "ပုံမှန်ဘဝကို ငြီးငွေ့လာခြင်း၊ အိမ်ထောင်ရေး အေးစက်လာခြင်း။", grandma: "မင်္ဂလာခုတင်၏ ခြေ ၄ ချောင်း။ ညစာဖိတ်ကြားလွှာ။", advice: "အိမ်ထောင်ရေးအုတ်မြစ်ကို ခိုင်မာအောင် တည်ဆောက်ပါ။" },
+            "5H": { dignified: "ကြင်နာမှု၊ အမျိုးသမီးစွမ်းအင် (Female Gender)၊ မင်္ဂလာဆောင်ရန် တောင်းဆိုခြင်း။", illDignified: "စိုးရိမ်ပူပန်မှု၊ နောင်တရခြင်း၊ ခါးသီးမှုနှင့် မကျေနပ်မှု။", grandma: "ညာလက် (Right Hand)။ မှန်ကန်သောအရာကို ပြုလုပ်ခြင်း။", advice: "မှန်ကန်သော ဆန္ဒအတိုင်း ဆုံးဖြတ်ပါ။" },
+            "6H": { dignified: "စိတ်ပိုင်းဆိုင်ရာ လုံခြုံမှု၊ သစ္စာရှိမှုနှင့် အမျိုးသားစွမ်းအင် (Male Gender)။ ဆန္ဒပြည့်ဝခြင်း။", illDignified: "အတိတ်ကို လွမ်းဆွတ်ပြီး လက်ရှိကို မကျေနပ်ခြင်း။", grandma: "သစ္စာတရားနှင့် ချစ်ကြည်ရေး။ ကလေးမွေးလျှင် ယောက်ျားလေး ဖြစ်တတ်သည်။", advice: "သစ္စာတရားကို ဦးစားပေးပါ။" },
+            "7H": { dignified: "Second Chances — ပြန်လည်ဆန်းသစ်ခြင်း၊ ငြိမ်းချမ်းမှု၊ ကျန်းမာရေး ပြန်လည်ကောင်းမွန်လာခြင်း။", illDignified: "အတင်းအဖျင်း၊ မကောင်းသတင်းများကြောင့် စိတ်ဝမ်းကွဲရခြင်း၊ သဝန်တိုမှု။", grandma: "ဒုတိယအကြိမ် အခွင့်အရေး။ ဆုံးရှုံးမှုပြီးနောက် ပြန်လည်စတင်နိုင်ခြင်း။", advice: "အခွင့်အရေးသစ်ကို ရဲဝံ့စွာ ဆုပ်ကိုင်ပါ။" },
+            "8H": { dignified: "မိတ်ဆွေများနှင့် ပျော်ရွှင်ရခြင်း၊ အပြန်အလှန် ယုံကြည်မှု။", illDignified: "The Relationship Card — အခြေအမြစ်မရှိသော သံသယ၊ သစ္စာဖောက်ခံရခြင်း၊ ချစ်သူဟောင်းကို စွဲလမ်းနေခြင်း။", grandma: "အချစ်ရေး မေးခွန်းတွင် ကျပါက အခြားသူတစ်ဦးနှင့် ငြိတွယ်နေသူ ဖြစ်နိုင်ခြင်း။", advice: "ဟန်ချက်ညီအောင် အချိန်ပေးပါ။" },
+            "9H": { dignified: "The Big Wish Card — ဖဲထုပ်တစ်ခုလုံးတွင် အကောင်းဆုံးကတ်ဖြစ်ပြီး ဆန္ဒကြီး အပြည့်အဝ ပြည့်ဝမည်။", illDignified: "စာရိတ္တ မာနထောင်လွှားခြင်း (သို့သော် ပင်မဆန္ဒကြီးမှာမူ မလွဲဧကန် အောင်မြင်မည်)။", grandma: "Spades များ ဝန်းရံထားစေကာမူ အဟန့်အတားသာဖြစ်ပြီး မူလဆန္ဒကြီးကို မဖျက်စီးနိုင်ပါ။", advice: "ယုံကြည်ချက်အပြည့်ဖြင့် ရည်မှန်းချက်ကို အကောင်အထည်ဖော်ပါ။", omen: "🌟 The Big Wish Card" },
+            "10H": { dignified: "Marriage Card — မင်္ဂလာဆောင်ကတ်၊ ပျော်ရွှင်ဖွယ် ရေရှည်ပေါင်းသင်းမှုနှင့် အထွတ်အထိပ်။", illDignified: "မိသားစု ရန်ဖြစ်မှုနှင့် မိတ်ပျက်ခြင်း။", grandma: "l'innamorato (အချစ်ကြီးသူ)။ ဘေးမှ အနုတ်ကတ်များကို အကောင်းဘက်သို့ ပြောင်းစေသည်။", advice: "ချစ်ခြင်းမေတ္တာကို အပြည့်အဝ ယုံကြည်ပါ။", omen: "💍 Marriage Card" },
+            "JH": { dignified: "စိတ်ကူးယဉ်ဆန်ပြီး သဘောကောင်းသော လူငယ်၊ ချစ်ရသော ချစ်သူ၊ သား သို့မဟုတ် ညီ။", illDignified: "ပျင်းရိပြီး စနစ်တကျ လိမ်လည်တတ်သူ၊ စိတ်ဒဏ်ရာရလွယ်သူ။", grandma: "Giovin Biond (အလိုလိုက်ခံရသော အချစ်တော်လူငယ်)။", advice: "နူးညံ့သော စေတနာဖြင့် ဆက်ဆံပါ။" },
+            "QH": { dignified: "စိတ်ကူးဉာဏ်ကောင်းပြီး စာနာတတ်သော အမျိုးသမီး၊ မိခင် သို့မဟုတ် အရင်းနှီးဆုံး မိတ်ဆွေ။", illDignified: "စိတ်ဒဏ်ရာရလွယ်ပြီး ယုံကြည်ရခက်သူ၊ သဝန်တိုတတ်သူ။", grandma: "Judith (ဂျူးဒစ်)။ မေးမြန်းသူ၏ အချစ်ဆုံး မိခင် သို့မဟုတ် သူငယ်ချင်း။", advice: "မေတ္တာနှင့် စာနာမှုကို ရှေ့တန်းတင်ပါ။" },
+            "KH": { dignified: "ကျွမ်းကျင်သော ညှိနှိုင်းသူ၊ ကြင်နာသော ဖခင် သို့မဟုတ် ခင်ပွန်း။", illDignified: "မရိုးသားသော နှစ်ဖက်လှည့် လိမ်လည်သူ၊ စိတ်နုနယ်လွန်းသူ။", grandma: "Charlemagne (ရှားလမိန်ဘုရင်)။ စိတ်ဓာတ်နုနယ်၍ အထိမခံသော ပုဂ္ဂိုလ်။", advice: "ရင့်ကျက်သော မေတ္တာဖြင့် ဦးဆောင်ပါ။" },
 
-            "AC": { 
-                dignified: "စီးပွားရေးလုပ်ငန်းသစ်၊ တရားဝင် စာချုပ်စာတမ်းသစ်များ ချုပ်ဆိုရခြင်းနှင့် စိတ်ဓာတ်ခိုင်မာမှု။", 
-                illDignified: "စာချုပ်စာတမ်းများတွင် ချည်နှောင်ခံရခြင်း၊ တရားဝင်ဖိအားများ ပေါ်ပေါက်ခြင်း။",
-                grandma: "တရားဝင် စာချုပ်များ၊ ပေါင်နှံမှု၊ သေတမ်းစာများ။ အဖွဲ့အစည်းကြီးများ။", 
-                advice: "အခွင့်အလမ်းသစ်ကို အမိအရ ဆုပ်ကိုင်ပါ။" 
-            },
-            "2C": { 
-                dignified: "The Gift — အပြန်အလှန် ဆက်ဆံရေး၊ စီးပွားရေး ပူးပေါင်းမှု၊ သတင်းကောင်းနှင့် အကြံကောင်း ရရှိခြင်း။", 
-                illDignified: "စီးပွားရေးဖိတ်ကြားချက် ပျက်ပြယ်ခြင်း၊ မညီမျှသော ဖလှယ်မှု။",
-                grandma: "အကျိုး/အပြစ် နှစ်ဆဖြစ်ခြင်း၊ အစုံလိုက် ရောက်ရှိလာခြင်း။", 
-                advice: "မိတ်ဖက်များနှင့် ညီညွတ်စွာ လက်တွဲပါ။" 
-            },
-            "3C": { 
-                dignified: "အခွင့်အလမ်း တိုးချဲ့ခြင်း၊ စီးပွားရေး တိုးတက်ပွင့်လန်းခြင်း၊ အသိပညာ တိုးပွားခြင်း။", 
-                illDignified: "မိတ်ဖက် ၃ ဦးကြား သဘောထားကွဲလွဲခြင်း၊ လှည့်ဖြားခံရခြင်း။",
-                grandma: "သုံးရွက်လှ ခလိုဗာရွက် ကံကောင်းခြင်း။", 
-                advice: "လုပ်ငန်းချဲ့ထွင်ရန် အကောင်းဆုံးအချိန်ဖြစ်သည်။" 
-            },
-            "4C": { 
-                dignified: "လက်တွေ့ကျသော အုတ်မြစ်နှင့် တည်ငြိမ်မှု။ ခိုင်မာသော ရုံးခန်း၊ စားပွဲခြေ ၄ ချောင်း၊ ကား။", 
-                illDignified: "Mind your own business — မလိုအပ်ဘဲ ဘေးလူအရေး ဝင်စွက်ဖက်မိ၍ ထိခိုက်ခြင်း။",
-                grandma: "တည်ငြိမ်သော စီးပွားရေး ပတ်ဝန်းကျင်နှင့် ကားဖြင့် ခရီးသွားရခြင်း။", 
-                advice: "လက်ရှိအလုပ်ကို စနစ်တကျ တည်ငြိမ်အောင်လုပ်ပါ။" 
-            },
-            "5C": { 
-                dignified: "Action Card — ကာယ/ဉာဏ လုပ်အား စိုက်ထုတ်ရခြင်း၊ အလုပ်အကိုင် လက်တွေ့ အပြောင်းအလဲ။", 
-                illDignified: "အင်တာဗျူး သို့မဟုတ် ပရောဂျက်အသစ်တွင် အခက်အခဲကြုံရခြင်း၊ လုပ်အားအလဟဿဖြစ်ခြင်း။",
-                grandma: "ခန္ဓာကိုယ်နှင့် လက်များ၏ သင်္ကေတ။ အားကစားနှင့် လေ့ကျင့်ခန်း။", 
-                advice: "ဇွဲမလျှော့ဘဲ ကြိုးစားအားထုတ်ပါ။" 
-            },
-            "6C": { 
-                dignified: "သတင်းအချက်အလက်၊ မီဒီယာ၊ စာအုပ် (Book)၊ စာရေးသားခြင်းနှင့် တာဝန်ယူမှု။", 
-                illDignified: "သတင်းအချက်အလက် ပိတ်ပင်ခံရခြင်း၊ တာဝန်ယူမှု လွဲချော်ခြင်း။",
-                grandma: "စာပေပါရမီ ထူးချွန်ခြင်း။ အကြံဉာဏ်ကောင်း ရရှိခြင်း။", 
-                advice: "သတင်းအချက်အလက်များကို မှန်ကန်စွာ အသုံးချပါ။" 
-            },
-            "7C": { 
-                dignified: "Success assured - don't relax — အောင်မြင်မှု သေချာခြင်း၊ ပိုမိုကောင်းမွန်သော အပြောင်းအလဲ။", 
-                illDignified: "ပေါ့ဆနေပါက အခွင့်အရေး လက်လွတ်ရခြင်း၊ ငြင်းခုံရခြင်း။",
-                grandma: "Spades နှင့်တွဲပါက အခက်အခဲကို အကောင်းဆုံး ကျော်လွှားရမည့် အခြေအနေ။", 
-                advice: "ပေါ့ဆမနေဘဲ အဆုံးထိ ကြိုးစားပါ။" 
-            },
-            "8C": { 
-                dignified: "နေ့စဉ် အလုပ်အကိုင်၊ ဆွေးနွေးပွဲ၊ အစည်းအဝေးနှင့် အချိန်ကို စနစ်တကျ အသုံးချခြင်း။", 
-                illDignified: "ပျင်းရိခြင်း၊ ပုံစံခွက်ထဲ တိုင်ပတ်နေခြင်း၊ အချိန်ဖြုန်းမိခြင်း။",
-                grandma: "Spades များ ဝိုင်းပါက အလုပ်ခွင် ပျင်းရိငြီးငွေ့ဖွယ် ဖြစ်နေခြင်း။", 
-                advice: "အချိန်ဇယားဆွဲ၍ အလုပ်လုပ်ပါ။" 
-            },
-            "9C": { 
-                dignified: "ခရီးသွားခြင်းနှင့် စီးပွားရေး စာချုပ်များ အောင်မြင်စွာ ချုပ်ဆိုနိုင်ခြင်း။", 
-                illDignified: "ခရီးစဉ်များ ရက်ရွှေ့ဆိုင်းရခြင်း၊ အချိန်နှင့် အကွာအဝေးကြောင့် ကြန့်ကြာခြင်း။",
-                grandma: "ရေရှည်တည်တံ့သော စီးပွားရေး အခြေအနေ။", 
-                advice: "အဝေးခရီးနှင့် ရေရှည်အကျိုးစီးပွားကို အာရုံစိုက်ပါ။" 
-            },
-            "10C": { 
-                dignified: "စီးပွားရေးနှင့် အသက်မွေးဝမ်းကျောင်းတွင် အထွတ်အထိပ်ရောက်ခြင်း။ ရေထု (Body of water)။", 
-                illDignified: "အလုပ်ဖိအား များပြားသဖြင့် လူမှုရေးဘဝ ထိခိုက်ခြင်း၊ လမ်းပျောက်နေခြင်း။",
-                grandma: "ရေကြောင်းခရီးနှင့် ဘီး (Wheel)။ Face Card တွဲပါက စီးပွားရေးအကြီးအကဲ ဖြစ်မည်။", 
-                advice: "အောင်မြင်မှု အထွတ်အထိပ်ကို ယုံကြည်စွာ ထိန်းသိမ်းပါ။" 
-            },
-            "JC": { 
-                dignified: "သစ္စာရှိသော မိတ်ဆွေ၊ အကြံပေး၊ အလုပ်ကြိုးစားသော လူငယ် (Domestico)။", 
-                illDignified: "စိတ်သဘောထား ကျဉ်းမြောင်းပြီး ပဋိပက္ခကို လိုလားသူ။ ရုတ်တရက် နေရာပြောင်းရွှေ့ခြင်း။",
-                grandma: "မေးမြန်းသူအား ကူညီဆောင်ရွက်ပေးမည့် လုပ်ဖော်ကိုင်ဖက် သို့မဟုတ် ကျောင်းသား။", 
-                advice: "ရိုးသားသော မိတ်ဆွေ၏ အကူအညီကို ရယူပါ။" 
-            },
-            "QC": { 
-                dignified: "Successful Woman of Business — စီးပွားရေးတွင် ထက်မြက်သော လက်တွေ့ဆန်သည့် အမျိုးသမီး။", 
-                illDignified: "မနာလိုဝန်တိုတတ်ပြီး ဆရာလုပ်လိုသူ။ အလုပ်ခွင်တင်းမာမှု။",
-                grandma: "Argine (မိဖုရား)။ ပရဟိတနှင့် ရန်ပုံငွေပွဲများ။ အကောင်းဆုံး မိတ်ဆွေ။", 
-                advice: "ပေါင်းသင်းဆက်ဆံရေး ကောင်းမွန်အောင် တည်ဆောက်ပါ။" 
-            },
-            "KC": { 
-                dignified: "The Married Businessman — ရိုးသားပြီး တာဝန်သိတတ်သော စီးပွားရေး အာဏာပိုင် ပုဂ္ဂိုလ်ကြီး။", 
-                illDignified: "အာဏာရှင်ဆန်ပြီး သည်းခံစိတ်မဲ့သူ၊ ဖောက်ပြန်တတ်သူ။",
-                grandma: "Alexander the Great (မဟာအလက်ဇန္ဒား)။ အိမ်ထောင်ရှိ စီးပွားရေးသမားကြီး။", 
-                advice: "အတွေ့အကြုံရှိသော အကြီးအကဲ၏ လမ်းညွှန်မှုကို ခံယူပါ။" 
-            },
+            "AC": { dignified: "စီးပွားရေးလုပ်ငန်းသစ်၊ တရားဝင် စာချုပ်စာတမ်းသစ်များ ချုပ်ဆိုရခြင်းနှင့် စိတ်ဓာတ်ခိုင်မာမှု။", illDignified: "စာချုပ်စာတမ်းများတွင် ချည်နှောင်ခံရခြင်း၊ တရားဝင်ဖိအားများ ပေါ်ပေါက်ခြင်း။", grandma: "တရားဝင် စာချုပ်များ၊ ပေါင်နှံမှု၊ သေတမ်းစာများ။ အဖွဲ့အစည်းကြီးများ။", advice: "အခွင့်အလမ်းသစ်ကို အမိအရ ဆုပ်ကိုင်ပါ။" },
+            "2C": { dignified: "The Gift — အပြန်အလှန် ဆက်ဆံရေး၊ စီးပွားရေး ပူးပေါင်းမှု၊ သတင်းကောင်းနှင့် အကြံကောင်း ရရှိခြင်း။", illDignified: "စီးပွားရေးဖိတ်ကြားချက် ပျက်ပြယ်ခြင်း၊ မညီမျှသော ဖလှယ်မှု။", grandma: "အကျိုး/အပြစ် နှစ်ဆဖြစ်ခြင်း၊ အစုံလိုက် ရောက်ရှိလာခြင်း။", advice: "မိတ်ဖက်များနှင့် ညီညွတ်စွာ လက်တွဲပါ။" },
+            "3C": { dignified: "အခွင့်အလမ်း တိုးချဲ့ခြင်း၊ စီးပွားရေး တိုးတက်ပွင့်လန်းခြင်း၊ အသိပညာ တိုးပွားခြင်း။", illDignified: "မိတ်ဖက် ၃ ဦးကြား သဘောထားကွဲလွဲခြင်း၊ လှည့်ဖြားခံရခြင်း။", grandma: "သုံးရွက်လှ ခလိုဗာရွက် ကံကောင်းခြင်း။", advice: "လုပ်ငန်းချဲ့ထွင်ရန် အကောင်းဆုံးအချိန်ဖြစ်သည်။" },
+            "4C": { dignified: "လက်တွေ့ကျသော အုတ်မြစ်နှင့် တည်ငြိမ်မှု။ ခိုင်မာသော ရုံးခန်း၊ စားပွဲခြေ ၄ ချောင်း၊ ကား။", illDignified: "Mind your own business — မလိုအပ်ဘဲ ဘေးလူအရေး ဝင်စွက်ဖက်မိ၍ ထိခိုက်ခြင်း။", grandma: "တည်ငြိမ်သော စီးပွားရေး ပတ်ဝန်းကျင်နှင့် ကားဖြင့် ခရီးသွားရခြင်း။", advice: "လက်ရှိအလုပ်ကို စနစ်တကျ တည်ငြိမ်အောင်လုပ်ပါ။" },
+            "5C": { dignified: "Action Card — ကာယ/ဉာဏ လုပ်အား စိုက်ထုတ်ရခြင်း၊ အလုပ်အကိုင် လက်တွေ့ အပြောင်းအလဲ။", illDignified: "အင်တာဗျူး သို့မဟုတ် ပရောဂျက်အသစ်တွင် အခက်အခဲကြုံရခြင်း၊ လုပ်အားအလဟဿဖြစ်ခြင်း။", grandma: "ခန္ဓာကိုယ်နှင့် လက်များ၏ သင်္ကေတ။ အားကစားနှင့် လေ့ကျင့်ခန်း။", advice: "ဇွဲမလျှော့ဘဲ ကြိုးစားအားထုတ်ပါ။" },
+            "6C": { dignified: "သတင်းအချက်အလက်၊ မီဒီယာ၊ စာအုပ် (Book)၊ စာရေးသားခြင်းနှင့် တာဝန်ယူမှု။", illDignified: "သတင်းအချက်အလက် ပိတ်ပင်ခံရခြင်း၊ တာဝန်ယူမှု လွဲချော်ခြင်း။", grandma: "စာပေပါရမီ ထူးချွန်ခြင်း။ အကြံဉာဏ်ကောင်း ရရှိခြင်း။", advice: "သတင်းအချက်အလက်များကို မှန်ကန်စွာ အသုံးချပါ။" },
+            "7C": { dignified: "Success assured - don't relax — အောင်မြင်မှု သေချာခြင်း၊ ပိုမိုကောင်းမွန်သော အပြောင်းအလဲ။", illDignified: "ပေါ့ဆနေပါက အခွင့်အရေး လက်လွတ်ရခြင်း၊ ငြင်းခုံရခြင်း။", grandma: "Spades နှင့်တွဲပါက အခက်အခဲကို အကောင်းဆုံး ကျော်လွှားရမည့် အခြေအနေ။", advice: "ပေါ့ဆမနေဘဲ အဆုံးထိ ကြိုးစားပါ။" },
+            "8C": { dignified: "နေ့စဉ် အလုပ်အကိုင်၊ ဆွေးနွေးပွဲ၊ အစည်းအဝေးနှင့် အချိန်ကို စနစ်တကျ အသုံးချခြင်း။", illDignified: "ပျင်းရိခြင်း၊ ပုံစံခွက်ထဲ တိုင်ပတ်နေခြင်း၊ အချိန်ဖြုန်းမိခြင်း။", grandma: "Spades များ ဝိုင်းပါက အလုပ်ခွင် ပျင်းရိငြီးငွေ့ဖွယ် ဖြစ်နေခြင်း။", advice: "အချိန်ဇယားဆွဲ၍ အလုပ်လုပ်ပါ။" },
+            "9C": { dignified: "ခရီးသွားခြင်းနှင့် စီးပွားရေး စာချုပ်များ အောင်မြင်စွာ ချုပ်ဆိုနိုင်ခြင်း။", illDignified: "ခရီးစဉ်များ ရက်ရွှေ့ဆိုင်းရခြင်း၊ အချိန်နှင့် အကွာအဝေးကြောင့် ကြန့်ကြာခြင်း။", grandma: "ရေရှည်တည်တံ့သော စီးပွားရေး အခြေအနေ။", advice: "အဝေးခရီးနှင့် ရေရှည်အကျိုးစီးပွားကို အာရုံစိုက်ပါ။" },
+            "10C": { dignified: "စီးပွားရေးနှင့် အသက်မွေးဝမ်းကျောင်းတွင် အထွတ်အထိပ်ရောက်ခြင်း။ ရေထု (Body of water)။", illDignified: "အလုပ်ဖိအား များပြားသဖြင့် လူမှုရေးဘဝ ထိခိုက်ခြင်း၊ လမ်းပျောက်နေခြင်း။", grandma: "ရေကြောင်းခရီးနှင့် ဘီး (Wheel)။ Face Card တွဲပါက စီးပွားရေးအကြီးအကဲ ဖြစ်မည်။", advice: "အောင်မြင်မှု အထွတ်အထိပ်ကို ယုံကြည်စွာ ထိန်းသိမ်းပါ။" },
+            "JC": { dignified: "သစ္စာရှိသော မိတ်ဆွေ၊ အကြံပေး၊ အလုပ်ကြိုးစားသော လူငယ် (Domestico)။", illDignified: "စိတ်သဘောထား ကျဉ်းမြောင်းပြီး ပဋိပက္ခကို လိုလားသူ။ ရုတ်တရက် နေရာပြောင်းရွှေ့ခြင်း။", grandma: "မေးမြန်းသူအား ကူညီဆောင်ရွက်ပေးမည့် လုပ်ဖော်ကိုင်ဖက် သို့မဟုတ် ကျောင်းသား။", advice: "ရိုးသားသော မိတ်ဆွေ၏ အကူအညီကို ရယူပါ။" },
+            "QC": { dignified: "Successful Woman of Business — စီးပွားရေးတွင် ထက်မြက်သော လက်တွေ့ဆန်သည့် အမျိုးသမီး။", illDignified: "မနာလိုဝန်တိုတတ်ပြီး ဆရာလုပ်လိုသူ။ အလုပ်ခွင်တင်းမာမှု။", grandma: "Argine (မိဖုရား)။ ပရဟိတနှင့် ရန်ပုံငွေပွဲများ။ အကောင်းဆုံး မိတ်ဆွေ။", advice: "ပေါင်းသင်းဆက်ဆံရေး ကောင်းမွန်အောင် တည်ဆောက်ပါ။" },
+            "KC": { dignified: "The Married Businessman — ရိုးသားပြီး တာဝန်သိတတ်သော စီးပွားရေး အာဏာပိုင် ပုဂ္ဂိုလ်ကြီး။", illDignified: "အာဏာရှင်ဆန်ပြီး သည်းခံစိတ်မဲ့သူ၊ ဖောက်ပြန်တတ်သူ။", grandma: "Alexander the Great (မဟာအလက်ဇန္ဒား)။ အိမ်ထောင်ရှိ စီးပွားရေးသမားကြီး။", advice: "အတွေ့အကြုံရှိသော အကြီးအကဲ၏ လမ်းညွှန်မှုကို ခံယူပါ။" },
 
-            "AD": { 
-                dignified: "ဘဏ္ဍာရေးဆိုင်ရာ အစသစ်များ၊ လက်စွပ် (Ring)၊ အိမ်ခြံမြေနှင့် ရုပ်ဝတ္ထု ရင်းနှီးမြှုပ်နှံမှု အောင်မြင်ခြင်း။", 
-                illDignified: "ငွေကုန်ကြေးကျ များပြားခြင်း၊ မင်္ဂလာသတင်း ကြန့်ကြာခြင်း။",
-                grandma: "စေ့စပ်ကြောင်းလမ်းခြင်း သို့မဟုတ် ငွေစက္ကူသစ်။ ဝမ်းမြောက်စရာ သတင်း။", 
-                advice: "ငွေကြေးစီမံကိန်းအသစ်ကို စတင်ပါ။" 
-            },
-            "2D": { 
-                dignified: "ဘဏ္ဍာရေး ပူးပေါင်းဆောင်ရွက်မှု၊ Time Card (၂ ရက်၊ ၂ ပတ် သို့မဟုတ် ၂ နှစ်အတွင်း အကျိုးဖြစ်ထွန်းခြင်း)။", 
-                illDignified: "မဆင်မခြင် သုံးစွဲသဖြင့် အကြွေးနွံနစ်ခြင်း၊ မတည်ငြိမ်သော ငွေကြေးအခြေအနေ။",
-                grandma: "ငွေကြေးလက်ဆောင် သို့မဟုတ် အကြံဉာဏ် ရရှိခြင်း။", 
-                advice: "အသုံးစရိတ်ကို သတိထား ထိန်းကျောင်းပါ။" 
-            },
-            "3D": { 
-                dignified: "Financial Opportunity — ရာထူးတိုး၍ ငွေကြေးတိုးတက်လာခြင်း၊ ဘေးထွက်အလုပ်မှ ဝင်ငွေရခြင်း။", 
-                illDignified: "စိုးရိမ်မှု လွန်ကဲသဖြင့် အခွင့်အရေး လက်လွတ်ရခြင်း၊ စိတ်ကစားခြင်း။",
-                grandma: "၃ ကလပ်နှင့်တွဲပါက စီးပွားရေး အခွင့်အလမ်း အလွန်ခိုင်မာခြင်း။", 
-                advice: "အပိုဝင်ငွေရမည့် လမ်းစကို ချဲ့ထွင်ပါ။" 
-            },
-            "4D": { 
-                dignified: "ဘဏ္ဍာရေး ခိုင်မာတည်ငြိမ်မှု။ စာရွက်စာတမ်းများ၊ ဘဏ်စာရင်း၊ ချက်လက်မှတ်၊ မီးခံသေတ္တာ။", 
-                illDignified: "ငွေကြေးသုံးစွဲမှု ကြီးတစ်ခု ပြုလုပ်ရခြင်း၊ ရုတ်တရက် အကုန်အကျများခြင်း။",
-                grandma: "The Card of Financial Protection။ ရတနာသေတ္တာ၊ လုံခြုံရေးသေတ္တာ။", 
-                advice: "ငွေကြေးကို လုံခြုံစွာ စုဆောင်းထိန်းသိမ်းပါ။" 
-            },
-            "5D": { 
-                dignified: "Card of Karma — အကြောင်းနှင့် အကျိုးတရားများ၊ အလုပ်အပြောင်းအလဲနှင့် ဘဏ်အကူအညီ ရရှိခြင်း။", 
-                illDignified: "ငွေကြေးကျပ်တည်း၍ မိတ်ဆွေထံမှ အကူအညီ ရယူရခြင်း၊ တရားရုံး အမှုအခင်း။",
-                grandma: "Landholdings (ပိုင်ဆိုင်သော မြေကွက်များ)။ ၂ Jacks နှင့်တွဲပါက တရားရုံး အမှုအခင်း။", 
-                advice: "တရားမျှတ မှန်ကန်စွာ လုပ်ဆောင်ပါ။" 
-            },
-            "6D": { 
-                dignified: "ချွေတာစုဆောင်းမှုကြောင့် ဘဏ္ဍာရေး တည်ငြိမ်ခြင်း၊ ဘောနပ်စ်ရခြင်း၊ စရိတ်ကာမိရုံ အမြတ်ရခြင်း။", 
-                illDignified: "ပိုင်ဆိုင်မှု သိမ်းဆည်းခံရခြင်း သို့မဟုတ် ငွေကြေးဆုံးရှုံးခြင်း၊ သတင်းပိတ်ပင်ခံရခြင်း။",
-                grandma: "လျှပ်စစ်ဓာတ်၊ စွမ်းအင်နှင့် နှစ်သိမ့်ဆွေးနွေးပွဲ (Counseling) မှ အကျိုးရခြင်း။", 
-                advice: "ရရန်ရှိသော ငွေကြေးများကို စနစ်တကျ ရှင်းလင်းပါ။" 
-            },
-            "7D": { 
-                dignified: "Wise investments — ပညာရှိသော ရင်းနှီးမြှုပ်နှံမှု၊ လက်ဝယ်ရှိ လည်ပတ်ငွေ၊ ဆုလာဘ်ရရှိခြင်း။", 
-                illDignified: "လောင်းကစားတွင် ငွေကြေးဆုံးရှုံးခြင်း၊ ပစ္စည်းဥစ္စာ သူခိုးခိုးခံရခြင်း။",
-                grandma: "Spades ပါဝင်ပါက ငွေကြေးဆိုင်ရာ စိတ်ဖိစီးမှုနှင့် လောင်းကစား ရှုံးနိမ့်ခြင်း။", 
-                advice: "လက်ဝယ်ရှိငွေကို စနစ်တကျ ရင်းနှီးမြှုပ်နှံပါ။" 
-            },
-            "8D": { 
-                dignified: "စီးပွားရေး ရင်းနှီးမြှုပ်နှံမှုများ အောင်မြင်ခြင်း၊ ဘတ်ဂျက်ဆွဲခြင်းနှင့် ဝင်ငွေ/ထွက်ငွေ ထိန်းညှိခြင်း။", 
-                illDignified: "Money coming and going — မသမာမှုနှင့် ငွေကြေး အလွဲသုံးစားမှုများ ကြုံရခြင်း၊ ငွေဝင်လိုက်ထွက်လိုက်ဖြစ်ခြင်း။",
-                grandma: "Spectacles (မျက်မှန်)။ အနာဂတ်ကို ထိုးထွင်းမြင်ခြင်း သို့မဟုတ် မျက်စိကျန်းမာရေး။", 
-                advice: "ဘတ်ဂျက်ကို စနစ်တကျ စိစစ်ပါ။" 
-            },
-            "9D": { 
-                dignified: "ပုံမှန်လစာပြင်ပမှ အပိုငွေ၊ အခွန်ပြန်အမ်းငွေ၊ အမွေအနှစ် သို့မဟုတ် အစိုးရချက်လက်မှတ် ရရှိခြင်း။", 
-                illDignified: "အခြားသူများအား မဖြစ်မနေ လှူဒါန်းထောက်ပံ့ရသဖြင့် ငွေကုန်ခြင်း။",
-                grandma: "မြို့နယ်/အစိုးရ အဖွဲ့အစည်းများမှ ငွေဝင်ခြင်း။ စိတ်ပိုင်းဆိုင်ရာ ဆွဲဆောင်မှု။", 
-                advice: "မိမိအရည်အချင်းဖြင့် ဝင်ငွေတိုးအောင် ကြိုးစားပါ။" 
-            },
-            "10D": { 
-                dignified: "တစ်သက်တာ ကြွယ်ဝချမ်းသာမည့် အခြေအနေ၊ အပြည့်အဝ ငွေကြေးလုံခြုံမှုနှင့် ဘဏ်တိုက်ကြီး။", 
-                illDignified: "အမွေခွဲဝေမှုကြောင့် မိသားစု ပြဿနာဖြစ်ခြင်း။",
-                grandma: "Bank (ဘဏ်ကတ်)။ ပင်စင်ရန်ပုံငွေနှင့် မေးမြန်းသူ၏ တကယ့် နိမိတ်ပြတန်ဖိုး အစစ်အမှန်။", 
-                advice: "ကြီးမားသော ဓနဥစ္စာကို ခိုင်မာအောင် တည်ဆောက်ပါ။",
-                omen: "🏦 The Bank Card"
-            },
-            "JD": { 
-                dignified: "လက်တွေ့ဆန်ပြီး ငွေကြေးချောင်လည်သော လူငယ်၊ ဘဏ်ဝန်ထမ်း သို့မဟုတ် အစိုးရဝန်ထမ်းငယ်။", 
-                illDignified: "ကပ်စေးနည်းပြီး အတ္တကြီးသူ၊ အသုံးအဖြုန်း ကြီးလွန်းသူ။",
-                grandma: "ထိမ်းမြားခြင်းမှ တော်စပ်လာသော အမျိုးသားလူငယ် (ယောက်ဖ၊ မရီး၊ သမက်)။", 
-                advice: "တက်ကြွသော စွမ်းအင်ဖြင့် အခွင့်အလမ်း ရှာပါ။" 
-            },
-            "QD": { 
-                dignified: "ပါးနပ်သော စီးပွားရေး အမျိုးသမီး၊ စာရင်းကိုင်၊ ဘဏ်မန်နေဂျာ သို့မဟုတ် အရာရှိ။", 
-                illDignified: "သုံးစွဲမှု မဆင်မခြင် ရှိသူ၊ မနာလိုတတ်သော အမျိုးသမီးဆွေမျိုး။",
-                grandma: "Rachel (ရာချယ်)။ အိမ်ထောင်ပြုခြင်းမှ တော်စပ်လာသော အမျိုးသမီးဆွေမျိုး။", 
-                advice: "စနစ်ကျသော အမျိုးသမီး၏ အကြံဉာဏ်ကို ရယူပါ။" 
-            },
-            "KD": { 
-                dignified: "တည်ငြိမ်၍ ယုံကြည်ရသော ဘဏ္ဍာရေးခေါင်းဆောင်၊ ရင်းနှီးမြှုပ်နှံသူ သို့မဟုတ် နိုင်ငံရေးသမား။", 
-                illDignified: "ပျင်းရိပြီး ရုပ်ဝတ္ထုကိုသာ မက်မောသူ၊ စီးပွားရေး အတ္တသမား။",
-                grandma: "Julius Caesar (ဆီဇာ)။ ဩဇာကြီးသော စီးပွားရေးလုပ်ငန်းရှင်ကြီး။", 
-                advice: "ရဲဝံ့သော ဘဏ္ဍာရေး မဟာဗျူဟာကို ချမှတ်ပါ။" 
-            }
+            "AD": { dignified: "ဘဏ္ဍာရေးဆိုင်ရာ အစသစ်များ၊ လက်စွပ် (Ring)၊ အိမ်ခြံမြေနှင့် ရုပ်ဝတ္ထု ရင်းနှီးမြှုပ်နှံမှု အောင်မြင်ခြင်း။", illDignified: "ငွေကုန်ကြေးကျ များပြားခြင်း၊ မင်္ဂလာသတင်း ကြန့်ကြာခြင်း။", grandma: "စေ့စပ်ကြောင်းလမ်းခြင်း သို့မဟုတ် ငွေစက္ကူသစ်။ ဝမ်းမြောက်စရာ သတင်း။", advice: "ငွေကြေးစီမံကိန်းအသစ်ကို စတင်ပါ။" },
+            "2D": { dignified: "ဘဏ္ဍာရေး ပူးပေါင်းဆောင်ရွက်မှု၊ Time Card (၂ ရက်၊ ၂ ပတ် သို့မဟုတ် ၂ နှစ်အတွင်း အကျိုးဖြစ်ထွန်းခြင်း)။", illDignified: "မဆင်မခြင် သုံးစွဲသဖြင့် အကြွေးနွံနစ်ခြင်း၊ မတည်ငြိမ်သော ငွေကြေးအခြေအနေ။", grandma: "ငွေကြေးလက်ဆောင် သို့မဟုတ် အကြံဉာဏ် ရရှိခြင်း။", advice: "အသုံးစရိတ်ကို သတိထား ထိန်းကျောင်းပါ။" },
+            "3D": { dignified: "Financial Opportunity — ရာထူးတိုး၍ ငွေကြေးတိုးတက်လာခြင်း၊ ဘေးထွက်အလုပ်မှ ဝင်ငွေရခြင်း။", illDignified: "စိုးရိမ်မှု လွန်ကဲသဖြင့် အခွင့်အရေး လက်လွတ်ရခြင်း၊ စိတ်ကစားခြင်း။", grandma: "၃ ကလပ်နှင့်တွဲပါက စီးပွားရေး အခွင့်အလမ်း အလွန်ခိုင်မာခြင်း။", advice: "အပိုဝင်ငွေရမည့် လမ်းစကို ချဲ့ထွင်ပါ။" },
+            "4D": { dignified: "ဘဏ္ဍာရေး ခိုင်မာတည်ငြိမ်မှု။ စာရွက်စာတမ်းများ၊ ဘဏ်စာရင်း၊ ချက်လက်မှတ်၊ မီးခံသေတ္တာ။", illDignified: "ငွေကြေးသုံးစွဲမှု ကြီးတစ်ခု ပြုလုပ်ရခြင်း၊ ရုတ်တရက် အကုန်အကျများခြင်း။", grandma: "The Card of Financial Protection။ ရတနာသေတ္တာ၊ လုံခြုံရေးသေတ္တာ။", advice: "ငွေကြေးကို လုံခြုံစွာ စုဆောင်းထိန်းသိမ်းပါ။" },
+            "5D": { dignified: "Card of Karma — အကြောင်းနှင့် အကျိုးတရားများ၊ အလုပ်အပြောင်းအလဲနှင့် ဘဏ်အကူအညီ ရရှိခြင်း။", illDignified: "ငွေကြေးကျပ်တည်း၍ မိတ်ဆွေထံမှ အကူအညီ ရယူရခြင်း၊ တရားရုံး အမှုအခင်း။", grandma: "Landholdings (ပိုင်ဆိုင်သော မြေကွက်များ)။ ၂ Jacks နှင့်တွဲပါက တရားရုံး အမှုအခင်း။", advice: "တရားမျှတ မှန်ကန်စွာ လုပ်ဆောင်ပါ။" },
+            "6D": { dignified: "ချွေတာစုဆောင်းမှုကြောင့် ဘဏ္ဍာရေး တည်ငြိမ်ခြင်း၊ ဘောနပ်စ်ရခြင်း၊ စရိတ်ကာမိရုံ အမြတ်ရခြင်း။", illDignified: "ပိုင်ဆိုင်မှု သိမ်းဆည်းခံရခြင်း သို့မဟုတ် ငွေကြေးဆုံးရှုံးခြင်း၊ သတင်းပိတ်ပင်ခံရခြင်း။", grandma: "လျှပ်စစ်ဓာတ်၊ စွမ်းအင်နှင့် နှစ်သိမ့်ဆွေးနွေးပွဲ (Counseling) မှ အကျိုးရခြင်း။", advice: "ရရန်ရှိသော ငွေကြေးများကို စနစ်တကျ ရှင်းလင်းပါ။" },
+            "7D": { dignified: "Wise investments — ပညာရှိသော ရင်းနှီးမြှုပ်နှံမှု၊ လက်ဝယ်ရှိ လည်ပတ်ငွေ၊ ဆုလာဘ်ရရှိခြင်း။", illDignified: "လောင်းကစားတွင် ငွေကြေးဆုံးရှုံးခြင်း၊ ပစ္စည်းဥစ္စာ သူခိုးခိုးခံရခြင်း။", grandma: "Spades ပါဝင်ပါက ငွေကြေးဆိုင်ရာ စိတ်ဖိစီးမှုနှင့် လောင်းကစား ရှုံးနိမ့်ခြင်း။", advice: "လက်ဝယ်ရှိငွေကို စနစ်တကျ ရင်းနှီးမြှုပ်နှံပါ။" },
+            "8D": { dignified: "စီးပွားရေး ရင်းနှီးမြှုပ်နှံမှုများ အောင်မြင်ခြင်း၊ ဘတ်ဂျက်ဆွဲခြင်းနှင့် ဝင်ငွေ/ထွက်ငွေ ထိန်းညှိခြင်း။", illDignified: "Money coming and going — မသမာမှုနှင့် ငွေကြေး အလွဲသုံးစားမှုများ ကြုံရခြင်း၊ ငွေဝင်လိုက်ထွက်လိုက်ဖြစ်ခြင်း။", grandma: "Spectacles (မျက်မှန်)။ အနာဂတ်ကို ထိုးထွင်းမြင်ခြင်း သို့မဟုတ် မျက်စိကျန်းမာရေး။", advice: "ဘတ်ဂျက်ကို စနစ်တကျ စိစစ်ပါ။" },
+            "9D": { dignified: "ပုံမှန်လစာပြင်ပမှ အပိုငွေ၊ အခွန်ပြန်အမ်းငွေ၊ အမွေအနှစ် သို့မဟုတ် အစိုးရချက်လက်မှတ် ရရှိခြင်း။", illDignified: "အခြားသူများအား မဖြစ်မနေ လှူဒါန်းထောက်ပံ့ရသဖြင့် ငွေကုန်ခြင်း။", grandma: "မြို့နယ်/အစိုးရ အဖွဲ့အစည်းများမှ ငွေဝင်ခြင်း။ စိတ်ပိုင်းဆိုင်ရာ ဆွဲဆောင်မှု။", advice: "မိမိအရည်အချင်းဖြင့် ဝင်ငွေတိုးအောင် ကြိုးစားပါ။" },
+            "10D": { dignified: "တစ်သက်တာ ကြွယ်ဝချမ်းသာမည့် အခြေအနေ၊ အပြည့်အဝ ငွေကြေးလုံခြုံမှုနှင့် ဘဏ်တိုက်ကြီး။", illDignified: "အမွေခွဲဝေမှုကြောင့် မိသားစု ပြဿနာဖြစ်ခြင်း။", grandma: "Bank (ဘဏ်ကတ်)။ ပင်စင်ရန်ပုံငွေနှင့် မေးမြန်းသူ၏ တကယ့် နိမိတ်ပြတန်ဖိုး အစစ်အမှန်။", advice: "ကြီးမားသော ဓနဥစ္စာကို ခိုင်မာအောင် တည်ဆောက်ပါ။", omen: "🏦 The Bank Card" },
+            "JD": { dignified: "လက်တွေ့ဆန်ပြီး ငွေကြေးချောင်လည်သော လူငယ်၊ ဘဏ်ဝန်ထမ်း သို့မဟုတ် အစိုးရဝန်ထမ်းငယ်။", illDignified: "ကပ်စေးနည်းပြီး အတ္တကြီးသူ၊ အသုံးအဖြုန်း ကြီးလွန်းသူ။", grandma: "ထိမ်းမြားခြင်းမှ တော်စပ်လာသော အမျိုးသားလူငယ် (ယောက်ဖ၊ မရီး၊ သမက်)။", advice: "တက်ကြွသော စွမ်းအင်ဖြင့် အခွင့်အလမ်း ရှာပါ။" },
+            "QD": { dignified: "ပါးနပ်သော စီးပွားရေး အမျိုးသမီး၊ စာရင်းကိုင်၊ ဘဏ်မန်နေဂျာ သို့မဟုတ် အရာရှိ။", illDignified: "သုံးစွဲမှု မဆင်မခြင် ရှိသူ၊ မနာလိုတတ်သော အမျိုးသမီးဆွေမျိုး။", grandma: "Rachel (ရာချယ်)။ အိမ်ထောင်ပြုခြင်းမှ တော်စပ်လာသော အမျိုးသမီးဆွေမျိုး။", advice: "စနစ်ကျသော အမျိုးသမီး၏ အကြံဉာဏ်ကို ရယူပါ။" },
+            "KD": { dignified: "တည်ငြိမ်၍ ယုံကြည်ရသော ဘဏ္ဍာရေးခေါင်းဆောင်၊ ရင်းနှီးမြှုပ်နှံသူ သို့မဟုတ် နိုင်ငံရေးသမား။", illDignified: "ပျင်းရိပြီး ရုပ်ဝတ္ထုကိုသာ မက်မောသူ၊ စီးပွားရေး အတ္တသမား။", grandma: "Julius Caesar (ဆီဇာ)။ ဩဇာကြီးသော စီးပွားရေးလုပ်ငန်းရှင်ကြီး။", advice: "ရဲဝံ့သော ဘဏ္ဍာရေး မဟာဗျူဟာကို ချမှတ်ပါ။" }
         };
 
-        let fullDeck = [];
-        let solarOrderedDeck = []; // Unshuffled Solar Order Deck (Spades, Hearts, Diamonds, Clubs)
+        let activeDeck = [];
+        let solarOrderedDeck = [];
         let cardMap = {};
         let spreadMode = 1;
         let selectedCards = [];
         let bottomCards = [];
+        let settings = {
+            deckType: "52",
+            shuffleRigor: "standard",
+            animations: true
+        };
 
-        function build52Deck() {
+        function buildDeck() {
             fullDeck = [];
             solarOrderedDeck = [];
             cardMap = {};
-            // Solar Value Order: 1-13 Spades, 14-26 Hearts, 27-39 Diamonds, 40-52 Clubs
             const solarSuits = ["S", "H", "D", "C"];
-            const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+            const allRanks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"];
+            
+            // If 32-card deck is selected, remove 2, 3, 4, 5, 6
+            const ranks = settings.deckType === "32" ? ["A", "7", "8", "9", "10", "J", "Q", "K"] : allRanks;
 
             for (let s of solarSuits) {
                 for (let r of ranks) {
@@ -1505,7 +1338,7 @@
         }
 
         /* =========================================================
-           3. NAVIGATION & UI CONTROLS
+           3. NAVIGATION & SETTINGS MODAL
         ========================================================= */
         function toggleMainMenu() {
             document.getElementById('main-nav-drawer').classList.toggle('open');
@@ -1523,7 +1356,10 @@
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') closeModal();
+            if (e.key === 'Escape') {
+                closeModal();
+                closeSettingsModal();
+            }
         });
 
         function switchTab(tabName) {
@@ -1547,13 +1383,40 @@
             }
         }
 
+        function openSettingsModal() {
+            document.getElementById('setting-deck-type').value = settings.deckType;
+            document.getElementById('setting-shuffle-rigor').value = settings.shuffleRigor;
+            document.getElementById('setting-sound').checked = soundEnabled;
+            document.getElementById('setting-anim').checked = settings.animations;
+            document.getElementById('settings-modal').classList.add('active');
+        }
+
+        function closeSettingsModal() {
+            document.getElementById('settings-modal').classList.remove('active');
+        }
+
+        function updateSettings() {
+            const oldDeckType = settings.deckType;
+            settings.deckType = document.getElementById('setting-deck-type').value;
+            settings.shuffleRigor = document.getElementById('setting-shuffle-rigor').value;
+            settings.animations = document.getElementById('setting-anim').checked;
+
+            if (oldDeckType !== settings.deckType) {
+                buildDeck();
+                performWashAndShuffle();
+            }
+        }
+
         /* =========================================================
-           4. DECK SHUFFLING & INTERACTION
+           4. TABLE LAYOUT & PROFESSIONAL SPREAD RENDERER
         ========================================================= */
         function shuffleArray(arr) {
-            for (let i = arr.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [arr[i], arr[j]] = [arr[j], arr[i]];
+            const rounds = settings.shuffleRigor === 'deep' ? 5 : 2;
+            for (let r = 0; r < rounds; r++) {
+                for (let i = arr.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [arr[i], arr[j]] = [arr[j], arr[i]];
+                }
             }
         }
 
@@ -1569,7 +1432,7 @@
             const activeBtn = document.getElementById('btn-mode-' + mode);
             if (activeBtn) activeBtn.classList.add('active');
             document.getElementById('spread-dropdown').classList.remove('open');
-            shuffleDeck(true);
+            performWashAndShuffle();
         }
 
         function updateStatusText() {
@@ -1583,12 +1446,12 @@
             }
 
             if (spreadMode === 1) {
-                statusEl.innerHTML = `<span>🖐️ ဘယ်လက်စည်းမျဉ်း -</span> မသိစိတ်နှင့်ချိတ်ဆက်ရန် ဘယ်လက်ဖြင့် ဖဲချပ် <span>၁ ချပ်</span> ရွေးပါ။`;
+                statusEl.innerHTML = `<span>🖐️ ဘယ်လက်စည်းမျဉ်း -</span> မသိစိတ်နှင့်ချိတ်ဆက်ရန် ဘယ်လက်ဖြင့် ဖဲပုံထဲမှ <span>၁ ချပ်</span> နှိပ်၍ ရွေးပါ။`;
             } else if (spreadMode === 3) {
                 const labels = ["၁။ အတိတ်", "၂။ ပစ္စုပ္ပန်", "၃။ အနာဂတ် (အဆုံးအဖြတ်)"];
                 statusEl.innerHTML = `<span>⏳ ၃ ချပ်တွဲစနစ် -</span> [ ${labels[selectedCards.length]} ] အတွက် ကတ်ရွေးပါ — ကျန် ${rem} ချပ်။`;
             } else if (spreadMode === 9) {
-                statusEl.innerHTML = `<span>⊞ ၉ ချပ်စနစ် (3x3 Grid) -</span> ဖဲချပ် ၉ ချပ် ရွေးချယ်ပါ — ရွေးပြီး ${selectedCards.length}/၉ ချပ်။`;
+                statusEl.innerHTML = `<span>⊞ ၉ ချပ်စနစ် (3x3 Grid) -</span> 3x3 ဇယားခုံပေါ်တွင် ဖဲချပ် ၉ ချပ် ရွေးချယ်ပါ — ရွေးပြီး ${selectedCards.length}/၉ ချပ်။`;
             } else if (spreadMode === 10) {
                 const cLabels = [
                     "(၁) စိတ်ထဲရှိသောအရာ", "(၂) အတားအဆီးများ", "(၃) အတိတ်", "(၄) လက်ရှိ",
@@ -1597,12 +1460,12 @@
                 ];
                 statusEl.innerHTML = `<span>✝️ Celtic Cross (၁၀ ချပ်စနစ်) -</span> [ ${cLabels[selectedCards.length]} ] အတွက် ရွေးပါ — ကျန် ${rem} ချပ်။`;
             } else if (spreadMode === 'yn') {
-                statusEl.innerHTML = `<span>⚖️ Yes / No & When စနစ် -</span> ဖဲပုံ ၃ ပုံ စစ်ဆေးရန် နှင့် လမ်းညွှန်ကတ် <span>${rem} ချပ်</span> ရွေးချယ်ပါ။`;
+                statusEl.innerHTML = `<span>⚖️ Yes / No & When စနစ် -</span> အောက်ပါ <strong>"✊ ၃ ပုံခွဲဖြတ်၍ Under-card စစ်မည်"</strong> ကို နှိပ်ပြီးပါက ကတ် ၃ ချပ် ဆွဲယူစစ်ဆေးပါ။`;
             }
         }
 
-        function initDeck(clearUndercards = true) {
-            if (fullDeck.length === 0) build52Deck();
+        function initTableSpread(clearUndercards = true) {
+            if (fullDeck.length === 0) buildDeck();
             shuffleArray(fullDeck);
             
             fullDeck.forEach(c => {
@@ -1617,91 +1480,215 @@
 
             document.getElementById('self-study-tray').style.display = 'none';
             updateStatusText();
+            renderSpreadTableLayout();
+        }
 
-            const container = document.getElementById('deck-container');
+        function renderSpreadTableLayout() {
+            const container = document.getElementById('spread-layout-container');
             container.innerHTML = '';
 
-            fullDeck.forEach((cardData) => {
-                const cardElem = document.createElement('div');
-                cardElem.className = 'card' + (cardData.isReversed ? ' is-reversed' : '');
-                cardElem.innerHTML = `
+            const req = getRequiredCount();
+
+            if (spreadMode === 1) {
+                // Single card draw deck pile in center
+                renderDeckPile(container, 1);
+            } else if (spreadMode === 3) {
+                // 3-Card horizontal spread layout
+                const positions = ["အတိတ်", "ပစ္စုပ္ပန်", "အနာဂတ်"];
+                renderSlotLayout(container, positions, "row", 140);
+            } else if (spreadMode === 9) {
+                // 3x3 Grid layout
+                renderGridSlots(container, 3, 3, [
+                    "#1 အတိတ်ခံ", "#2 အခြေအနေ", "#3 ဖြစ်ပေါ်မှု",
+                    "#4 လမ်းစ", "#5 ဗဟိုချက်", "#6 လမ်းကြောင်း",
+                    "#7 သက်ရောက်မှု", "#8 ပတ်ဝန်းကျင်", "#9 နောက်ဆုံးရလဒ်"
+                ]);
+            } else if (spreadMode === 10) {
+                // Celtic Cross professional layout simulation
+                renderCelticCrossSlots(container);
+            } else if (spreadMode === 'yn') {
+                // 3 Piles layout for Yes/No
+                renderSlotLayout(container, ["ပုံ (၁) အတိတ်", "ပုံ (၂) ပစ္စုပ္ပန်", "ပုံ (၃) အနာဂတ်"], "row", 160);
+            }
+        }
+
+        function renderDeckPile(container, countNeeded) {
+            const pileWrapper = document.createElement('div');
+            pileWrapper.className = 'deck-pile-area';
+            
+            // Render stacked card back illusion
+            for (let i = Math.min(fullDeck.length - selectedCards.length, 12); i >= 0; i--) {
+                const stackedCard = document.createElement('div');
+                stackedCard.className = 'card';
+                stackedCard.style.position = 'absolute';
+                stackedCard.style.top = `${-i * 1.5}px`;
+                stackedCard.style.left = `${i * 1}px`;
+                stackedCard.innerHTML = `
                     <div class="card-inner">
                         <div class="face back"></div>
-                        <div class="face front ${cardData.suit.color}">
-                            <div class="card-corner">${cardData.rankKey}<br>${cardData.suit.symbol}</div>
-                            <div class="card-center">${cardData.suit.symbol}</div>
-                            <div class="card-corner bottom">${cardData.rankKey}<br>${cardData.suit.symbol}</div>
-                            ${cardData.isReversed ? `<div class="reversed-tag">REV</div>` : ''}
-                        </div>
                     </div>
                 `;
-                cardElem.onclick = () => onCardClick(cardElem, cardData);
-                container.appendChild(cardElem);
-            });
+                if (i === 0) {
+                    stackedCard.style.cursor = 'pointer';
+                    stackedCard.onclick = () => {
+                        const remaining = fullDeck.filter(c => !selectedCards.includes(c));
+                        if (remaining.length > 0 && selectedCards.length < countNeeded) {
+                            onTableCardClick(stackedCard, remaining[0]);
+                        }
+                    };
+                }
+                pileWrapper.appendChild(stackedCard);
+            }
+            container.appendChild(pileWrapper);
         }
 
-        function onCardClick(cardElem, cardData) {
-            const req = getRequiredCount();
-            if (cardElem.classList.contains('picked') || selectedCards.length >= req) return;
+        function renderSlotLayout(container, labels, direction = "row", gap = 130) {
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'flex';
+            wrapper.style.flexDirection = direction;
+            wrapper.style.gap = `${gap}px`;
+            wrapper.style.justifyContent = 'center';
+            wrapper.style.alignItems = 'center';
+            wrapper.style.flexWrap = 'wrap';
+
+            labels.forEach((lbl, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'layout-slot';
+                slot.innerHTML = `<div class="layout-slot-label">${lbl}</div>`;
+
+                if (selectedCards[idx]) {
+                    slot.appendChild(createCardElement(selectedCards[idx], idx));
+                } else {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'empty-slot-placeholder';
+                    placeholder.innerHTML = `<span>+</span>`;
+                    placeholder.onclick = () => pickNextCardForSlot(idx);
+                    slot.appendChild(placeholder);
+                }
+                wrapper.appendChild(slot);
+            });
+            container.appendChild(wrapper);
+        }
+
+        function renderGridSlots(container, rows, cols, labels) {
+            const grid = document.createElement('div');
+            grid.style.display = 'grid';
+            grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+            grid.style.gap = '16px';
+            grid.style.justifyContent = 'center';
+
+            labels.forEach((lbl, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'layout-slot';
+                slot.style.position = 'relative';
+                slot.innerHTML = `<div class="layout-slot-label">${lbl}</div>`;
+
+                if (selectedCards[idx]) {
+                    slot.appendChild(createCardElement(selectedCards[idx], idx));
+                } else {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'empty-slot-placeholder';
+                    placeholder.innerHTML = `<span>+</span>`;
+                    placeholder.onclick = () => pickNextCardForSlot(idx);
+                    slot.appendChild(placeholder);
+                }
+                grid.appendChild(slot);
+            });
+            container.appendChild(grid);
+        }
+
+        function renderCelticCrossSlots(container) {
+            // Simplified clean professional grid layout for Celtic Cross (10 positions)
+            const wrapper = document.createElement('div');
+            wrapper.style.display = 'grid';
+            wrapper.style.gridTemplateColumns = 'repeat(5, 1fr)';
+            wrapper.style.gap = '14px';
+            wrapper.style.maxWidth = '780px';
+            wrapper.style.alignItems = 'center';
+
+            const celticLabels = [
+                "(1) စိတ်ထဲရှိ", "(2) အတားအဆီး", "(3) အတိတ်", "(4) လက်ရှိ",
+                "(5) နီးကပ်အနာဂတ်", "(6) ဝေးကွာအနာဂတ်", "(7) မိမိကိုယ်ကို", "(8) ပတ်ဝန်းကျင်",
+                "(9) မျှော်လင့်/စိုးရိမ်", "(10) နောက်ဆုံးရလဒ်"
+            ];
+
+            celticLabels.forEach((lbl, idx) => {
+                const slot = document.createElement('div');
+                slot.className = 'layout-slot';
+                slot.style.position = 'relative';
+                slot.innerHTML = `<div class="layout-slot-label">${lbl}</div>`;
+
+                if (selectedCards[idx]) {
+                    slot.appendChild(createCardElement(selectedCards[idx], idx));
+                } else {
+                    const placeholder = document.createElement('div');
+                    placeholder.className = 'empty-slot-placeholder';
+                    placeholder.style.width = '74px';
+                    placeholder.style.height = '112px';
+                    placeholder.innerHTML = `<span>+</span>`;
+                    placeholder.onclick = () => pickNextCardForSlot(idx);
+                    slot.appendChild(placeholder);
+                }
+                wrapper.appendChild(slot);
+            });
+            container.appendChild(wrapper);
+        }
+
+        function createCardElement(cardData, index) {
+            const cardElem = document.createElement('div');
+            cardElem.className = 'card picked' + (cardData.isReversed ? ' is-reversed' : '');
+            cardElem.innerHTML = `
+                <div class="card-inner" style="transform: rotateY(180deg);">
+                    <div class="face back"></div>
+                    <div class="face front ${cardData.suit.color}">
+                        <div class="card-corner">${cardData.rankKey}<br>${cardData.suit.symbol}</div>
+                        <div class="card-center">${cardData.suit.symbol}</div>
+                        <div class="card-corner bottom">${cardData.rankKey}<br>${cardData.suit.symbol}</div>
+                        ${cardData.isReversed ? `<div class="reversed-tag">REV</div>` : ''}
+                    </div>
+                </div>
+            `;
+            return cardElem;
+        }
+
+        function pickNextCardForSlot(slotIndex) {
+            const available = fullDeck.filter(c => !selectedCards.includes(c));
+            if (available.length === 0) return;
+            const chosen = available[Math.floor(Math.random() * available.length)];
 
             playTone(620 + (selectedCards.length * 40), 0.09);
-            cardElem.classList.add('picked');
-            selectedCards.push(cardData);
-
-            const badge = document.createElement('div');
-            badge.className = 'slot-badge';
-            if (spreadMode === 3) {
-                const slotLabels = ["အတိတ်", "ပစ္စုပ္ပန်", "အနာဂတ်"];
-                badge.innerText = slotLabels[selectedCards.length - 1];
-            } else if (spreadMode === 10) {
-                badge.innerText = `ကတ် #${selectedCards.length}`;
-            } else {
-                badge.innerText = `#${selectedCards.length}`;
-            }
-            cardElem.appendChild(badge);
+            selectedCards.push(chosen);
 
             updateStatusText();
+            renderSpreadTableLayout();
             renderSelfStudyTray();
         }
 
-        function toggleDrawnCardOrientation(idx) {
-            if (!selectedCards[idx]) return;
-            selectedCards[idx].isReversed = !selectedCards[idx].isReversed;
-            playTone(480, 0.07);
+        function onTableCardClick(cardElem, cardData) {
+            const req = getRequiredCount();
+            if (selectedCards.length >= req) return;
+
+            playTone(650, 0.09);
+            selectedCards.push(cardData);
+
+            updateStatusText();
+            renderSpreadTableLayout();
             renderSelfStudyTray();
         }
 
-        function renderSelfStudyTray() {
-            const tray = document.getElementById('self-study-tray');
-            const previewList = document.getElementById('drawn-cards-preview');
-            tray.style.display = 'block';
-
-            previewList.innerHTML = selectedCards.map((c, i) => `
-                <div class="mini-card-item ${c.suit.color}" onclick="toggleDrawnCardOrientation(${i})" title="နှိပ်၍ အတည့်/ပြောင်းပြန် လှန်ပါ">
-                    <span class="mini-pos">#${i + 1}</span>
-                    <span class="mini-sym">${c.suit.symbol} ${c.rankKey}</span>
-                    <span class="mini-state ${c.isReversed ? 'ill' : 'dig'}">
-                        ${c.isReversed ? 'Ill-Dignified ↺' : 'Dignified ↑'}
-                    </span>
-                </div>
-            `).join("");
-        }
-
-        function renderUndercardsBanner() {
-            const banner = document.getElementById('undercards-banner');
-            if (bottomCards.length === 3) {
-                banner.classList.add('active');
-                banner.innerHTML = `
-                    <strong style="color:var(--emerald-mystic);">✊ ၃ ပုံခွဲ အောက်ခံနိမိတ် (Under-cards):</strong>
-                    ပုံ (၁) <strong>${bottomCards[0].suit.symbol}${bottomCards[0].rankKey}</strong> •
-                    ပုံ (၂) <strong>${bottomCards[1].suit.symbol}${bottomCards[1].rankKey}</strong> •
-                    ပုံ (၃) <strong>${bottomCards[2].suit.symbol}${bottomCards[2].rankKey}</strong>
-                    <span style="color:var(--text-muted); font-size:0.78rem;">(အဟော Modal တွင် အသေးစိတ် ပါဝင်မည်)</span>
-                `;
-            } else {
-                banner.classList.remove('active');
-                banner.innerHTML = '';
+        function performWashAndShuffle() {
+            playTone(480, 0.15);
+            const overlay = document.getElementById('washing-overlay');
+            if (settings.animations) {
+                overlay.classList.add('active');
             }
+
+            setTimeout(() => {
+                initTableSpread(true);
+                if (settings.animations) {
+                    overlay.classList.remove('active');
+                }
+            }, settings.animations ? 900 : 100);
         }
 
         function cleanseDeck() {
@@ -1710,21 +1697,16 @@
             status.innerHTML = `<span>✊ ဘယ်လက်ဖြင့် ဘယ်ဘက်သို့ ၃ ပုံခွဲဖြတ်၍ Under-card (အောက်ခံနိမိတ်) ၃ ချပ်ကို ထုတ်ယူနေပါသည်...</span>`;
             
             shuffleArray(fullDeck);
-            const pile1Bottom = fullDeck[16];
-            const pile2Bottom = fullDeck[33];
-            const pile3Bottom = fullDeck[51];
+            const pile1Bottom = fullDeck[Math.floor(fullDeck.length / 3) - 1];
+            const pile2Bottom = fullDeck[Math.floor((fullDeck.length * 2) / 3) - 1];
+            const pile3Bottom = fullDeck[fullDeck.length - 1];
             bottomCards = [pile1Bottom, pile2Bottom, pile3Bottom];
 
             setTimeout(() => {
-                initDeck(false); // Preserve bottomCards
+                initTableSpread(false);
                 renderUndercardsBanner();
                 status.innerHTML = `<span>✅ ၃ ပုံခွဲဖြတ်ပြီးပါပြီ —</span> Under-cards ၃ ချပ် အဆင်သင့်ဖြစ်ပါပြီ။ ကတ်များ ဆက်လက် ရွေးချယ်နိုင်ပါသည်။`;
-            }, 450);
-        }
-
-        function shuffleDeck(clearUndercards = true) {
-            playTone(520, 0.1);
-            initDeck(clearUndercards);
+            }, 600);
         }
 
         /* =========================================================
@@ -1950,17 +1932,6 @@
 
             } else if (spreadMode === 9) {
                 headerEl.innerText = "⊞ ၉ ချပ်စနစ် (3x3 Grid Analysis & Knighting)";
-                html += `<div class="grid-3x3">`;
-                selectedCards.forEach((c, i) => {
-                    html += `
-                        <div class="grid-cell ${c.suit.color}">
-                            <span style="font-size:0.65rem; display:block; color:#555;">#${i + 1} ${i === 4 ? '(ဗဟို)' : ''}</span>
-                            <span style="font-size:1.2rem;">${c.suit.symbol} ${c.rankKey}</span>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-
                 const center = selectedCards[4];
                 html += `
                     <div class="formula-box">
@@ -1968,27 +1939,7 @@
                         လက်ရှိ ပြဿနာ သို့မဟုတ် အခြေအနေတစ်ခုလုံး၏ အဓိက အရင်းအမြစ်မှာ <strong>${center.isReversed ? center.specific.illDignified : center.specific.dignified}</strong> ဖြစ်ပါသည်။
                     </div>
                 `;
-
-                const d1_c1 = selectedCards[0], d1_c2 = selectedCards[4], d1_c3 = selectedCards[8];
-                const d2_c1 = selectedCards[6], d2_c2 = selectedCards[4], d2_c3 = selectedCards[2];
-
-                html += `
-                    <div class="card-reading-block">
-                        <div style="font-size:0.75rem; color:var(--gold-bright);">ပင်မ အဆင်းထောင့်ဖြတ် (Descending Diagonal: #1 ➔ #5 ➔ #9)</div>
-                        <p style="font-size:0.85rem; margin:6px 0;">
-                            အတိတ်စိတ်ခံစားမှု (<strong>${d1_c1.suit.symbol} ${d1_c1.rankKey}</strong>) မှတစ်ဆင့် လက်ရှိဗဟိုပြဿနာ (<strong>${d1_c2.suit.symbol} ${d1_c2.rankKey}</strong>) သို့ ဖြတ်သန်းကာ အနာဂတ်နောက်ဆုံးရလဒ် (<strong>${d1_c3.suit.symbol} ${d1_c3.rankKey}</strong>) သို့ စီးဆင်းသွားပုံကို ဖော်ပြသည်။
-                        </p>
-                    </div>
-                    <div class="card-reading-block">
-                        <div style="font-size:0.75rem; color:var(--gold-bright);">ပင်မ အတက်ထောင့်ဖြတ် (Ascending Diagonal: #7 ➔ #5 ➔ #3)</div>
-                        <p style="font-size:0.85rem; margin:6px 0;">
-                            အတိတ်ကာယကံ အခြေခံအုတ်မြစ် (<strong>${d2_c1.suit.symbol} ${d2_c1.rankKey}</strong>) မှတစ်ဆင့် လက်ရှိအခြေအနေ (<strong>${d2_c2.suit.symbol} ${d2_c2.rankKey}</strong>) ကို တွန်းတင်ပေးခဲ့ပြီး အနာဂတ်စိတ်ပိုင်းဆိုင်ရာ ရလဒ် (<strong>${d2_c3.suit.symbol} ${d2_c3.rankKey}</strong>) သို့ ကူးပြောင်းသွားပုံကို ဖော်ပြသည်။
-                        </p>
-                    </div>
-                `;
-
                 html += generateKnightingAnalysis(selectedCards);
-
                 selectedCards.forEach((c, idx) => {
                     html += renderCardBlock(c, `ကတ် #${idx + 1} ${idx === 4 ? '(ဗဟိုကတ်)' : ''}`, idx === 8);
                 });
@@ -1996,63 +1947,10 @@
             } else if (spreadMode === 10) {
                 headerEl.innerText = "✝️ Celtic Cross (၁၀ ချပ်စနစ် အပြည့်အစုံ)";
                 const celticTitles = [
-                    "(၁) စိတ်ထဲရှိသောအရာ (The Crown)",
-                    "(၂) အတားအဆီးများ (The Obstacle)",
-                    "(၃) အတိတ် (The Past)",
-                    "(၄) လက်ရှိ (The Present)",
-                    "(၅) နီးကပ်သောအနာဂတ် (Immediate Future)",
-                    "(၆) ဝေးကွာသောအနာဂတ် (Distant Future)",
-                    "(၇) မိမိကိုယ်ကို မြင်သည့်ပုံစံ (Sees Self)",
-                    "(၈) ပတ်ဝန်းကျင်/အိမ် (Environment/Home)",
-                    "(၉) မျှော်လင့်ချက်နှင့် စိုးရိမ်မှုများ (Hopes & Fears)",
-                    "(၁၀) နောက်ဆုံးရလဒ် (Final Outcome ★)"
+                    "(၁) စိတ်ထဲရှိသောအရာ", "(၂) အတားအဆီးများ", "(၃) အတိတ်", "(၄) လက်ရှိ",
+                    "(၅) နီးကပ်သောအနာဂတ်", "(၆) ဝေးကွာသောအနာဂတ်", "(၇) မိမိကိုယ်ကို မြင်သည့်ပုံစံ",
+                    "(၈) ပတ်ဝန်းကျင်/အိမ်", "(၉) မျှော်လင့်ချက်နှင့် စိုးရိမ်မှုများ", "(၁၀) နောက်ဆုံးရလဒ်"
                 ];
-
-                // Visual summary of 10 cards
-                html += `<div class="celtic-grid-layout">`;
-                selectedCards.forEach((c, idx) => {
-                    html += `
-                        <div class="grid-cell ${c.suit.color}" style="padding:6px 4px;">
-                            <span style="font-size:0.6rem; display:block; color:#444;">#${idx + 1}</span>
-                            <span style="font-size:1rem;">${c.suit.symbol}${c.rankKey}</span>
-                        </div>
-                    `;
-                });
-                html += `</div>`;
-
-                const c4 = selectedCards[3];
-                const c10 = selectedCards[9];
-                const c2 = selectedCards[1];
-                const c7 = selectedCards[6];
-                const c8 = selectedCards[7];
-
-                let bridgeAnalysis = "";
-                const isC4Good = c4.suit.color === "red";
-                const isC10Good = c10.suit.color === "red";
-
-                if (isC4Good && !isC10Good) {
-                    bridgeAnalysis = `
-                        <strong>⚠️ ကတ် ၄ (လက်ရှိအခြေအနေကောင်း) သော်လည်း ကတ် ၁၀ (ရလဒ်ဆိုး) နေခြင်း -</strong><br>
-                        လက်ရှိအခြေအနေ အားသာချက် ကောင်းမွန်သော်လည်း အတားအဆီး [ကတ် ၂: ${c2.suit.symbol} ${c2.rankKey}] ကို လျှော့တွက်ခြင်း သို့မဟုတ် မိမိ၏ ပြုမူဆောင်ရွက်ပုံ [ကတ် ၇: ${c7.suit.symbol} ${c7.rankKey}] တွင် အမှားအယွင်း ဖြစ်ပေါ်နေပါသည်။ ကြားအဆင့်များကို ချက်ချင်း ပြင်ဆင်ရန် လိုအပ်ပါသည်။
-                    `;
-                } else if (!isC4Good && isC10Good) {
-                    bridgeAnalysis = `
-                        <strong>🌟 ကတ် ၄ (လက်ရှိအခြေအနေဆိုး) သော်လည်း ကတ် ၁၀ (ရလဒ်ကောင်း) နေခြင်း -</strong><br>
-                        လက်ရှိအခြေအနေ စိတ်မချမ်းသာဖွယ် ရှိနေသော်လည်း ပတ်ဝန်းကျင်၏ ကူညီပံ့ပိုးမှု [ကတ် ၈: ${c8.suit.symbol} ${c8.rankKey}] သို့မဟုတ် မိမိ၏ ဇွဲလုံ့လဖြင့် အခက်အခဲများကို ကျော်လွှားကာ အောင်မြင်မှုဆီသို့ ရောက်ရှိသွားမည့် အလားအလာရှိပါသည်။
-                    `;
-                } else {
-                    bridgeAnalysis = `
-                        <strong>⚖️ လက်ရှိအခြေအနေ [${c4.suit.symbol} ${c4.rankKey}] နှင့် နောက်ဆုံးရလဒ် [${c10.suit.symbol} ${c10.rankKey}] ချိန်ခွင်လျှာ ညီညွတ်စွာ စီးဆင်းနေပါသည်။</strong>
-                    `;
-                }
-
-                html += `
-                    <div class="formula-box" style="border-left-color:var(--emerald-mystic);">
-                        <strong>🌉 Bridge Analysis (ကတ် ၄ နှင့် ၁၀ ကြားခံပေါင်းကူး စိစစ်ချက်) -</strong><br>
-                        ${bridgeAnalysis}
-                    </div>
-                `;
-
                 selectedCards.forEach((c, idx) => {
                     html += renderCardBlock(c, celticTitles[idx], idx === 9);
                 });
@@ -2071,7 +1969,7 @@
         }
 
         /* =========================================================
-           6. BIRTHDAY DESTINY & CARDOLOGY ENGINE (Fixed Deterministic Logic)
+           6. BIRTHDAY DESTINY & CARDOLOGY ENGINE
         ========================================================= */
         function getExactAge(birthYear, month, day) {
             const today = new Date();
@@ -2099,7 +1997,7 @@
         }
 
         function calculateBirthdayDestiny() {
-            if (solarOrderedDeck.length === 0) build52Deck();
+            if (solarOrderedDeck.length === 0) buildDeck();
             const dobVal = document.getElementById('dob-input').value;
             if (!dobVal) return;
             playTone(640, 0.08);
@@ -2110,25 +2008,14 @@
             const day = parseInt(parts[2], 10);
 
             const X = 55 - (2 * month + day);
-
             let birthSuit = "";
             let rankNum = 0;
 
-            if (X >= 1 && X <= 13) {
-                birthSuit = "S";
-                rankNum = X;
-            } else if (X >= 14 && X <= 26) {
-                birthSuit = "H";
-                rankNum = X - 13;
-            } else if (X >= 27 && X <= 39) {
-                birthSuit = "D";
-                rankNum = X - 26;
-            } else if (X >= 40 && X <= 52) {
-                birthSuit = "C";
-                rankNum = X - 39;
-            } else {
-                birthSuit = "Joker";
-            }
+            if (X >= 1 && X <= 13) { birthSuit = "S"; rankNum = X; }
+            else if (X >= 14 && X <= 26) { birthSuit = "H"; rankNum = X - 13; }
+            else if (X >= 27 && X <= 39) { birthSuit = "D"; rankNum = X - 26; }
+            else if (X >= 40 && X <= 52) { birthSuit = "C"; rankNum = X - 39; }
+            else { birthSuit = "Joker"; }
 
             let rankKey = "";
             if (rankNum === 1) rankKey = "A";
@@ -2139,18 +2026,12 @@
 
             let resHTML = "";
             if (birthSuit === "Joker") {
-                resHTML = `
-                    <div class="card-reading-block highlight-final" style="text-align:center;">
-                        <h3>🃏 The Joker (ဒီဇင်ဘာ ၃၁ ရက်ဖွား)</h3>
-                        <p>ဒီဇင်ဘာ ၃၁ ရက်ဖွားများသည် Solar Value (X = 0) ဖြစ်ပြီး မဟာစကြဝဠာ၏ လျှို့ဝှက်နက်နဲသော Joker စွမ်းအင်ကို ပိုင်ဆိုင်ထားပါသည်။ မည်သည့်ဖဲချပ်၏ စွမ်းအင်ကိုမဆို ကူးပြောင်းအသုံးချနိုင်စွမ်း ရှိသူဖြစ်သည်။</p>
-                    </div>
-                `;
+                resHTML = `<div class="card-reading-block highlight-final" style="text-align:center;"><h3>🃏 The Joker</h3><p>မဟာစကြဝဠာ၏ လျှို့ဝှက်နက်နဲသော Joker စွမ်းအင်ကို ပိုင်ဆိုင်ထားပါသည်။</p></div>`;
             } else {
-                const birthCard = cardMap[rankKey + birthSuit];
+                const birthCard = cardMap[rankKey + birthSuit] || solarOrderedDeck[0];
                 const today = new Date();
                 const age = getExactAge(birthYear, month, day);
 
-                // Most recent birthday for 52-day cycle calculation
                 let lastBirthday = new Date(today.getFullYear(), month - 1, day);
                 if (today < lastBirthday) {
                     lastBirthday = new Date(today.getFullYear() - 1, month - 1, day);
@@ -2167,13 +2048,13 @@
                 else { cycleTitle = "အဆင့်မြင့်စက်ဝန်း (အသက် ၄၉ နှစ်အထက်)"; cyclePlanet = "Mercury ပြန်လည်စတင်ခြင်း"; cycleDesc = "ရင့်ကျက်သော ဉာဏ်ပညာဖြင့် ဘဝဒုတိယပိုင်းကို ဦးဆောင်ခြင်း။"; }
 
                 const planets = [
-                    { name: "Mercury (ဗုဒ္ဓဟူး)", focus: "သတင်းအချက်အလက်၊ စာချုပ်သစ်၊ ဆက်သွယ်ရေး၊ စိတ်မြန်လက်မြန် ဖြစ်ခြင်း" },
-                    { name: "Venus (သောကြာ)", focus: "အချစ်ရေး၊ အလှအပ၊ အနုပညာ၊ ဇိမ်ခံပစ္စည်းနှင့် ငွေကြေးသုံးစွဲမှု ထိန်းရန်" },
-                    { name: "Mars (အင်္ဂါ)", focus: "ယှဉ်ပြိုင်မှု၊ စွမ်းအင်၊ အားကစား၊ စိတ်လိုက်မာန်ပါ ဆုံးဖြတ်ခြင်းကို ရှောင်ရန်" },
-                    { name: "Jupiter (ကြာသပတေး)", focus: "တစ်နှစ်တာ အကောင်းဆုံး စီးပွားရေးကာလ၊ ချဲ့ထွင်ခြင်း၊ ကံကောင်းခြင်း" },
-                    { name: "Saturn (စနေ)", focus: "တာဝန်ဝတ္တရား၊ ကံကြမ္မာအကြွေးဆပ်ရခြင်း၊ စည်းစနစ်တကျ နေထိုင်ရန်" },
-                    { name: "Uranus (ရာဟု/ယူရေးနပ်စ်)", focus: "မထင်မှတ်သော အပြောင်းအလဲ၊ အွန်လိုင်းနည်းပညာ၊ အိမ်/အလုပ် ပြောင်းရွှေ့ခြင်း" },
-                    { name: "Neptune (နက်ပဂျွန်း)", focus: "ဝိညာဉ်ရေးရာ၊ ခရီးဝေး၊ အနားယူခြင်း၊ လိမ်လည်လှည့်ဖြားခံရမှုကို သတိပြုရန်" }
+                    { name: "Mercury (ဗုဒ္ဓဟူး)", focus: "သတင်းအချက်အလက်၊ စာချုပ်သစ်၊ ဆက်သွယ်ရေး" },
+                    { name: "Venus (သောကြာ)", focus: "အချစ်ရေး၊ အလှအပ၊ အနုပညာ၊ ငွေကြေးသုံးစွဲမှု" },
+                    { name: "Mars (အင်္ဂါ)", focus: "ယှဉ်ပြိုင်မှု၊ စွမ်းအင်၊ အားကစား၊ စိတ်လိုက်မာန်ပါ ရှောင်ရန်" },
+                    { name: "Jupiter (ကြာသပတေး)", focus: "စီးပွားရေးကာလ၊ ချဲ့ထွင်ခြင်း၊ ကံကောင်းခြင်း" },
+                    { name: "Saturn (စနေ)", focus: "တာဝန်ဝတ္တရား၊ ကံကြမ္မာအကြွေးဆပ်ရခြင်း" },
+                    { name: "Uranus (ရာဟု/ယူရေးနပ်စ်)", focus: "မထင်မှတ်သော အပြောင်းအလဲ၊ အွန်လိုင်းနည်းပညာ" },
+                    { name: "Neptune (နက်ပဂျွန်း)", focus: "ဝိညာဉ်ရေးရာ၊ ခရီးဝေး၊ အနားယူခြင်း" }
                 ];
 
                 let cycleHTML = `<div class="planet-cycle-grid">`;
@@ -2198,11 +2079,10 @@
                 });
                 cycleHTML += `</div>`;
 
-                // Deterministic Solar Ordered Deck lookup (Fixed Bug!)
-                const plutoIndex = (X - 1 + age) % 52;
-                const resultIndex = (X - 1 + age + 7) % 52;
-                const plutoSample = solarOrderedDeck[plutoIndex];
-                const resultSample = solarOrderedDeck[resultIndex];
+                const plutoIndex = (Math.abs(X) - 1 + age) % solarOrderedDeck.length;
+                const resultIndex = (Math.abs(X) - 1 + age + 7) % solarOrderedDeck.length;
+                const plutoSample = solarOrderedDeck[plutoIndex] || solarOrderedDeck[0];
+                const resultSample = solarOrderedDeck[resultIndex] || solarOrderedDeck[0];
 
                 resHTML = `
                     <div class="formula-box">
@@ -2223,10 +2103,10 @@
                     </div>
 
                     <div class="card-reading-block highlight-final">
-                        <h4 style="color:var(--gold-bright); margin:0 0 6px 0;">🪐 အသက် ${age} နှစ်အတွက် Pluto & Result Cards (တစ်နှစ်တာ အထွတ်အထိပ်)</h4>
+                        <h4 style="color:var(--gold-bright); margin:0 0 6px 0;">🪐 အသက် ${age} နှစ်အတွက် Pluto & Result Cards</h4>
                         <div style="font-size:0.86rem; line-height:1.65;">
-                            • <strong>Pluto Card (အဓိက စိန်ခေါ်မှုနှင့် ပြုပြင်ပြောင်းလဲရမည့်အရာ):</strong> ${plutoSample.suit.symbol} ${plutoSample.rankKey} (${plutoSample.rank.title} of ${plutoSample.suit.name}) — ${plutoSample.specific.dignified}<br>
-                            • <strong>Result Card (နှစ်ကုန်တွင် အောင်မြင်ရရှိမည့် ဆုလာဘ်):</strong> ${resultSample.suit.symbol} ${resultSample.rankKey} (${resultSample.rank.title} of ${resultSample.suit.name}) — ${resultSample.specific.dignified}
+                            • <strong>Pluto Card (စိန်ခေါ်မှုနှင့် ပြုပြင်ပြောင်းလဲရမည့်အရာ):</strong> ${plutoSample.suit.symbol} ${plutoSample.rankKey} (${plutoSample.rank.title} of ${plutoSample.suit.name}) — ${plutoSample.specific.dignified}<br>
+                            • <strong>Result Card (အောင်မြင်ရရှိမည့် ဆုလာဘ်):</strong> ${resultSample.suit.symbol} ${resultSample.rankKey} (${resultSample.rank.title} of ${resultSample.suit.name}) — ${resultSample.specific.dignified}
                         </div>
                     </div>
 
@@ -2241,7 +2121,7 @@
         }
 
         /* =========================================================
-           7. 52-CARD FORMULA EXPLORER & INTERACTIVE MATRIX
+           7. 52-CARD FORMULA EXPLORER & MATRIX
         ========================================================= */
         function renderExplorerMatrix() {
             const container = document.getElementById('explorer-matrix');
@@ -2276,10 +2156,10 @@
         }
 
         function exploreCard() {
-            if (fullDeck.length === 0) build52Deck();
+            if (fullDeck.length === 0) buildDeck();
             const s = document.getElementById('exp-suit').value;
             const r = document.getElementById('exp-rank').value;
-            const card = cardMap[r + s];
+            const card = cardMap[r + s] || solarOrderedDeck[0];
             renderExplorerMatrix();
 
             if (card) {
@@ -2316,35 +2196,10 @@
             }
         }
 
-        /* =========================================================
-           8. DESKTOP DRAG-TO-SCROLL FOR DECK RIBBON
-        ========================================================= */
-        function enableDeckDragScroll() {
-            const slider = document.getElementById('deck-container');
-            let isDown = false;
-            let startX;
-            let scrollLeft;
-
-            slider.addEventListener('mousedown', (e) => {
-                isDown = true;
-                startX = e.pageX - slider.offsetLeft;
-                scrollLeft = slider.scrollLeft;
-            });
-            slider.addEventListener('mouseleave', () => { isDown = false; });
-            slider.addEventListener('mouseup', () => { isDown = false; });
-            slider.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
-                e.preventDefault();
-                const x = e.pageX - slider.offsetLeft;
-                const walk = (x - startX) * 1.8;
-                slider.scrollLeft = scrollLeft - walk;
-            });
-        }
-
         window.onload = () => {
-            initDeck();
+            buildDeck();
+            initTableSpread();
             autoDetectSignificator();
-            enableDeckDragScroll();
         };
     </script>
 </body>
